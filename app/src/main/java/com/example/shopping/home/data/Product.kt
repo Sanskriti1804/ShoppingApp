@@ -1,6 +1,6 @@
 package com.example.shopping.home.data
 
-data class Product(
+data class  Product(
     val id: Int,
     val title: String,
     val price: Double,

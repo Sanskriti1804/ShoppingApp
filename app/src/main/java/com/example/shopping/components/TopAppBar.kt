@@ -13,13 +13,14 @@ import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CustomTopBar(
     title: String,
-    titleStyle: TextStyle,
+    fontWeight : FontWeight,
     titleOverflow: TextOverflow,
 
     //navIcon
@@ -37,7 +38,7 @@ fun CustomTopBar(
     title = {
         Text(
             text = title,
-            style = titleStyle,
+            fontWeight = fontWeight,
             overflow = titleOverflow
         )
     },

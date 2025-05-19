@@ -6,9 +6,14 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -37,6 +42,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.example.shopping.components.CustomAssistChip
@@ -44,6 +50,7 @@ import com.example.shopping.components.CustomBadge
 import com.example.shopping.components.CustomFilteringChip
 import com.example.shopping.components.CustomInputChip
 import com.example.shopping.components.CustomNavBar
+import com.example.shopping.components.CustomSearch
 import com.example.shopping.components.CustomSuggestionChip
 import com.example.shopping.components.CustomSwitch
 import com.example.shopping.components.CustomTopBar
@@ -60,6 +67,8 @@ fun UsageScreen() {
     var showBadge by remember { mutableStateOf(true) }
     var enabled by remember { mutableStateOf(true) }
     var isChecked by remember { mutableStateOf(false) }
+    var query by remember { mutableStateOf("") }
+    var active by remember { mutableStateOf(true) }
     val interactionSource = remember { MutableInteractionSource() }
 
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
@@ -72,11 +81,13 @@ fun UsageScreen() {
 //        iterations = LottieConstants.IterateForever
 //    )
 
+    val searchHistory = listOf<String>( "First Search", "Second Search", "Third Search")
+
     Scaffold(
         topBar = {
             CustomTopBar(
                 title = "My app",
-                titleStyle = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.ExtraBold,
                 titleOverflow = TextOverflow.Ellipsis,
                 navigationIcon = Icons.Default.ArrowBack,
                 navigationIconColor = Color.Black,
@@ -101,6 +112,31 @@ fun UsageScreen() {
             modifier = Modifier.padding(12.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+//            item {
+//                Box(
+//                    modifier = Modifier.fillMaxSize()
+//                ){
+//                    CustomSearch(
+//                        query = query,
+//                        onQueryChange = { query = it },
+//                        active = active,
+//                        onActiveChange = { active = it },
+//                        leadingIcon = Icons.Default.ArrowBack,
+//                        trailingIcon = Icons.Default.Close,
+//                        micIcon = painterResource(R.drawable.ic_mic),
+//                        containerColor = Color.Gray,
+//                        placeholder = { "Search" },
+//                        onClick = {},
+//                        historyIcon = painterResource(R.drawable.ic_history),
+//                        searchHistory = searchHistory,
+//                        modifier = Modifier
+//                            .fillMaxWidth()
+////                        .heightIn(max = 300.dp)
+////                        .wrapContentHeight()
+//                    )
+//
+//                }
+//            }
             item {
                 Text("Assist Chip")
                 CustomAssistChip(
