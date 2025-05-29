@@ -12,6 +12,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.shopping.home.screen.ProductListScreen
+import com.example.shopping.section.screen.FilterScreen
+import com.example.shopping.section.screen.MenuScreen
 import com.example.shopping.ui.theme.ShoppingTheme
 
 class MainActivity : ComponentActivity() {
@@ -20,7 +22,10 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             ShoppingTheme {
-                ProductListScreen()
+                MenuScreen()
+//                ScrollableGridScreen()
+//                ProductListScreen()
+//                FilterScreen()
                 }
             }
         }

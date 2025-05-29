@@ -1,35 +1,31 @@
 package com.example.shopping.home.screen
 
 import android.annotation.SuppressLint
-import android.util.Size
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyItemScope
 import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.CornerBasedShape
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.KeyboardArrowRight
-import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.graphics.painter.Painter
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -62,11 +58,11 @@ fun ProductListScreen() {
 
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
     var query by remember { mutableStateOf("") }
-    var active by remember { mutableStateOf(true) }
+    var active by remember { mutableStateOf(false) } // Changed from true to false for better default state
 
-    val searchHistory = listOf<String>( "First Search", "Second Search", "Third Search")
+    val searchHistory = listOf("First Search", "Second Search", "Third Search")
 
-    Scaffold (
+    Scaffold(
         topBar = {
             CustomTopBar(
                 title = "Shoppie",
@@ -76,218 +72,201 @@ fun ProductListScreen() {
                 navigationIconColor = Color.Black,
                 onNavigationClick = {},
                 actionIcon = Icons.Default.Favorite,
-                containerColor = T_LTextColor,
+                containerColor = T_LTextColor, // Assuming this color is defined elsewhere
                 titleColor = Color.Black,
                 actionIconColor = Color.Black,
                 scrollBehavior = scrollBehavior
-
             )
         }
-    ){paddingValues ->
-        LazyColumn(
+    ) { paddingValues ->
+        Column(
             modifier = Modifier
                 .fillMaxSize()
                 .background(Color.White)
                 .padding(paddingValues)
-                .padding(12.dp)
+                .verticalScroll(rememberScrollState())
         ) {
-//            item {
-//                Box(
-//                    modifier = Modifier.fillMaxSize()
-//                ){
-//                    CustomSearch(
-//                        modifier = Modifier
-//                            .fillMaxWidth()
-//                            .wrapContentHeight(),
-//                        query = query,
-//                        onQueryChange = {query = it},
-//                        active = active,
-//                        onActiveChange = { active = it},
-//                        leadingIcon = Icons.Default.ArrowBack,
-//                        trailingIcon = Icons.Default.Close,
-//                        micIcon = painterResource(R.drawable.ic_mic),
-//                        containerColor = Color.Gray,
-//                        placeholder = {Text("Search")},
-//                        onClick = {},
-//                        historyIcon = painterResource(R.drawable.ic_history),
-//                        searchHistory = searchHistory,
-//                    )
-//                }
-//            }
-            item {
-                val discountImage = listOf<Int>(
-                    R.drawable.ic_discount1,
-                    R.drawable.ic_discount2,
-                    R.drawable.ic_discount3,
-                    R.drawable.ic_discount4,
-                    R.drawable.ic_discount5,
-                    R.drawable.ic_discount6,
-                    R.drawable.ic_discount7,
-                    R.drawable.ic_discount8,
-                    R.drawable.ic_discount9,
-                    R.drawable.ic_discount10,
-                    R.drawable.ic_discount11,
-                    R.drawable.ic_discount12,
-                    R.drawable.ic_discount13,
-                    R.drawable.ic_discount14,
-                )
+            val discountImage = listOf(
+                R.drawable.ic_discount1,
+                R.drawable.ic_discount2,
+                R.drawable.ic_discount3,
+                R.drawable.ic_discount4,
+                R.drawable.ic_discount5,
+                R.drawable.ic_discount6,
+                R.drawable.ic_discount7,
+                R.drawable.ic_discount8,
+                R.drawable.ic_discount9,
+                R.drawable.ic_discount10,
+                R.drawable.ic_discount11,
+                R.drawable.ic_discount12,
+                R.drawable.ic_discount13,
+                R.drawable.ic_discount14
+            )
 
-                val discountData = DiscountData(
-                    title = "Flat 30% OFF",
-                    desc = "on Summer Collection",
-                    textColor = Color.Black,
-                    descColor = T_DTextColor,
-                    image = discountImage,
-                    ctaText = "SHOP NOW"
-                )
+            val discountData = DiscountData(
+                title = "Flat 30% OFF",
+                desc = "on Summer Collection",
+                textColor = Color.Black,
+                descColor = T_DTextColor,
+                image = discountImage,
+                ctaText = "SHOP NOW"
+            )
 
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(15.dp)
-                ) {
-                    DiscountCard(
-                        shape = RoundedCornerShape(8.dp),
-                        containerColor = T_BgColor,
-                        elevation = CardDefaults.cardElevation(4.dp),
-                        data = discountData,
-                        titleSize = 40.sp,
-                        descSize = 20.sp,
-                        ctaSize = 20.sp
-                    )
-                }
-            }
-            item {
-                val categoryList = listOf(
-                    CategoryData(
-                        icon = painterResource(id = R.drawable.ic_cat_dress),
-                        label = "null",
-                        bgColor = T_LTextColor
-                    ),
-                    CategoryData(
-                        icon = painterResource(id = R.drawable.ic_cat_hat),
-                        label = "null",
-                        bgColor = T_LTextColor
-                    ),
-                    CategoryData(
-                        icon = painterResource(id = R.drawable.ic_cat_bow_tie),
-                        label = "null",
-                        bgColor = T_LTextColor
-                    ),
-                    CategoryData(
-                        icon = painterResource(id = R.drawable.ic_cat_camera),
-                        label = "null",
-                        bgColor = T_LTextColor
-                    ),
-                    CategoryData(
-                        icon = painterResource(id = R.drawable.ic_cat_tie),
-                        label = "null",
-                        bgColor = T_LTextColor
-                    ),
-                    CategoryData(
-                        icon = painterResource(id = R.drawable.ic_cat_dryer),
-                        label = "null",
-                        bgColor = T_LTextColor
-                    ),
-                    CategoryData(
-                        icon = painterResource(id = R.drawable.ic_cat_belt),
-                        label = "null",
-                        bgColor = T_LTextColor
-                    ),
-                    CategoryData(
-                        icon = painterResource(id = R.drawable.ic_cat_earrings),
-                        label = "null",
-                        bgColor = T_LTextColor
-                    ),
-                    CategoryData(
-                        icon = painterResource(id = R.drawable.ic_cat_glasses),
-                        label = "null",
-                        bgColor = T_LTextColor
-                    ),
-                    CategoryData(
-                        icon = painterResource(id = R.drawable.ic_cat_hand_bag),
-                        label = "null",
-                        bgColor = T_LTextColor
-                    ),
-                    CategoryData(
-                        icon = painterResource(id = R.drawable.ic_cat_jeans),
-                        label = "null",
-                        bgColor = T_LTextColor
-                    ),
-                    CategoryData(
-                        icon = painterResource(id = R.drawable.ic_cat_lipstick),
-                        label = "null",
-                        bgColor = T_LTextColor
-                    ),
-                    CategoryData(
-                        icon = painterResource(id = R.drawable.ic_cat_shorts),
-                        label = "null",
-                        bgColor = T_LTextColor
-                    ),
-                    CategoryData(
-                        icon = painterResource(id = R.drawable.ic_cat_tshirt),
-                        label = "null",
-                        bgColor = T_LTextColor
-                    ),
-                    CategoryData(
-                        icon = painterResource(id = R.drawable.ic_cat_wristwatch),
-                        label = "null",
-                        bgColor = T_LTextColor
-                    ),
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(15.dp)
+            ) {
+                DiscountCard(
+                    shape = RoundedCornerShape(8.dp),
+                    containerColor = T_BgColor, // Assuming this color is defined elsewhere
+                    elevation = CardDefaults.cardElevation(4.dp),
+                    data = discountData,
+                    titleSize = 40.sp,
+                    descSize = 20.sp,
+                    ctaSize = 20.sp
                 )
-                Box(
-                    modifier = Modifier.padding(8.dp)
-                ) {
-                    CategoryCardRow(
-                        categoryList = categoryList,
-                        size = 45.dp,
-                        onClick = {},
-                        CardColor = Color.White,
-                        borderStroke = 1.dp,
-                        borderColor = T_DTextColor
-                    )
-                }
             }
-            item {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(12.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
+
+            val categoryList = listOf(
+                CategoryData(
+                    icon = painterResource(id = R.drawable.ic_cat_dress),
+                    label = "null",
+                    bgColor = T_LTextColor
+                ),
+                CategoryData(
+                    icon = painterResource(id = R.drawable.ic_cat_hat),
+                    label = "null",
+                    bgColor = T_LTextColor
+                ),
+                CategoryData(
+                    icon = painterResource(id = R.drawable.ic_cat_bow_tie),
+                    label = "null",
+                    bgColor = T_LTextColor
+                ),
+                CategoryData(
+                    icon = painterResource(id = R.drawable.ic_cat_camera),
+                    label = "null",
+                    bgColor = T_LTextColor
+                ),
+                CategoryData(
+                    icon = painterResource(id = R.drawable.ic_cat_tie),
+                    label = "null",
+                    bgColor = T_LTextColor
+                ),
+                CategoryData(
+                    icon = painterResource(id = R.drawable.ic_cat_dryer),
+                    label = "null",
+                    bgColor = T_LTextColor
+                ),
+                CategoryData(
+                    icon = painterResource(id = R.drawable.ic_cat_belt),
+                    label = "null",
+                    bgColor = T_LTextColor
+                ),
+                CategoryData(
+                    icon = painterResource(id = R.drawable.ic_cat_earrings),
+                    label = "null",
+                    bgColor = T_LTextColor
+                ),
+                CategoryData(
+                    icon = painterResource(id = R.drawable.ic_cat_glasses),
+                    label = "null",
+                    bgColor = T_LTextColor
+                ),
+                CategoryData(
+                    icon = painterResource(id = R.drawable.ic_cat_hand_bag),
+                    label = "null",
+                    bgColor = T_LTextColor
+                ),
+                CategoryData(
+                    icon = painterResource(id = R.drawable.ic_cat_jeans),
+                    label = "null",
+                    bgColor = T_LTextColor
+                ),
+                CategoryData(
+                    icon = painterResource(id = R.drawable.ic_cat_lipstick),
+                    label = "null",
+                    bgColor = T_LTextColor
+                ),
+                CategoryData(
+                    icon = painterResource(id = R.drawable.ic_cat_shorts),
+                    label = "null",
+                    bgColor = T_LTextColor
+                ),
+                CategoryData(
+                    icon = painterResource(id = R.drawable.ic_cat_tshirt),
+                    label = "null",
+                    bgColor = T_LTextColor
+                ),
+                CategoryData(
+                    icon = painterResource(id = R.drawable.ic_cat_wristwatch),
+                    label = "null",
+                    bgColor = T_LTextColor
+                )
+            )
+
+            Box(modifier = Modifier.padding(8.dp)) {
+                CategoryCardRow(
+                    categoryList = categoryList,
+                    size = 45.dp,
+                    onClick = {},
+                    CardColor = Color.White,
+                    borderStroke = 1.dp,
+                    borderColor = T_DTextColor // Assuming this color is defined elsewhere
+                )
+            }
+
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(12.dp),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Text(
+                    text = "Featured",
+                    color = Color.Black,
+                    fontSize = 15.sp,
+                    fontWeight = FontWeight.SemiBold
+                )
+                Row {
                     Text(
-                        text = "Featured",
-                        color = Color.Black,
+                        text = "See all",
+                        color = T_DTextColor, // Assuming this color is defined elsewhere
                         fontSize = 15.sp,
                         fontWeight = FontWeight.SemiBold
                     )
-                    Row {
-                        Text(
-                            text = "See all",
-                            color = T_DTextColor,
-                            fontSize = 15.sp,
-                            fontWeight = FontWeight.SemiBold
-                        )
-                        Icon(
-                            imageVector = Icons.Default.KeyboardArrowRight,
-                            contentDescription = "See  all icon",
-                            tint = T_DTextColor
-                        )
-                    }
+                    Icon(
+                        imageVector = Icons.Default.KeyboardArrowRight,
+                        contentDescription = "See all icon",
+                        tint = T_DTextColor // Assuming this color is defined elsewhere
+                    )
                 }
-                Divider(thickness = 2.dp, color = T_LTextColor)
             }
-            items(products) {products->
-                ProductCard(
-                    product = products,
-                    containerColor = T_CardColor,
-                    shape = RoundedCornerShape(4.dp)
-                )
-            }
+            Divider(thickness = 2.dp, color = T_LTextColor) // Assuming this color is defined elsewhere
+
+//            LazyVerticalGrid(
+//                columns = GridCells.Fixed(2),
+//                modifier = Modifier
+//                    .fillMaxWidth()
+//                    .padding(horizontal = 12.dp),
+//                horizontalArrangement = Arrangement.spacedBy(12.dp),
+//                verticalArrangement = Arrangement.spacedBy(12.dp)
+//            ) {
+//                items(
+//                    items = products,
+//                    key = {products -> products.id}
+//                ){ product ->
+//                    ProductCard(
+//                        product = product,
+//                        containerColor = T_CardColor, // Assuming this color is defined elsewhere
+//                        shape = RoundedCornerShape(4.dp)
+//                    )
+//                }
+//            }
         }
     }
 }
-
 
 @Composable
 fun ProductCard(
@@ -313,7 +292,7 @@ fun ProductCard(
                 contentScale = ContentScale.Crop
             )
             Spacer(modifier = Modifier.height(6.dp))
-            Column {
+            Row {
                 Text(text = product.title, style = MaterialTheme.typography.titleMedium)
                 Text(text = "$${product.price}", style = MaterialTheme.typography.bodyMedium)
             }
@@ -321,22 +300,6 @@ fun ProductCard(
     }
 }
 
-
-//@Composable
-//fun ProductGrid(
-//
-//) {
-//    LazyVerticalGrid(
-//        columns = GridCells.Fixed(2),
-//        verticalArrangement = Arrangement.spacedBy(12.dp),
-//        horizontalArrangement = Arrangement.spacedBy(12.dp)
-//    ) {
-//
-//        items(products) { product ->
-//
-//        }
-//    }
-//}
 @Composable
 fun DiscountCard(
     shape: Shape,
@@ -464,3 +427,71 @@ fun PreviewDiscountCard(){
         ctaSize = 16.sp
     )
 }
+
+
+
+
+
+
+
+//@Composable
+//fun ProductGrid(
+//
+//) {
+//    LazyVerticalGrid(
+//        columns = GridCells.Fixed(2),
+//        verticalArrangement = Arrangement.spacedBy(12.dp),
+//        horizontalArrangement = Arrangement.spacedBy(12.dp)
+//    ) {
+//
+//        items(products) { product ->
+//
+//        }
+//    }
+//}
+
+
+//        LazyColumn(
+//            modifier = Modifier
+//                .fillMaxSize()
+//                .background(Color.White)
+//                .padding(paddingValues)
+//                .padding(12.dp)
+//        ) {
+//            item {
+//                Box(
+//                    modifier = Modifier.fillMaxSize()
+//                ){
+//                    CustomSearch(
+//                        modifier = Modifier
+//                            .fillMaxWidth()
+//                            .wrapContentHeight(),
+//                        query = query,
+//                        onQueryChange = {query = it},
+//                        active = active,
+//                        onActiveChange = { active = it},
+//                        leadingIcon = Icons.Default.ArrowBack,
+//                        trailingIcon = Icons.Default.Close,
+//                        micIcon = painterResource(R.drawable.ic_mic),
+//                        containerColor = Color.Gray,
+//                        placeholder = {Text("Search")},
+//                        onClick = {},
+//                        historyIcon = painterResource(R.drawable.ic_history),
+//                        searchHistory = searchHistory,
+//                    )
+//                }
+//            }
+//            item {
+//                    }
+//            item {
+//}
+//            items(products) {products->
+//                ProductCard(
+//                    product = products,
+//                    containerColor = T_CardColor,
+//                    shape = RoundedCornerShape(4.dp)
+//                )
+//            }
+//        }
+//    }
+//}

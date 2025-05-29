@@ -28,7 +28,7 @@ fun CustomTopBar(
     navigationIconColor: Color,
     onNavigationClick: (() -> Unit)? = null,
 
-    actionIcon: ImageVector,
+    actionIcon: ImageVector? = null ,
     containerColor: Color,
     titleColor: Color,
     actionIconColor: Color,
