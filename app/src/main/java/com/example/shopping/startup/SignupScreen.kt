@@ -1,2 +1,99 @@
 package com.example.shopping.startup
 
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.example.shopping.R
+import com.example.shopping.components.AppLogo
+import com.example.shopping.components.CustomButton
+import com.example.shopping.components.CustomCard
+import com.example.shopping.components.CustomTextField
+import com.example.shopping.components.CustomTitle
+
+@Composable
+fun SignupScreen(
+
+){
+    val appLogo = painterResource(id = R.drawable.iconapp)
+
+    Column (
+        modifier = Modifier.padding(12.dp),
+        verticalArrangement = Arrangement.Center
+    ){
+        AppLogo(
+            logoImage = appLogo
+        )
+
+        Spacer(modifier = Modifier.height(36.dp))
+
+        CustomTitle(
+            header = "SIGNUP SCREEN"
+        )
+
+        Spacer(modifier = Modifier.height(18.dp))
+
+        CustomCard(
+            onClick = {}
+        ) {
+            Column(
+                modifier = Modifier.padding(28.dp),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                CustomTitle(
+                    header = "Username"
+                )
+                CustomTextField(
+                    value = "Username",
+                     placeholder = "Enter your Username"
+                )
+                CustomTitle(
+                    header = "Name"
+                )
+                CustomTextField(
+                    value = "Name",
+                    placeholder = "Enter your name"
+                )
+                CustomTitle(
+                    header = "Password"
+                )
+                CustomTextField(
+                    value = "Password",
+                    placeholder = "Enter your password"
+                )
+
+                Spacer(modifier = Modifier.height(12.dp))
+
+                CustomButton(
+                    textButton = true,
+                    onClick = {},
+                    buttonText = "SIGN UP",
+                    elevation = ButtonDefaults.buttonElevation(4.dp),
+                    buttonDescription = "signup"
+
+                )
+            }
+            }
+        }
+}
