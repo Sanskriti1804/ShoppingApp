@@ -2,6 +2,7 @@ package com.example.shopping.components
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
@@ -16,15 +17,18 @@ import com.example.shopping.ui.theme.T_CardColor
 @Composable
 fun CustomTextField(
     value : String,
+    onValueChange : (String) -> Unit,
     shape: Shape = RoundedCornerShape(6.dp),
     placeholder: String,
     fieldColor : Color = T_CardColor
 ){
     OutlinedTextField(
         value = value,
-//        onValueChange = {value.it},
+        onValueChange =  onValueChange,
         shape = shape,
-        placeholder = placeholder,
+        placeholder = {
+            Text(text = placeholder)
+        },
         colors = TextFieldDefaults.colors(
             focusedTextColor = fieldColor
         )

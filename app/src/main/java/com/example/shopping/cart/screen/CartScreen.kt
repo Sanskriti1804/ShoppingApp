@@ -32,6 +32,7 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.foundation.lazy.items
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.rememberAsyncImagePainter
 import com.example.shopping.cart.data.CartProduct
@@ -164,4 +165,12 @@ fun CartProdCard(
 
         }
     }
+}
+
+
+@Preview(showBackground = true)
+@Composable
+fun CartScreenPreview()
+{
+    CartScreen()
 }

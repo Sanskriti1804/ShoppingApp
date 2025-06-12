@@ -32,7 +32,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.shopping.Profile.Screen.ProfileScreen
 import com.example.shopping.components.CustomButton
 import com.example.shopping.components.CustomFilteringChip
 import com.example.shopping.components.CustomTopBar
@@ -153,4 +155,10 @@ fun filterChips(){
             }
         }
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun FilterScreenPreview(){
+    FilterScreen()
 }

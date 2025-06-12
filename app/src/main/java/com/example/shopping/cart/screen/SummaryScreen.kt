@@ -13,6 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.shopping.cart.data.Summary
@@ -20,6 +21,7 @@ import com.example.shopping.components.CustomButton
 import com.example.shopping.components.CustomCard
 import com.example.shopping.ui.theme.T_CardColor
 import com.example.shopping.ui.theme.T_DTextColor
+import kotlin.Int
 
 @Composable
 fun CheckoutSummary(summary : Summary){
@@ -54,4 +56,23 @@ fun CheckoutSummary(summary : Summary){
             buttonDescription = "payment button"
         )
     }
+}
+
+
+@Preview(showBackground = true)
+@Composable
+fun CheckoutScreenPreview()
+{
+    val dummySummary =
+        Summary(
+            quantity = 2,
+            Subtotal = 1200.00,
+            Shipping = 1200.00,
+            Tax = 1200.00,
+            Total = 1200.00,
+            recipient = "Sanskriti",
+            address = "222 Street, India" ,
+            payment ="Credit Card"
+    )
+    CheckoutSummary(dummySummary)
 }

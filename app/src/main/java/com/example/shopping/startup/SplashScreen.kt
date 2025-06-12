@@ -17,8 +17,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.shopping.Profile.Screen.ProfileScreen
 import com.example.shopping.R
 import com.example.shopping.components.AppLogo
 import com.example.shopping.components.CustomTitle
@@ -29,8 +31,6 @@ fun SplashScreen()
 {
     val appLogo = painterResource(id = R.drawable.iconapp)
 
-    @Composable
-    fun SplashScreen() {
         LaunchedEffect(Unit) {
             delay(3000)
         }
@@ -59,5 +59,10 @@ fun SplashScreen()
                 Spacer(modifier = Modifier.height(24.dp))
             }
         }
-    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun SplashScreenPreview(){
+    SplashScreen()
 }

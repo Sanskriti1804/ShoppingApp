@@ -22,8 +22,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.shopping.Profile.Screen.ProfileScreen
 import com.example.shopping.R
 import com.example.shopping.components.AppLogo
 import com.example.shopping.components.CustomButton
@@ -66,13 +68,15 @@ fun SignupScreen(
                 )
                 CustomTextField(
                     value = "Username",
-                     placeholder = "Enter your Username"
+                    onValueChange = {},
+                    placeholder = "Enter your Username"
                 )
                 CustomTitle(
                     header = "Name"
                 )
                 CustomTextField(
                     value = "Name",
+                    onValueChange = {},
                     placeholder = "Enter your name"
                 )
                 CustomTitle(
@@ -80,6 +84,7 @@ fun SignupScreen(
                 )
                 CustomTextField(
                     value = "Password",
+                    onValueChange = {},
                     placeholder = "Enter your password"
                 )
 
@@ -96,4 +101,10 @@ fun SignupScreen(
             }
             }
         }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun SignupScreenPreview(){
+    SignupScreen()
 }

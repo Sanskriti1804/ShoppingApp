@@ -10,7 +10,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.shopping.Profile.Screen.ProfileScreen
 import com.example.shopping.R
 import com.example.shopping.components.AppLogo
 import com.example.shopping.components.CustomButton
@@ -53,6 +55,7 @@ fun LoginScreen(
                 )
                 CustomTextField(
                     value = "Username",
+                    onValueChange = {},
                     placeholder = "Enter your Username"
                 )
                 CustomTitle(
@@ -60,6 +63,7 @@ fun LoginScreen(
                 )
                 CustomTextField(
                     value = "Password",
+                    onValueChange = {},
                     placeholder = "Enter your password"
                 )
 
@@ -76,4 +80,10 @@ fun LoginScreen(
             }
         }
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun LoginScreenPreview(){
+    LoginScreen()
 }
