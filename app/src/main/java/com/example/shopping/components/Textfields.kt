@@ -31,8 +31,22 @@ fun CustomTextField(
         },
         colors = TextFieldDefaults.colors(
             focusedTextColor = fieldColor
-        )
+        ),
 
+    )
+}
 
+@Composable
+fun CustomField(
+    value : String,
+    onValueChange : (String) -> Unit,
+    placeholder: String,
+){
+    TextField(
+        value = value,
+        onValueChange = onValueChange,
+        placeholder = {
+            Text(text = placeholder)
+        }
     )
 }

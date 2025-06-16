@@ -1,5 +1,6 @@
 package com.example.shopping.startup
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -20,19 +21,25 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.example.shopping.Profile.Screen.ProfileScreen
 import com.example.shopping.R
 import com.example.shopping.components.AppLogo
 import com.example.shopping.components.CustomTitle
+import com.example.shopping.navigation.Screen
 import kotlinx.coroutines.delay
 
+@SuppressLint("SuspiciousIndentation")
 @Composable
-fun SplashScreen()
+fun SplashScreen(navController: NavHostController)
 {
     val appLogo = painterResource(id = R.drawable.iconapp)
 
         LaunchedEffect(Unit) {
             delay(3000)
+            navController.navigate(Screen.SignupScreen.route)
         }
 
         Box(
@@ -64,5 +71,6 @@ fun SplashScreen()
 @Preview(showBackground = true)
 @Composable
 fun SplashScreenPreview(){
-    SplashScreen()
+    val dummyNavController = rememberNavController()
+    SplashScreen(navController = dummyNavController)
 }

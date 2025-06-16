@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import com.example.shopping.cart.screen.CartScreen
+import com.example.shopping.navigation.graphs.MainApp
 import com.example.shopping.section.screen.MenuScreen
 import com.example.shopping.ui.theme.ShoppingTheme
 
@@ -18,7 +19,8 @@ class MainActivity : ComponentActivity() {
 //                ScrollableGridScreen()
 //                ProductListScreen()
 //                FilterScreen()
-                CartScreen()
+//                CartScreen()
+                MainApp()
                 }
             }
         }

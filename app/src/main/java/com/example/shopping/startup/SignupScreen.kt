@@ -25,6 +25,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.example.shopping.Profile.Screen.ProfileScreen
 import com.example.shopping.R
 import com.example.shopping.components.AppLogo
@@ -32,11 +35,10 @@ import com.example.shopping.components.CustomButton
 import com.example.shopping.components.CustomCard
 import com.example.shopping.components.CustomTextField
 import com.example.shopping.components.CustomTitle
+import com.example.shopping.navigation.Screen
 
 @Composable
-fun SignupScreen(
-
-){
+fun SignupScreen(navController: NavHostController){
     val appLogo = painterResource(id = R.drawable.iconapp)
 
     Column (
@@ -92,7 +94,7 @@ fun SignupScreen(
 
                 CustomButton(
                     textButton = true,
-                    onClick = {},
+                    onClick = {navController.navigate(Screen.LoginScreen.route)},
                     buttonText = "SIGN UP",
                     elevation = ButtonDefaults.buttonElevation(4.dp),
                     buttonDescription = "signup"
@@ -106,5 +108,6 @@ fun SignupScreen(
 @Preview(showBackground = true)
 @Composable
 fun SignupScreenPreview(){
-    SignupScreen()
+    val dummyNavController = rememberNavController()
+    SignupScreen(dummyNavController)
 }
