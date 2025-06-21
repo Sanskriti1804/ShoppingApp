@@ -1,4 +1,4 @@
-package com.example.shopping.startup
+package com.example.shopping.startup.screen
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -22,7 +22,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.airbnb.lottie.compose.LottieCompositionSpec
@@ -40,7 +39,7 @@ import com.example.shopping.ui.theme.T_LTextColor
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun NewPasswordScreen(navController: NavHostController){
+fun ForgotPasswordScreen(navController: NavHostController){
 
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
 
@@ -57,18 +56,18 @@ fun NewPasswordScreen(navController: NavHostController){
 
         topBar = {
             CustomTopBar(
-                title = "Create New Password",
-                fontWeight = FontWeight.ExtraBold,
-                titleOverflow = TextOverflow.Ellipsis,
-                navigationIcon = Icons.Default.ArrowBack,
-                navigationIconColor = Color.Black,
-                onNavigationClick = {},
-                actionIcon = Icons.Default.Favorite,
-                containerColor = T_LTextColor,
-                titleColor = Color.Black,
-                actionIconColor = Color.Black,
-                scrollBehavior = scrollBehavior
-            )}
+            title = "Forgot Password",
+            fontWeight = FontWeight.ExtraBold,
+            titleOverflow = TextOverflow.Ellipsis,
+            navigationIcon = Icons.Default.ArrowBack,
+            navigationIconColor = Color.Black,
+            onNavigationClick = {},
+            actionIcon = Icons.Default.Favorite,
+            containerColor = T_LTextColor, // Assuming this color is defined elsewhere
+            titleColor = Color.Black,
+            actionIconColor = Color.Black,
+            scrollBehavior = scrollBehavior
+        )}
     ){ paddingValues ->
         Column (
             modifier = Modifier.padding(paddingValues),
@@ -84,30 +83,23 @@ fun NewPasswordScreen(navController: NavHostController){
 
             Spacer(modifier = Modifier.height(4.dp))
             CustomTitle(
-                header = "Your New Password must be differnet from previously used Password"
+                header = "Please Enter your Email Address to recieve a Verification Code"
             )
             Spacer(modifier = Modifier.height(10.dp))
 
             CustomField(
-                value = "New Password",
+                value = "Email address",
                 onValueChange = {},
-                placeholder = "New Password"
-            )
-            Spacer(modifier = Modifier.height(4.dp))
-            CustomField(
-                value = "Confirm Password",
-                onValueChange = {},
-                placeholder = "Confirm Password"
+                placeholder = "Enter your email address"
             )
             Spacer(modifier = Modifier.height(15.dp))
 
-
             CustomButton(
                 textButton = true,
-                onClick = {navController.navigate(Screen.HomeScreen.route)},
-                buttonText = "Save",
+                onClick = {navController.navigate(Screen.EmailVerificationScreen.route)},
+                buttonText = "Send",
                 elevation = ButtonDefaults.buttonElevation(4.dp),
-                buttonDescription = "Save Password button"
+                buttonDescription = "send  verification code button"
             )
 
 
@@ -117,7 +109,7 @@ fun NewPasswordScreen(navController: NavHostController){
 
 @Preview(showBackground = true)
 @Composable
-fun newpasswordcreenPreview(){
+fun pswdFOrgotScreenPreview(){
     val dummyNavController = rememberNavController()
-    NewPasswordScreen(dummyNavController)
+    ForgotPasswordScreen(dummyNavController)
 }

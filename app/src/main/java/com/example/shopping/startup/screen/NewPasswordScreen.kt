@@ -1,12 +1,10 @@
-package com.example.shopping.startup
+package com.example.shopping.startup.screen
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Favorite
@@ -24,7 +22,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.airbnb.lottie.compose.LottieCompositionSpec
@@ -42,93 +39,84 @@ import com.example.shopping.ui.theme.T_LTextColor
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun EmailVerificationScreen(navController: NavHostController){
+fun NewPasswordScreen(navController: NavHostController){
+
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
 
-    val composition by rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.email_verification))
+    val composition by rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.forgot_password))
     val lottieProg by animateLottieCompositionAsState(
         composition = composition,
         isPlaying = true,
         speed = 0.6f,
         iterations = LottieConstants.IterateForever
+
     )
-    Scaffold(
+
+    Scaffold (
+
         topBar = {
             CustomTopBar(
-                title = "Verify Your Email",
+                title = "Create New Password",
                 fontWeight = FontWeight.ExtraBold,
                 titleOverflow = TextOverflow.Ellipsis,
                 navigationIcon = Icons.Default.ArrowBack,
                 navigationIconColor = Color.Black,
                 onNavigationClick = {},
                 actionIcon = Icons.Default.Favorite,
-                containerColor = T_LTextColor, // Assuming this color is defined elsewhere
+                containerColor = T_LTextColor,
                 titleColor = Color.Black,
                 actionIconColor = Color.Black,
                 scrollBehavior = scrollBehavior
-            )
-        }
-    ) { paddingValues ->
-        Column(
+            )}
+    ){ paddingValues ->
+        Column (
             modifier = Modifier.padding(paddingValues),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.SpaceEvenly
-        ) {
+        ){
             composition?.let {
                 EmptyState(
                     composition = it,
-                    progress = { lottieProg}
+                    progress = { lottieProg }
                 )
             }
 
             Spacer(modifier = Modifier.height(4.dp))
             CustomTitle(
-                header = "Please Enter the 4 digit code sent to sans@gmail.com"
+                header = "Your New Password must be differnet from previously used Password"
             )
             Spacer(modifier = Modifier.height(10.dp))
 
-            Row (
-                modifier = Modifier.padding(start = 20.dp, end = 20.dp),
-                horizontalArrangement = Arrangement.SpaceEvenly
-            ){
-                CustomField(
-                    value = "0",
-                    onValueChange = {},
-                    placeholder = "0"
-                )
-                CustomField(
-                    value = "0",
-                    onValueChange = {},
-                    placeholder = "0"
-                )
-                CustomField(
-                    value = "0",
-                    onValueChange = {},
-                    placeholder = "0"
-                )
-                CustomField(
-                    value = "0",
-                    onValueChange = {},
-                    placeholder = "0"
-                )
-            }
-
+            CustomField(
+                value = "New Password",
+                onValueChange = {},
+                placeholder = "New Password"
+            )
+            Spacer(modifier = Modifier.height(4.dp))
+            CustomField(
+                value = "Confirm Password",
+                onValueChange = {},
+                placeholder = "Confirm Password"
+            )
             Spacer(modifier = Modifier.height(15.dp))
+
 
             CustomButton(
                 textButton = true,
-                onClick = {navController.navigate(Screen.NewPasswordScreen.route)},
-                buttonText = "Verify",
+                onClick = {navController.navigate(Screen.HomeScreen.route)},
+                buttonText = "Save",
                 elevation = ButtonDefaults.buttonElevation(4.dp),
-                buttonDescription = "verification button"
+                buttonDescription = "Save Password button"
             )
+
+
         }
     }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun EmailVerificationScreenPreview(){
+fun newpasswordcreenPreview(){
     val dummyNavController = rememberNavController()
-    EmailVerificationScreen(dummyNavController)
+    NewPasswordScreen(dummyNavController)
 }

@@ -1,34 +1,26 @@
-package com.example.shopping.startup
+package com.example.shopping.startup.screen
 
-import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import com.example.shopping.Profile.Screen.ProfileScreen
 import com.example.shopping.R
 import com.example.shopping.components.AppLogo
 import com.example.shopping.components.CustomButton
@@ -36,10 +28,19 @@ import com.example.shopping.components.CustomCard
 import com.example.shopping.components.CustomTextField
 import com.example.shopping.components.CustomTitle
 import com.example.shopping.navigation.Screen
+import com.example.shopping.startup.viewmodel.AuthViewModel
 
 @Composable
-fun SignupScreen(navController: NavHostController){
+fun LoginScreen(
+    navController: NavHostController,
+    authViewModel: AuthViewModel
+){
+
     val appLogo = painterResource(id = R.drawable.iconapp)
+
+    var email by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
+    var isLoading by remember { mutableStateOf(false) }
 
     Column (
         modifier = Modifier.padding(12.dp),
@@ -52,7 +53,7 @@ fun SignupScreen(navController: NavHostController){
         Spacer(modifier = Modifier.height(36.dp))
 
         CustomTitle(
-            header = "SIGNUP SCREEN"
+            header = "LOGIN SCREEN"
         )
 
         Spacer(modifier = Modifier.height(18.dp))
@@ -66,48 +67,46 @@ fun SignupScreen(navController: NavHostController){
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 CustomTitle(
-                    header = "Username"
+                    header = "email"
                 )
                 CustomTextField(
-                    value = "Username",
-                    onValueChange = {},
-                    placeholder = "Enter your Username"
-                )
-                CustomTitle(
-                    header = "Name"
-                )
-                CustomTextField(
-                    value = "Name",
-                    onValueChange = {},
-                    placeholder = "Enter your name"
+                    value = email,
+                    onValueChange = {email = it},
+                    placeholder = "Enter your email"
                 )
                 CustomTitle(
                     header = "Password"
                 )
                 CustomTextField(
-                    value = "Password",
-                    onValueChange = {},
+                    value = password,
+                    onValueChange = {password = it},
                     placeholder = "Enter your password"
                 )
-
+                Text(
+                    text = "Forgot Password",
+                    color = Color.Red,
+                    modifier = Modifier.clickable{(navController.navigate(Screen.ForgotPasswordScreen.route))}
+                )
                 Spacer(modifier = Modifier.height(12.dp))
 
                 CustomButton(
                     textButton = true,
-                    onClick = {navController.navigate(Screen.LoginScreen.route)},
-                    buttonText = "SIGN UP",
+                    onClick = {
+                        authViewModel.login(email, password)
+                        navController.navigate(Screen.HomeScreen.route)},
+                    buttonText = "LOG IN",
                     elevation = ButtonDefaults.buttonElevation(4.dp),
                     buttonDescription = "signup"
 
                 )
             }
-            }
         }
+    }
 }
-
-@Preview(showBackground = true)
-@Composable
-fun SignupScreenPreview(){
-    val dummyNavController = rememberNavController()
-    SignupScreen(dummyNavController)
-}
+//
+//@Preview(showBackground = true)
+//@Composable
+//fun LoginScreenPreview(){
+//    val dummyNavController = rememberNavController()
+//    LoginScreen(dummyNavController)
+//}

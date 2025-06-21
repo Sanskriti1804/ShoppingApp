@@ -61,10 +61,15 @@ dependencies {
     implementation ("androidx.navigation:navigation-compose:2.7.7")
 
     implementation(platform("com.google.firebase:firebase-bom:33.15.0"))
+    implementation("com.google.firebase:firebase-auth")
     implementation("com.google.firebase:firebase-analytics")
-
+    implementation("com.google.firebase:firebase-firestore")
 
     implementation("io.coil-kt:coil-compose:2.5.0")
+
+    implementation("io.insert-koin:koin-android:3.5.3")
+    implementation("io.insert-koin:koin-androidx-compose:3.5.0")// or latest
+
 
     implementation("com.airbnb.android:lottie-compose:6.1.0")
 

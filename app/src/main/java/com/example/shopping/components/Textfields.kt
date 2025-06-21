@@ -11,6 +11,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.Placeholder
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import com.example.shopping.ui.theme.T_CardColor
 
@@ -20,7 +21,8 @@ fun CustomTextField(
     onValueChange : (String) -> Unit,
     shape: Shape = RoundedCornerShape(6.dp),
     placeholder: String,
-    fieldColor : Color = T_CardColor
+    fieldColor : Color = T_CardColor,
+    visualTransformation : VisualTransformation = VisualTransformation.None
 ){
     OutlinedTextField(
         value = value,
@@ -32,6 +34,7 @@ fun CustomTextField(
         colors = TextFieldDefaults.colors(
             focusedTextColor = fieldColor
         ),
+        visualTransformation = visualTransformation
 
     )
 }
@@ -40,13 +43,14 @@ fun CustomTextField(
 fun CustomField(
     value : String,
     onValueChange : (String) -> Unit,
-    placeholder: String,
+    placeholder: String
 ){
     TextField(
         value = value,
         onValueChange = onValueChange,
         placeholder = {
             Text(text = placeholder)
-        }
+        },
+
     )
 }

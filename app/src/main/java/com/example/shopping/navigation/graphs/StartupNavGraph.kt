@@ -4,12 +4,15 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import com.example.shopping.navigation.Screen
-import com.example.shopping.startup.EmailVerificationScreen
-import com.example.shopping.startup.ForgotPasswordScreen
-import com.example.shopping.startup.LoginScreen
-import com.example.shopping.startup.NewPasswordScreen
-import com.example.shopping.startup.SignupScreen
-import com.example.shopping.startup.SplashScreen
+import com.example.shopping.startup.screen.EmailVerificationScreen
+import com.example.shopping.startup.screen.ForgotPasswordScreen
+import com.example.shopping.startup.screen.LoginScreen
+import com.example.shopping.startup.screen.NewPasswordScreen
+import com.example.shopping.startup.screen.SignupScreen
+import com.example.shopping.startup.screen.SplashScreen
+import com.example.shopping.startup.viewmodel.AuthViewModel
+import org.koin.androidx.compose.koinViewModel
+
 
 
 fun NavGraphBuilder.StartupNavGraph(navController: NavHostController){
@@ -17,10 +20,12 @@ fun NavGraphBuilder.StartupNavGraph(navController: NavHostController){
             SplashScreen(navController)
         }
         composable(Screen.SignupScreen.route){
-            SignupScreen(navController)
+            val authViewModel : AuthViewModel = koinViewModel()
+            SignupScreen(navController, authViewModel)
         }
         composable(Screen.LoginScreen.route){
-            LoginScreen(navController)
+            val authViewModel : AuthViewModel = koinViewModel()
+            LoginScreen(navController, authViewModel)
         }
         composable(Screen.ForgotPasswordScreen.route){
             ForgotPasswordScreen(navController)
