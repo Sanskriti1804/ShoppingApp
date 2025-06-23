@@ -65,6 +65,8 @@ dependencies {
     implementation("com.google.firebase:firebase-analytics")
     implementation("com.google.firebase:firebase-firestore")
 
+    implementation ("com.google.accompanist:accompanist-pager:0.34.0")
+    implementation ("com.google.accompanist:accompanist-pager-indicators:0.34.0")
     implementation("io.coil-kt:coil-compose:2.5.0")
 
     implementation("io.insert-koin:koin-android:3.5.3")

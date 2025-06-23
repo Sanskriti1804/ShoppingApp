@@ -10,6 +10,8 @@ import com.example.shopping.home.model.RetrofitInstance
 import kotlinx.coroutines.launch
 
 class ProductViewModel : ViewModel(){
+
+    var product by mutableStateOf<Product?>(null)
     //prodList - observable property that will hold a list of products fetched from the api
     //mutableStateOf - ui will be automatically updated when the ui changes
     var productList by mutableStateOf<List<Product>>(emptyList())
@@ -30,6 +32,19 @@ class ProductViewModel : ViewModel(){
             catch (e : Exception){
                 e.printStackTrace()
             }
+        }
+    }
+
+    private fun fetchProductById(){
+        viewModelScope.launch {
+            try {
+                val response = RetrofitInstance.api.getProducts(limit = 1, skip = 0)
+                product = response.products.firstOrNull()
+            }
+            catch (e : Exception){
+                e.printStackTrace()
+            }
+
         }
     }
 }
