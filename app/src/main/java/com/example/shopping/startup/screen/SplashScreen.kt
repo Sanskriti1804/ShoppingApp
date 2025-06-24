@@ -14,6 +14,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -24,6 +25,7 @@ import com.example.shopping.R
 import com.example.shopping.components.AppLogo
 import com.example.shopping.components.CustomTitle
 import com.example.shopping.navigation.Screen
+import com.example.shopping.ui.theme.Strings
 import kotlinx.coroutines.delay
 
 @SuppressLint("SuspiciousIndentation")
@@ -51,12 +53,12 @@ fun SplashScreen(navController: NavHostController)
                     logoImage = appLogo
                 )
 
-                Spacer(modifier = Modifier.height(4.dp))
+                Spacer(modifier = Modifier.height(15.dp))
 
                 CustomTitle(
-                    header = "Shoppie",
+                    header = stringResource(Strings.appName),
                     fontSize = 56.sp,
-                    fontWeight = FontWeight.Normal
+                    fontWeight = FontWeight.ExtraBold
                 )
                 Spacer(modifier = Modifier.height(24.dp))
             }

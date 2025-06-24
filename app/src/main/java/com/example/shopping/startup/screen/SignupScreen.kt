@@ -31,7 +31,7 @@ import com.example.shopping.startup.viewmodel.AuthViewModel
 @Composable
 fun SignupScreen(
     navController: NavHostController,
-    authViewModel: AuthViewModel
+//    authViewModel: AuthViewModel
 ){
     val appLogo = painterResource(id = R.drawable.iconapp)
 
@@ -96,7 +96,7 @@ fun SignupScreen(
                 CustomButton(
                     textButton = true,
                     onClick = {
-                        authViewModel.register(name, email, password)
+//                        authViewModel.register(name, email, password)
                         navController.navigate(Screen.LoginScreen.route)
                         },
                     buttonText = "SIGN UP",
@@ -112,6 +112,7 @@ fun SignupScreen(
 @Preview(showBackground = true)
 @Composable
 fun SignupScreenPreview(){
-//    val dummyNavController = rememberNavController()
-//    SignupScreen(dummyNavController)
+    val dummyNavController = rememberNavController()
+//    val dummyAuthViewModel = object : AuthViewModel(authRepository = DummyRepo()) {}
+    SignupScreen(dummyNavController)
 }

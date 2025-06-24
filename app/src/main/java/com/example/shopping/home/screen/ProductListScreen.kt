@@ -39,6 +39,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.rememberAsyncImagePainter
 import com.example.shopping.R
+import com.example.shopping.components.CustomNavigationBar
 import com.example.shopping.components.CustomSearch
 import com.example.shopping.components.CustomTopBar
 import com.example.shopping.home.data.CategoryData
@@ -78,6 +79,9 @@ fun ProductListScreen() {
                 actionIconColor = Color.Black,
                 scrollBehavior = scrollBehavior
             )
+        },
+        bottomBar = {
+            CustomNavigationBar()
         }
     ) { paddingValues ->
         LazyVerticalGrid(

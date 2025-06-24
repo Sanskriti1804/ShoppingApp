@@ -49,12 +49,10 @@ import com.example.shopping.components.CustomAssistChip
 import com.example.shopping.components.CustomBadge
 import com.example.shopping.components.CustomFilteringChip
 import com.example.shopping.components.CustomInputChip
-import com.example.shopping.components.CustomNavBar
-import com.example.shopping.components.CustomSearch
 import com.example.shopping.components.CustomSuggestionChip
 import com.example.shopping.components.CustomSwitch
 import com.example.shopping.components.CustomTopBar
-import com.example.shopping.navigation.navBarItems
+
 
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -99,14 +97,14 @@ fun UsageScreen() {
                 containerColor = Color.Yellow
             )
         },
-        bottomBar = {
-            CustomNavBar(
-                modifier = Modifier.padding(15.dp),
-                containerColor = Color.Yellow,
-                onItemClick = {},
-                items = navBarItems
-            )
-        }
+//        bottomBar = {
+//            CustomNavBar(
+//                modifier = Modifier.padding(15.dp),
+//                containerColor = Color.Yellow,
+//                onItemClick = {},
+//                items = navBarItems
+//            )
+//        }
     ) { paddingValues ->
         LazyColumn(
             modifier = Modifier.padding(12.dp),
