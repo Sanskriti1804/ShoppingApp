@@ -36,7 +36,8 @@ import com.example.shopping.components.CustomTitle
 import com.example.shopping.components.CustomTopBar
 import com.example.shopping.components.EmptyState
 import com.example.shopping.navigation.Screen
-import com.example.shopping.ui.theme.T_LTextColor
+import com.example.shopping.ui.theme.app_dBlack
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -60,7 +61,7 @@ fun EmailVerificationScreen(navController: NavHostController){
                 navigationIconColor = Color.Black,
                 onNavigationClick = {},
                 actionIcon = Icons.Default.Favorite,
-                containerColor = T_LTextColor, // Assuming this color is defined elsewhere
+                containerColor = app_dBlack, // Assuming this color is defined elsewhere
                 titleColor = Color.Black,
                 actionIconColor = Color.Black,
                 scrollBehavior = scrollBehavior

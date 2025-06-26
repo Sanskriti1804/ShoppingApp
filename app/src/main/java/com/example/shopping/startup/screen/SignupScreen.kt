@@ -3,6 +3,7 @@ package com.example.shopping.startup.screen
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ButtonDefaults
@@ -14,9 +15,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.shopping.R
@@ -27,6 +31,7 @@ import com.example.shopping.components.CustomTextField
 import com.example.shopping.components.CustomTitle
 import com.example.shopping.navigation.Screen
 import com.example.shopping.startup.viewmodel.AuthViewModel
+import com.example.shopping.ui.theme.Strings
 
 @Composable
 fun SignupScreen(
@@ -41,9 +46,11 @@ fun SignupScreen(
     val isLoading by remember { mutableStateOf(false)}
 
     Column (
-        modifier = Modifier.padding(12.dp),
-        verticalArrangement = Arrangement.Center
+        modifier = Modifier.padding(top = 100.dp, start = 30.dp, end = 30.dp, bottom = 30.dp),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
     ){
+
         AppLogo(
             logoImage = appLogo
         )
@@ -51,10 +58,12 @@ fun SignupScreen(
         Spacer(modifier = Modifier.height(36.dp))
 
         CustomTitle(
-            header = "SIGNUP SCREEN"
+            header = stringResource(Strings.signup),
+            fontWeight = FontWeight.ExtraBold,
+            fontSize = 40.sp
         )
 
-        Spacer(modifier = Modifier.height(18.dp))
+        Spacer(modifier = Modifier.height(12.dp))
 
         CustomCard(
             onClick = {}
@@ -99,9 +108,10 @@ fun SignupScreen(
 //                        authViewModel.register(name, email, password)
                         navController.navigate(Screen.LoginScreen.route)
                         },
-                    buttonText = "SIGN UP",
+                    buttonText = stringResource(Strings.signup),
                     elevation = ButtonDefaults.buttonElevation(4.dp),
-                    buttonDescription = "signup"
+                    buttonDescription = "signup",
+                    modifier = Modifier.fillMaxWidth()
 
                 )
             }

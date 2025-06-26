@@ -13,7 +13,9 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.Placeholder
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
-import com.example.shopping.ui.theme.T_CardColor
+import com.example.shopping.ui.theme.app_lBlack
+import com.example.shopping.ui.theme.app_white
+
 
 @Composable
 fun CustomTextField(
@@ -21,7 +23,8 @@ fun CustomTextField(
     onValueChange : (String) -> Unit,
     shape: Shape = RoundedCornerShape(6.dp),
     placeholder: String,
-    fieldColor : Color = T_CardColor,
+    textColor : Color = app_lBlack,
+    containercolor : Color = app_white,
     visualTransformation : VisualTransformation = VisualTransformation.None
 ){
     OutlinedTextField(
@@ -32,7 +35,11 @@ fun CustomTextField(
             Text(text = placeholder)
         },
         colors = TextFieldDefaults.colors(
-            focusedTextColor = fieldColor
+            focusedTextColor = textColor,
+            unfocusedTextColor = textColor,
+            focusedContainerColor = containercolor,
+            unfocusedContainerColor = containercolor,
+            focusedIndicatorColor = textColor
         ),
         visualTransformation = visualTransformation
 

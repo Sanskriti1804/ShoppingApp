@@ -42,9 +42,8 @@ import com.example.shopping.components.CustomTitle
 import com.example.shopping.components.CustomTopBar
 import com.example.shopping.components.QuantityButton
 import com.example.shopping.components.SizeButton
-import com.example.shopping.ui.theme.T_CardColor
-import com.example.shopping.ui.theme.T_DTextColor
-import com.example.shopping.ui.theme.T_LTextColor
+import com.example.shopping.ui.theme.app_dBlack
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -64,7 +63,7 @@ fun CartScreen() {
                 navigationIconColor = Color.Black,
                 onNavigationClick = {},
                 actionIcon = Icons.Default.Favorite,
-                containerColor = T_LTextColor, // Assuming this color is defined elsewhere
+                containerColor = app_dBlack, // Assuming this color is defined elsewhere
                 titleColor = Color.Black,
                 actionIconColor = Color.Black,
                 scrollBehavior = scrollBehavior
@@ -100,10 +99,10 @@ fun CartProdCard(
     contentDescription : String = "Cart Product",
     modifier : Modifier = Modifier.padding(10.dp),
     shape : Shape  = RoundedCornerShape(4.dp),
-    containerColor: Color = T_CardColor,
+    containerColor: Color = app_dBlack,
     contentColor: Color = Color.Black,
     elevation: CardElevation = CardDefaults.cardElevation(2.dp),
-    titleColor: Color = T_DTextColor,
+    titleColor: Color = app_dBlack,
     titleSize : TextUnit = 24.sp,
     textColor: Color = Color.Black,
     textSize : TextUnit = 14.sp,

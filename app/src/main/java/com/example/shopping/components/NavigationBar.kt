@@ -1,7 +1,10 @@
 package com.example.shopping.components
 
+import android.R.attr.contentDescription
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Badge
 import androidx.compose.material.Text
 import androidx.compose.material3.BadgedBox
@@ -10,30 +13,42 @@ import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import com.example.shopping.navigation.BottomNavScreens
 import com.example.shopping.navigation.bottomNavItems
-import com.example.shopping.ui.theme.T_CardColor
-import com.example.shopping.ui.theme.T_DTextColor
+import com.example.shopping.ui.theme.app_dBlack
+import com.example.shopping.ui.theme.app_lBlack
+import com.example.shopping.ui.theme.app_white
+
 
 @Composable
 fun CustomNavigationBar(
-    modifier : Modifier = Modifier.padding(4.dp).fillMaxWidth(),
-    bottomBarColor : Color = T_CardColor,
-    contentColor : Color = T_DTextColor,
+    navBarPadding : Dp = 8.dp,
+    bottomBarColor : Color = app_dBlack,
+    contentColor : Color = app_white,
     selected : Boolean = false,
-
-){
+    navBarShape : Shape = RoundedCornerShape(8.dp),
+    navController: NavHostController
+    ){
     NavigationBar(
-        modifier = modifier,
+        modifier = Modifier
+            .padding(navBarPadding)
+            .clip(navBarShape)
+            .fillMaxWidth(),
         containerColor = bottomBarColor,
         contentColor = contentColor
     ){
         bottomNavItems.forEachIndexed { index, item ->
             NavigationBarItem(
                 selected = selected,
-                onClick = {},
+                onClick = {navController.navigate(item.route)},
                 icon = {
                     BadgedBox(
                         badge = {
@@ -47,9 +62,8 @@ fun CustomNavigationBar(
                             }
                         }
                     ) {
-                        Icon(
-                            imageVector = item.icon,
-                            contentDescription = item.label
+                        CustomIcon(
+                            painter = painterResource(item.iconResId),
                         )
                     }
                 }

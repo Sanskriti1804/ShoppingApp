@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
@@ -58,7 +59,8 @@ fun SplashScreen(navController: NavHostController)
                 CustomTitle(
                     header = stringResource(Strings.appName),
                     fontSize = 56.sp,
-                    fontWeight = FontWeight.ExtraBold
+                    fontWeight = FontWeight.ExtraBold,
+                    style = MaterialTheme.typography.bodyLarge
                 )
                 Spacer(modifier = Modifier.height(24.dp))
             }

@@ -11,7 +11,7 @@ import com.example.shopping.section.screen.MenuScreen
 
 fun NavGraphBuilder.ProductNavGraph(navController: NavHostController){
     composable(Screen.HomeScreen.route){
-        ProductListScreen()
+        ProductListScreen(navController)
     }
     composable(Screen.FilterScreen.route){
         FilterScreen()

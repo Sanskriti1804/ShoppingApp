@@ -12,27 +12,28 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
+import com.example.shopping.ui.theme.Strings
+import com.example.shopping.ui.theme.app_dBlack
+import com.example.shopping.ui.theme.app_lBlack
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CustomTopBar(
-    title: String,
-    fontWeight : FontWeight,
+    title: String = stringResource(Strings.appName),
+    fontWeight : FontWeight = FontWeight.Bold,
     titleOverflow: TextOverflow,
-
     //navIcon
     navigationIcon: ImageVector,
-    navigationIconColor: Color,
+    navigationIconColor: Color = app_lBlack,
     onNavigationClick: (() -> Unit)? = null,
-
-    actionIcon: ImageVector? = null ,
-    containerColor: Color,
-    titleColor: Color,
-    actionIconColor: Color,
-
+    actionIcon: ImageVector? = null,
+    containerColor: Color = Color.White,
+    titleColor: Color = app_dBlack,
+    actionIconColor: Color = app_lBlack,
     scrollBehavior: TopAppBarScrollBehavior
 ){ CenterAlignedTopAppBar(
     title = {

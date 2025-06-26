@@ -30,9 +30,10 @@ import com.example.shopping.components.CustomDivider
 import com.example.shopping.components.CustomTitle
 import com.example.shopping.components.CustomTopBar
 import com.example.shopping.components.EmptyState
-import com.example.shopping.ui.theme.T_BgColor
-import com.example.shopping.ui.theme.T_DTextColor
-import com.example.shopping.ui.theme.T_LTextColor
+import com.example.shopping.ui.theme.app_lBlack
+import com.example.shopping.ui.theme.app_lGray
+import com.example.shopping.ui.theme.app_white
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -58,7 +59,7 @@ fun EmptyCartScreen(
                 navigationIconColor = Color.Black,
                 onNavigationClick = {},
                 actionIcon = Icons.Default.Favorite,
-                containerColor = T_LTextColor, // Assuming this color is defined elsewhere
+                containerColor = app_white, // Assuming this color is defined elsewhere
                 titleColor = Color.Black,
                 actionIconColor = Color.Black,
                 scrollBehavior = scrollBehavior
@@ -84,14 +85,14 @@ fun EmptyCartScreen(
 
             CustomTitle(
                 header = "Empty Cart",
-                headerColor = T_DTextColor,
+                headerColor = app_lGray,
                 fontWeight = FontWeight.ExtraBold,
                 fontSize = 36.sp
             )
 
             CustomTitle(
                 header = "Your Cart is Empty",
-                headerColor = T_LTextColor,
+                headerColor = app_white,
                 fontWeight = FontWeight.Bold,
                 fontSize = 24.sp
             )
@@ -99,7 +100,7 @@ fun EmptyCartScreen(
             CustomButton(
                 textButton = true,
                 onClick = {},
-                containerColor = T_BgColor,
+                containerColor = app_lBlack,
                 contentColor = Color.Black,
                 elevation = ButtonDefaults.buttonElevation(2.dp),
                 buttonText = "START SHOPPING",

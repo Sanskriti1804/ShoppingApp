@@ -41,8 +41,9 @@ import com.example.shopping.R
 import com.example.shopping.components.CustomTopBar
 import com.example.shopping.home.data.CategoryData
 import com.example.shopping.home.screen.CategoryCardRow
-import com.example.shopping.ui.theme.T_DTextColor
-import com.example.shopping.ui.theme.T_LTextColor
+import com.example.shopping.ui.theme.app_dBlack
+import com.example.shopping.ui.theme.app_lBlack
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -63,7 +64,7 @@ fun MenuScreen() {
                 navigationIconColor = Color.Black,
                 onNavigationClick = {},
                 actionIcon = Icons.Default.Favorite,
-                containerColor = T_LTextColor, // Assuming this color is defined elsewhere
+                containerColor = app_lBlack, // Assuming this color is defined elsewhere
                 titleColor = Color.Black,
                 actionIconColor = Color.Black,
                 scrollBehavior = scrollBehavior
@@ -84,7 +85,7 @@ fun MenuScreen() {
                 Icon(
                     imageVector = Icons.Default.ShoppingCart,
                     contentDescription = "Cart",
-                    tint = T_DTextColor
+                    tint = app_dBlack
                 )
             }
 
@@ -117,77 +118,77 @@ fun MenuScreen() {
                 CategoryData(
                     icon = painterResource(id = R.drawable.ic_cat_dress),
                     label = "null",
-                    bgColor = T_LTextColor
+                    bgColor = app_lBlack
                 ),
                 CategoryData(
                     icon = painterResource(id = R.drawable.ic_cat_hat),
                     label = "null",
-                    bgColor = T_LTextColor
+                    bgColor = app_lBlack
                 ),
                 CategoryData(
                     icon = painterResource(id = R.drawable.ic_cat_bow_tie),
                     label = "null",
-                    bgColor = T_LTextColor
+                    bgColor = app_lBlack
                 ),
                 CategoryData(
                     icon = painterResource(id = R.drawable.ic_cat_camera),
                     label = "null",
-                    bgColor = T_LTextColor
+                    bgColor = app_lBlack
                 ),
                 CategoryData(
                     icon = painterResource(id = R.drawable.ic_cat_tie),
                     label = "null",
-                    bgColor = T_LTextColor
+                    bgColor = app_lBlack
                 ),
                 CategoryData(
                     icon = painterResource(id = R.drawable.ic_cat_dryer),
                     label = "null",
-                    bgColor = T_LTextColor
+                    bgColor = app_lBlack
                 ),
                 CategoryData(
                     icon = painterResource(id = R.drawable.ic_cat_belt),
                     label = "null",
-                    bgColor = T_LTextColor
+                    bgColor = app_lBlack
                 ),
                 CategoryData(
                     icon = painterResource(id = R.drawable.ic_cat_earrings),
                     label = "null",
-                    bgColor = T_LTextColor
+                    bgColor = app_lBlack
                 ),
                 CategoryData(
                     icon = painterResource(id = R.drawable.ic_cat_glasses),
                     label = "null",
-                    bgColor = T_LTextColor
+                    bgColor = app_lBlack
                 ),
                 CategoryData(
                     icon = painterResource(id = R.drawable.ic_cat_hand_bag),
                     label = "null",
-                    bgColor = T_LTextColor
+                    bgColor = app_lBlack
                 ),
                 CategoryData(
                     icon = painterResource(id = R.drawable.ic_cat_jeans),
                     label = "null",
-                    bgColor = T_LTextColor
+                    bgColor = app_lBlack
                 ),
                 CategoryData(
                     icon = painterResource(id = R.drawable.ic_cat_lipstick),
                     label = "null",
-                    bgColor = T_LTextColor
+                    bgColor = app_lBlack
                 ),
                 CategoryData(
                     icon = painterResource(id = R.drawable.ic_cat_shorts),
                     label = "null",
-                    bgColor = T_LTextColor
+                    bgColor = app_lBlack
                 ),
                 CategoryData(
                     icon = painterResource(id = R.drawable.ic_cat_tshirt),
                     label = "null",
-                    bgColor = T_LTextColor
+                    bgColor = app_lBlack
                 ),
                 CategoryData(
                     icon = painterResource(id = R.drawable.ic_cat_wristwatch),
                     label = "null",
-                    bgColor = T_LTextColor
+                    bgColor = app_lBlack
                 )
             )
 
@@ -198,7 +199,7 @@ fun MenuScreen() {
                     onClick = {},
                     CardColor = Color.White,
                     borderStroke = 1.dp,
-                    borderColor = T_DTextColor // Assuming this color is defined elsewhere
+                    borderColor = app_dBlack // Assuming this color is defined elsewhere
                 )
             }
 
@@ -210,17 +211,17 @@ fun MenuScreen() {
             ) {
                 Text(
                     text = "NEW ARRIVAL",
-                    color = T_DTextColor, // Assuming this color is defined elsewhere
+                    color = app_dBlack, // Assuming this color is defined elsewhere
                     fontSize = 20.sp,
                     fontWeight = FontWeight.SemiBold
                 )
                 Icon(
                     imageVector = Icons.Default.KeyboardArrowRight,
                     contentDescription = "See all icon",
-                    tint = T_DTextColor // Assuming this color is defined elsewhere
+                    tint = app_dBlack // Assuming this color is defined elsewhere
                 )
             }
-            Divider(thickness = 2.dp, color = T_LTextColor) // Assuming this color is defined elsewhere
+            Divider(thickness = 2.dp, color = app_lBlack) // Assuming this color is defined elsewhere
         }
     }
 }

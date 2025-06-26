@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">DUNELLE</string>
+    <string name="app_login">LOGIN</string>
+    <string name="app_signup">SIGNUP</string>
 </resources>

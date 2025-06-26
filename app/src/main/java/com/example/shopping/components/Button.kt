@@ -30,24 +30,26 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.example.shopping.R
-import com.example.shopping.ui.theme.T_BgColor
+import com.example.shopping.ui.theme.app_lBlack
+import com.example.shopping.ui.theme.app_white
+
 
 @Composable
 fun CustomButton(
     textButton : Boolean,
     onClick : () -> Unit,
     shape : Shape = RoundedCornerShape(4.dp),
-    containerColor: Color = T_BgColor,
-    contentColor : Color = Color.Black,
-    elevation: ButtonElevation ,
+    containerColor: Color = app_lBlack,
+    contentColor : Color = app_white,
+    elevation: ButtonElevation,
     buttonText: String? = null,
     buttonIcon : ImageVector? = null,
     buttonDescription: String,
+    modifier: Modifier = Modifier.padding(2.dp)
 ){
     Button(
         onClick = onClick,
-        modifier = Modifier
-            .padding(2.dp),
+        modifier = modifier,
         shape = shape,
         colors = ButtonDefaults.buttonColors(
             containerColor = containerColor,
@@ -71,9 +73,9 @@ fun QuantityButton(
     onClick: () -> Unit,
     shape: Shape = RoundedCornerShape(2.dp),
     elevation: ButtonElevation = ButtonDefaults.buttonElevation(2.dp),
-    containerColor: Color = Color.White,
-    contentColor: Color = Color.Black,
-    borderColor : Color = Color.Black,
+    containerColor: Color = app_lBlack,
+    contentColor: Color = app_white,
+    borderColor : Color = app_white,
     borderThickness : Dp = 1.dp,
     upIcon : Painter = painterResource(R.drawable.ic_remove),
     downIcon : ImageVector = Icons.Default.Add,
@@ -106,7 +108,6 @@ fun QuantityButton(
                 imageVector = downIcon,
                 contentDescription = contentDesciption
             )
-
         }
     }
 }

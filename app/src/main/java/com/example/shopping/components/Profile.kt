@@ -16,7 +16,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.example.shopping.ui.theme.T_DTextColor
+import com.example.shopping.ui.theme.app_lBlack
 
 
 @Composable
@@ -25,7 +25,7 @@ fun ProfileSection(
     profileDesc : String,
     contentScale: ContentScale = ContentScale.Crop,
     borderWidth : Dp = 1.dp,
-    borderColor : Color = T_DTextColor,
+    borderColor : Color = app_lBlack,
     shape : Shape = CircleShape
 ){
     Row (

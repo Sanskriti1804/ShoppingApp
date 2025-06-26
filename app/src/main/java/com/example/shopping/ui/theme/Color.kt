@@ -12,8 +12,11 @@ val Pink40 = Color(0xFF7D5260)
 
 
 // temp color
-val T_BgColor = Color(0xFFE4D5B4)
-val T_CardColor = Color(0xFFF5F5DC)
-val T_LTextColor = Color(0xFF9D825D)
-val T_DTextColor = Color(0xFF674F2D)
+val app_dBlack = Color(0xFF121212)
+val app_lBlack = Color(0xFF2c2c2c)
+val app_dGray = Color(0xFF75706f)
+val app_lGray = Color(0xFFd4d3d2)
+val app_white = Color(0xFFeaeaea)
+val app_white_bg = Color.White
+
 

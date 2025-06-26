@@ -1,6 +1,7 @@
 package com.example.shopping.home.screen
 
 import android.annotation.SuppressLint
+import android.util.Size
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -37,24 +38,30 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import coil.compose.rememberAsyncImagePainter
 import com.example.shopping.R
+import com.example.shopping.components.CustomIcon
 import com.example.shopping.components.CustomNavigationBar
 import com.example.shopping.components.CustomSearch
+import com.example.shopping.components.CustomTitle
 import com.example.shopping.components.CustomTopBar
 import com.example.shopping.home.data.CategoryData
 import com.example.shopping.home.data.DiscountData
 import com.example.shopping.home.data.Product
 import com.example.shopping.home.viewmodel.ProductViewModel
-import com.example.shopping.ui.theme.T_BgColor
-import com.example.shopping.ui.theme.T_CardColor
-import com.example.shopping.ui.theme.T_DTextColor
-import com.example.shopping.ui.theme.T_LTextColor
+import com.example.shopping.ui.theme.app_dBlack
+import com.example.shopping.ui.theme.app_lBlack
+import com.example.shopping.ui.theme.app_lGray
+import com.example.shopping.ui.theme.app_white
+import com.example.shopping.ui.theme.app_white_bg
+
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ProductListScreen() {
+fun ProductListScreen(navController : NavHostController) {
     val viewModel: ProductViewModel = viewModel()
     val products = viewModel.productList
 
@@ -65,28 +72,24 @@ fun ProductListScreen() {
     val searchHistory = listOf("First Search", "Second Search", "Third Search")
 
     Scaffold(
+        containerColor = app_white_bg,
         topBar = {
             CustomTopBar(
-                title = "Shoppie",
-                fontWeight = FontWeight.ExtraBold,
                 titleOverflow = TextOverflow.Ellipsis,
                 navigationIcon = Icons.Default.ArrowBack,
-                navigationIconColor = Color.Black,
                 onNavigationClick = {},
+                fontWeight = FontWeight.ExtraBold,
                 actionIcon = Icons.Default.Favorite,
-                containerColor = T_LTextColor, // Assuming this color is defined elsewhere
-                titleColor = Color.Black,
-                actionIconColor = Color.Black,
                 scrollBehavior = scrollBehavior
             )
         },
         bottomBar = {
-            CustomNavigationBar()
+            CustomNavigationBar(navController = navController)
         }
     ) { paddingValues ->
         LazyVerticalGrid(
             columns = GridCells.Fixed(2),
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier.fillMaxSize().padding(top = 95.dp, bottom = 18.dp, start = 18.dp, end = 18.dp)
 
         ) {
             item(span = { GridItemSpan(2)}) {
@@ -111,14 +114,14 @@ fun ProductListScreen() {
                     title = "Flat 30% OFF",
                     desc = "on Summer Collection",
                     textColor = Color.Black,
-                    descColor = T_DTextColor,
+                    descColor = app_dBlack,
                     image = discountImage,
                     ctaText = "SHOP NOW"
                 )
 
                 DiscountCard(
                     shape = RoundedCornerShape(8.dp),
-                    containerColor = T_BgColor, // Assuming this color is defined elsewhere
+                    containerColor = app_lGray, // Assuming this color is defined elsewhere
                     elevation = CardDefaults.cardElevation(4.dp),
                     data = discountData,
                     titleSize = 40.sp,
@@ -126,83 +129,85 @@ fun ProductListScreen() {
                     ctaSize = 20.sp
                 )
 
+                Spacer(modifier = Modifier.height(12.dp))
             }
+
             item(span = { GridItemSpan(2)}) {
                 val categoryList = listOf(
                     CategoryData(
                         icon = painterResource(id = R.drawable.ic_cat_dress),
                         label = "null",
-                        bgColor = T_LTextColor
+                        bgColor = app_lBlack
                     ),
                     CategoryData(
                         icon = painterResource(id = R.drawable.ic_cat_hat),
                         label = "null",
-                        bgColor = T_LTextColor
+                        bgColor = app_lBlack
                     ),
                     CategoryData(
                         icon = painterResource(id = R.drawable.ic_cat_bow_tie),
                         label = "null",
-                        bgColor = T_LTextColor
+                        bgColor = app_lBlack
                     ),
                     CategoryData(
                         icon = painterResource(id = R.drawable.ic_cat_camera),
                         label = "null",
-                        bgColor = T_LTextColor
+                        bgColor = app_lBlack
                     ),
                     CategoryData(
                         icon = painterResource(id = R.drawable.ic_cat_tie),
                         label = "null",
-                        bgColor = T_LTextColor
+                        bgColor = app_lBlack
                     ),
                     CategoryData(
                         icon = painterResource(id = R.drawable.ic_cat_dryer),
                         label = "null",
-                        bgColor = T_LTextColor
+                        bgColor = app_lBlack
                     ),
                     CategoryData(
                         icon = painterResource(id = R.drawable.ic_cat_belt),
                         label = "null",
-                        bgColor = T_LTextColor
+                        bgColor = app_lBlack
                     ),
                     CategoryData(
                         icon = painterResource(id = R.drawable.ic_cat_earrings),
                         label = "null",
-                        bgColor = T_LTextColor
+                        bgColor = app_lBlack
                     ),
                     CategoryData(
                         icon = painterResource(id = R.drawable.ic_cat_glasses),
                         label = "null",
-                        bgColor = T_LTextColor
+                        bgColor = app_lBlack
                     ),
                     CategoryData(
                         icon = painterResource(id = R.drawable.ic_cat_hand_bag),
                         label = "null",
-                        bgColor = T_LTextColor
+                        bgColor = app_lBlack
                     ),
                     CategoryData(
                         icon = painterResource(id = R.drawable.ic_cat_jeans),
                         label = "null",
-                        bgColor = T_LTextColor
+                        bgColor = app_lBlack
                     ),
                     CategoryData(
                         icon = painterResource(id = R.drawable.ic_cat_lipstick),
                         label = "null",
-                        bgColor = T_LTextColor
+                        bgColor = app_lBlack
                     ),
                     CategoryData(
                         icon = painterResource(id = R.drawable.ic_cat_shorts),
                         label = "null",
-                        bgColor = T_LTextColor
+                        bgColor = app_lBlack
                     ),
                     CategoryData(
                         icon = painterResource(id = R.drawable.ic_cat_tshirt),
                         label = "null",
-                        bgColor = T_LTextColor
+                        bgColor = app_lBlack
                     ),
                     CategoryData(
                         icon = painterResource(id = R.drawable.ic_cat_wristwatch),
                         label = "null",
-                        bgColor = T_LTextColor
+                        bgColor = app_lBlack
                     )
                 )
 
@@ -210,10 +215,7 @@ fun ProductListScreen() {
                     CategoryCardRow(
                         categoryList = categoryList,
                         size = 45.dp,
-                        onClick = {},
-                        CardColor = Color.White,
-                        borderStroke = 1.dp,
-                        borderColor = T_DTextColor // Assuming this color is defined elsewhere
+                        onClick = {}
                     )
                 }
             }
@@ -225,36 +227,30 @@ fun ProductListScreen() {
                         .padding(12.dp),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
-                    Text(
-                        text = "Featured",
-                        color = Color.Black,
-                        fontSize = 15.sp,
-                        fontWeight = FontWeight.SemiBold
+                    CustomTitle(
+                        header = "Featured",
+                        fontSize = 16.sp
                     )
                     Row {
-                        Text(
-                            text = "See all",
-                            color = T_DTextColor, // Assuming this color is defined elsewhere
-                            fontSize = 15.sp,
-                            fontWeight = FontWeight.SemiBold
+                        CustomTitle(
+                            header = "See all",
+                            fontSize = 14.sp,
+                            fontWeight = FontWeight.Thin
                         )
-                        Icon(
-                            imageVector = Icons.Default.KeyboardArrowRight,
-                            contentDescription = "See all icon",
-                            tint = T_DTextColor // Assuming this color is defined elsewhere
+                        CustomIcon(
+                            painter = painterResource(R.drawable.ic_app_arrow),
+                            iconColor = app_dBlack
                         )
                     }
                 }
-                Divider(thickness = 2.dp, color = T_LTextColor) // Assuming this color is defined elsewhere
             }
+
             items(
                 items = products,
                 key = {products -> products.id}
             ){ product ->
                 ProductCard(
-                    product = product,
-                    containerColor = T_CardColor, // Assuming this color is defined elsewhere
-                    shape = RoundedCornerShape(4.dp)
+                    product = product
                 )
             }
         }
@@ -264,30 +260,42 @@ fun ProductListScreen() {
 @Composable
 fun ProductCard(
     product : Product,
-    containerColor : Color,
-    shape: Shape,
+    containerColor : Color = app_white,
+    outerPadding : Dp = 8.dp,
+    shape: Shape = RoundedCornerShape(4.dp),
+    elevation: CardElevation = CardDefaults.cardElevation(4.dp),
+    innerPadding: Dp = 16.dp,
+    imageSize : Dp = 100.dp,
+    contentScale: ContentScale = ContentScale.Crop,
+    spacerHeight : Dp = 4.dp
 ){
     Card(
         modifier = Modifier
-//            .fillMaxWidth()
-            .padding(vertical = 8.dp),
+            .padding(outerPadding),
         shape = shape,
         colors = CardDefaults.cardColors(
             containerColor = containerColor
         ),
-        elevation = CardDefaults.cardElevation(8.dp)
+        elevation = elevation
     ) {
-        Column(modifier = Modifier.padding(16.dp)) {
+        Column(modifier = Modifier.padding(innerPadding)) {
             Image(
                 painter = rememberAsyncImagePainter(product.thumbnail),
                 contentDescription = product.title,
-                modifier = Modifier.size(80.dp),
-                contentScale = ContentScale.Crop
+                modifier = Modifier.size(imageSize),
+                contentScale = contentScale
             )
-            Spacer(modifier = Modifier.height(6.dp))
-            Row {
-                Text(text = product.title, style = MaterialTheme.typography.titleMedium)
-                Text(text = "$${product.price}", style = MaterialTheme.typography.bodyMedium)
+            Spacer(modifier = Modifier.height(spacerHeight))
+            Column {
+                CustomTitle(
+                    header = product.title,
+                    fontSize = 16.sp
+                )
+                CustomTitle(
+                    header = "$${product.price}",
+                    fontSize = 12.sp,
+                    fontWeight = FontWeight.Thin
+                )
             }
         }
     }
@@ -295,6 +303,7 @@ fun ProductCard(
 
 @Composable
 fun DiscountCard(
+    modifier : Modifier = Modifier.padding(2.dp).heightIn(max = 180.dp),
     shape: Shape,
     containerColor: Color,
     elevation: CardElevation,
@@ -305,6 +314,7 @@ fun DiscountCard(
 ){
     val selectedImage  = remember { data.image.random() }
     Card(
+        modifier = modifier,
         shape = shape,
         colors = CardDefaults.cardColors(
             containerColor = containerColor
@@ -321,28 +331,24 @@ fun DiscountCard(
                 modifier = Modifier.weight(3f),
                 verticalArrangement = Arrangement.SpaceBetween
             ) {
-                Text(
-                    text = data.title,
-                    color = data.textColor,
-                    fontSize = titleSize,
-                    fontWeight = FontWeight.ExtraBold,
-                    maxLines = 1
-                )
-                Spacer(modifier = Modifier.height(4.dp))
-                Text(
-                    text = data.desc,
-                    color = data.descColor,
-                    fontSize = descSize,
-                    fontWeight = FontWeight.Thin,
-                    maxLines = 1
-                )
-                Spacer(modifier = Modifier.height(30.dp))
-                Text(
-                    text = data.ctaText,
-                    color = data.descColor,
-                    fontSize = ctaSize,
+                CustomTitle(
+                    header = data.title,
+                    modifier = Modifier.weight(3f),
                     fontWeight = FontWeight.Bold,
-                    letterSpacing = 1.sp
+                    maxLine = 1
+                )
+                Spacer(modifier = Modifier.height(3.dp))
+
+                CustomTitle(
+                    header =   data.desc,
+                    maxLine = 1,
+                    modifier = Modifier.weight(0.8f)
+                )
+                Spacer(modifier = Modifier.height(2.dp))
+                CustomTitle(
+                    header = data.ctaText,
+                    modifier = Modifier.weight(0.8f),
+                    maxLine = 1
                 )
             }
             Box(
@@ -369,9 +375,10 @@ fun CategoryCardRow(
     categoryList : List<CategoryData>,
     size : Dp,
     onClick : () -> Unit,
-    CardColor : Color,
-    borderStroke : Dp,
-    borderColor: Color
+    CardColor : Color = app_white_bg,
+    borderStroke : Dp = 1.dp,
+    borderColor: Color = app_lGray,
+    innerPadding : Dp = 7.dp
 ){
     LazyRow(
         horizontalArrangement = Arrangement.spacedBy(3.dp)
@@ -390,7 +397,8 @@ fun CategoryCardRow(
                 Icon(
                     painter = item.icon,
                     tint = item.bgColor,
-                    contentDescription = item.label
+                    contentDescription = item.label,
+                    modifier = Modifier.padding(innerPadding)
                 )
             }
             Spacer(modifier = Modifier.width(10.dp))

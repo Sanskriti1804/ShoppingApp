@@ -31,9 +31,9 @@ import com.example.shopping.R
 import com.example.shopping.components.CustomButton
 import com.example.shopping.components.CustomTitle
 import com.example.shopping.components.CustomTopBar
-import com.example.shopping.ui.theme.T_CardColor
-import com.example.shopping.ui.theme.T_DTextColor
-import com.example.shopping.ui.theme.T_LTextColor
+import com.example.shopping.ui.theme.app_dBlack
+import com.example.shopping.ui.theme.app_lGray
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -57,7 +57,7 @@ fun ConfirmationScreen(){
                 navigationIconColor = Color.Black,
                 onNavigationClick = {},
                 actionIcon = Icons.Default.Favorite,
-                containerColor = T_LTextColor, // Assuming this color is defined elsewhere
+                containerColor = app_dBlack, // Assuming this color is defined elsewhere
                 titleColor = Color.Black,
                 actionIconColor = Color.Black,
                 scrollBehavior = scrollBehavior
@@ -70,7 +70,7 @@ fun ConfirmationScreen(){
         ) {
             CustomTitle(
                 header = "THANKYOU FOR YOUR ORDER",
-                headerColor = T_DTextColor,
+                headerColor = app_lGray,
                 fontWeight = FontWeight.ExtraBold,
                 fontSize = 32.sp
             )
@@ -84,14 +84,14 @@ fun ConfirmationScreen(){
 
             CustomTitle(
                 header = "Estimated Delivery",
-                headerColor = T_LTextColor,
+                headerColor = app_dBlack,
                 fontWeight = FontWeight.SemiBold,
                 fontSize = 22.sp
             )
 
             CustomTitle(
                 header = "July 7, 2004",
-                headerColor = T_LTextColor,
+                headerColor = app_dBlack,
                 fontWeight = FontWeight.Normal,
                 fontSize = 18.sp
             )
@@ -105,8 +105,8 @@ fun ConfirmationScreen(){
             CustomButton(
                 textButton = true,
                 onClick = {},
-                containerColor = T_CardColor,
-                contentColor = T_DTextColor,
+                containerColor = app_dBlack,
+                contentColor = app_dBlack,
                 elevation = ButtonDefaults.buttonElevation(4.dp),
                 buttonText = "VIEW PLACED ORDER",
                 buttonDescription = "order desc"

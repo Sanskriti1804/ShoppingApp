@@ -19,9 +19,7 @@ import androidx.compose.ui.unit.sp
 import com.example.shopping.cart.data.Summary
 import com.example.shopping.components.CustomButton
 import com.example.shopping.components.CustomCard
-import com.example.shopping.ui.theme.T_CardColor
-import com.example.shopping.ui.theme.T_DTextColor
-import kotlin.Int
+import com.example.shopping.ui.theme.app_lBlack
 
 @Composable
 fun CheckoutSummary(summary : Summary){
@@ -49,8 +47,8 @@ fun CheckoutSummary(summary : Summary){
         CustomButton(
             textButton = true,
             onClick = {},
-            containerColor = T_CardColor,
-            contentColor = T_DTextColor,
+            containerColor = app_lBlack,
+            contentColor = app_lBlack,
             elevation = ButtonDefaults.buttonElevation(4.dp),
             buttonText = "PROCEED TO PAY",
             buttonDescription = "payment button"

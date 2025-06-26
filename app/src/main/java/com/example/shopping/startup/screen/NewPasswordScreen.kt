@@ -35,7 +35,8 @@ import com.example.shopping.components.CustomTitle
 import com.example.shopping.components.CustomTopBar
 import com.example.shopping.components.EmptyState
 import com.example.shopping.navigation.Screen
-import com.example.shopping.ui.theme.T_LTextColor
+import com.example.shopping.ui.theme.app_lGray
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -63,7 +64,7 @@ fun NewPasswordScreen(navController: NavHostController){
                 navigationIconColor = Color.Black,
                 onNavigationClick = {},
                 actionIcon = Icons.Default.Favorite,
-                containerColor = T_LTextColor,
+                containerColor = app_lGray,
                 titleColor = Color.Black,
                 actionIconColor = Color.Black,
                 scrollBehavior = scrollBehavior
