@@ -1,12 +1,15 @@
 package com.example.shopping.components
 
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CardElevation
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.example.shopping.ui.theme.app_dBlack
 import com.example.shopping.ui.theme.app_lGray
@@ -15,6 +18,7 @@ import com.example.shopping.ui.theme.app_lGray
 @Composable
 fun CustomCard(
     onClick: () -> Unit,
+    padding : Dp = 8.dp,
     shape: Shape = RoundedCornerShape(6.dp),
     elevation: CardElevation = CardDefaults.cardElevation(4.dp),
     containerColor: Color = app_lGray,
@@ -22,6 +26,8 @@ fun CustomCard(
     content : @Composable () -> Unit
 ){
     Card (
+        modifier = Modifier
+            .padding(padding),
         onClick = onClick,
         shape = shape,
         elevation = elevation,

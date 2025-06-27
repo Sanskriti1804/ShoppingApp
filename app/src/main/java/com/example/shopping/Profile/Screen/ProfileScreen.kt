@@ -36,6 +36,7 @@ import androidx.navigation.NavHostController
 import com.example.shopping.R
 import com.example.shopping.components.CustomCard
 import com.example.shopping.components.CustomNavigationBar
+import com.example.shopping.components.CustomProfilePic
 import com.example.shopping.components.CustomTitle
 import com.example.shopping.components.CustomTopBar
 import com.example.shopping.components.ProfileSection
@@ -46,15 +47,9 @@ import com.example.shopping.ui.theme.app_white_bg
 fun ProfileScreen(
 //    navController: NavHostController
 ){
-
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
 
     val profileImage = painterResource(id = R.drawable.profile)
-
-    val delivered = painterResource(id = R.drawable.profile)
-    val returns = painterResource(id = R.drawable.profile)
-    val tracking = painterResource(id = R.drawable.profile)
-    val unpaid = painterResource(id = R.drawable.profile)
 
     Scaffold(
         containerColor = app_white_bg,
@@ -76,23 +71,13 @@ fun ProfileScreen(
             item {
                 ProfileSection(
                     profileImage = profileImage,
-                    username = "JKKiddding",
-                    name = "heloiiw"
+                    username = "GUNNI",
+                    name = "heloiiw PETU"
                 )
             }
             item {
                 OrderCard(
-                    onClick = {},
-                    cardTitle = "My Orders",
-                    viewmore = "View More",
-                    unpaid = unpaid,
-                    tracking = tracking,
-                    returns = returns,
-                    delivered = delivered,
-                    unpaidLabel = "Unpaid",
-                    trackingLabel = "Tracking",
-                    deliveredLabel = "Delivered",
-                    returnsLabel = "Returns"
+                    onClick = {}
                 )
             }
             item {
@@ -100,75 +85,19 @@ fun ProfileScreen(
                     onClick = {}
                 ) {
                     Column(
-                        modifier = Modifier.padding(10.dp),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(10.dp),
                         horizontalAlignment = Alignment.Start
                     ) {
-                        Text(
-                            text = "My Profile",
-                            fontSize = 12.sp,
+                        CustomTitle(
+                            header = "My Profile",
+                            fontSize = 18.sp,
                             fontWeight = FontWeight.Thin
                         )
-                        Divider(thickness = 1.dp)
-                        Text(
-                            text = "Refer and earn",
-                            fontSize = 12.sp,
-                            fontWeight = FontWeight.Thin
-                        )
-                        Divider(thickness = 1.dp)
-                    }
-                }
-            }
-            item {
-                CustomCard(
-                    onClick = {}
-                ) {
-                    Column(
-                        modifier = Modifier.padding(10.dp),
-                        horizontalAlignment = Alignment.Start
-                    ) {
-                        Text(
-                            text = "My Profile",
-                            fontSize = 12.sp,
-                            fontWeight = FontWeight.Thin
-                        )
-                        Divider(thickness = 1.dp)
-                        Text(
-                            text = "Refer and earn",
-                            fontSize = 12.sp,
-                            fontWeight = FontWeight.Thin
-                        )
-                    }
-                }
-            }
-            item {
-                CustomCard(
-                    onClick = {}
-                ) {
-                    Column(
-                        modifier = Modifier.padding(10.dp),
-                        horizontalAlignment = Alignment.Start
-                    ) {
-                        Text(
-                            text = "Help Center",
-                            fontSize = 12.sp,
-                            fontWeight = FontWeight.Thin
-                        )
-                        Divider(thickness = 1.dp)
-                        Text(
-                            text = "Customer Service",
-                            fontSize = 12.sp,
-                            fontWeight = FontWeight.Thin
-                        )
-                        Divider(thickness = 1.dp)
-                        Text(
-                            text = "Return Policy",
-                            fontSize = 12.sp,
-                            fontWeight = FontWeight.Thin
-                        )
-                        Divider(thickness = 1.dp)
-                        Text(
-                            text = "Shipping Delivery",
-                            fontSize = 12.sp,
+                        CustomTitle(
+                            header = "Refer and Earn",
+                            fontSize = 18.sp,
                             fontWeight = FontWeight.Thin
                         )
                     }
@@ -176,23 +105,57 @@ fun ProfileScreen(
             }
 
             item {
-
                 CustomCard(
                     onClick = {}
                 ) {
                     Column(
-                        modifier = Modifier.padding(10.dp),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(10.dp),
                         horizontalAlignment = Alignment.Start
                     ) {
-                        Text(
-                            text = "About Shoppie",
-                            fontSize = 12.sp,
+                        CustomTitle(
+                            header = "Help Center",
+                            fontSize = 18.sp,
                             fontWeight = FontWeight.Thin
                         )
-                        Divider(thickness = 1.dp)
-                        Text(
-                            text = "About us",
-                            fontSize = 12.sp,
+                        CustomTitle(
+                            header = "Customer Service",
+                            fontSize = 18.sp,
+                            fontWeight = FontWeight.Thin
+                        )
+                        CustomTitle(
+                            header = "Return Policy",
+                            fontSize = 18.sp,
+                            fontWeight = FontWeight.Thin
+                        )
+                        CustomTitle(
+                            header = "Shipping Delivery",
+                            fontSize = 18.sp,
+                            fontWeight = FontWeight.Thin
+                        )
+                    }
+                }
+            }
+
+            item {
+                CustomCard(
+                    onClick = {}
+                ) {
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(10.dp),
+                        horizontalAlignment = Alignment.Start
+                    ) {
+                        CustomTitle(
+                            header = "About Service",
+                            fontSize = 18.sp,
+                            fontWeight = FontWeight.Thin
+                        )
+                        CustomTitle(
+                            header = "About Us",
+                            fontSize = 18.sp,
                             fontWeight = FontWeight.Thin
                         )
                     }
@@ -212,14 +175,12 @@ fun ProfileSection(
 ){
     Row(
         modifier = Modifier.padding(12.dp),
-        horizontalArrangement = Arrangement.SpaceEvenly
+        horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        ProfileSection(
-            profilePhoto = profileImage,
-            profileDesc = "profile image"
-        )
-
-        Column {
+        CustomProfilePic()
+        Column (
+            modifier = Modifier.padding(15.dp)
+        ){
             CustomTitle(
                 header = username,
                 fontWeight = FontWeight.Bold
@@ -237,30 +198,32 @@ fun ProfileSection(
 @Composable
 fun OrderCard(
     onClick : () -> Unit,
-    cardTitle : String,
+    innerPadding : Dp = 8.dp,
+    cardTitle : String = "My Orders",
     orderFont : TextUnit = 16.sp,
     viewmoreFont : TextUnit = 14.sp,
-    viewmore : String,
-    unpaid : Painter,
-    tracking : Painter,
-    delivered: Painter,
-    returns : Painter,
-    unpaidLabel : String,
-    trackingLabel : String,
-    deliveredLabel: String,
-    returnsLabel : String,
+    viewmore : String = "View More",
+    unpaid : Painter = painterResource(R.drawable.ic_order_unpaid) ,
+    tracking : Painter = painterResource(R.drawable.ic_app_processing),
+    delivered: Painter = painterResource(R.drawable.ic_order_delivered),
+    returns : Painter = painterResource(R.drawable.ic_order_return),
+    unpaidLabel : String = "Unpaid",
+    trackingLabel : String = "Processing",
+    deliveredLabel: String = "Delivered",
+    returnsLabel : String = "Returns",
     labelWeight : FontWeight = FontWeight.Thin,
     labelSize : TextUnit = 12.sp
-
 ){
     CustomCard(
         onClick = onClick,
     ) {
         Column (
-            modifier = Modifier.padding(10.dp)
+            modifier = Modifier
+                .padding(innerPadding)
+                .fillMaxWidth()
         ){
             Row (
-                modifier = Modifier.padding(12.dp),
+                modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween
             ){
                 CustomTitle(
@@ -278,7 +241,7 @@ fun OrderCard(
             Row(
                 modifier = Modifier
                     .padding(12.dp),
-                horizontalArrangement = Arrangement.SpaceEvenly
+                horizontalArrangement = Arrangement.Absolute.SpaceAround
             )
             {
                 Column {
