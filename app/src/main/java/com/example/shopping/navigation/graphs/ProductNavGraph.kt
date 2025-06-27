@@ -17,6 +17,6 @@ fun NavGraphBuilder.ProductNavGraph(navController: NavHostController){
         FilterScreen()
     }
     composable(Screen.MenuScreen.route){
-        MenuScreen()
+        MenuScreen(navController = navController)
     }
 }

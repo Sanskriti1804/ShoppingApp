@@ -5,12 +5,19 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Divider
 import androidx.compose.material3.DividerDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.TopAppBarScrollBehavior
+import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -18,18 +25,29 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import com.example.shopping.R
 import com.example.shopping.components.CustomCard
+import com.example.shopping.components.CustomNavigationBar
 import com.example.shopping.components.CustomTitle
+import com.example.shopping.components.CustomTopBar
 import com.example.shopping.components.ProfileSection
+import com.example.shopping.ui.theme.app_white_bg
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ProfileScreen(){
+fun ProfileScreen(
+//    navController: NavHostController
+){
+
+    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
 
     val profileImage = painterResource(id = R.drawable.profile)
 
@@ -38,125 +56,153 @@ fun ProfileScreen(){
     val tracking = painterResource(id = R.drawable.profile)
     val unpaid = painterResource(id = R.drawable.profile)
 
-    ProfileSection(
-        profileImage = profileImage,
-        username = "JKKiddding",
-        name = "heloiiw"
-    )
-
-    OrderCard(
-        onClick = {},
-        cardTitle = "My Orders",
-        viewmore = "View More",
-        unpaid = unpaid,
-        tracking = tracking,
-        returns = returns,
-        delivered = delivered,
-        unpaidLabel = "Unpaid",
-        trackingLabel = "Tracking",
-        deliveredLabel = "Delivered",
-        returnsLabel = "Returns"
-    )
-
-    CustomCard(
-        onClick = {}
-    ) {
-        Column(
-            modifier = Modifier.padding(10.dp),
-            horizontalAlignment = Alignment.Start
-        ) {
-            Text(
-                text = "My Profile",
-                fontSize = 12.sp,
-                fontWeight = FontWeight.Thin
+    Scaffold(
+        containerColor = app_white_bg,
+        topBar = {
+            CustomTopBar(
+                titleOverflow = TextOverflow.Ellipsis,
+                scrollBehavior = scrollBehavior
             )
-            Divider(thickness = 1.dp)
-            Text(
-                text = "Refer and earn",
-                fontSize = 12.sp,
-                fontWeight = FontWeight.Thin
-            )
-            Divider(thickness = 1.dp)
+        },
+//        bottomBar = {
+//            CustomNavigationBar(navController = navController)
+//        }
+    ) {paddingValues ->
+        LazyColumn (
+            modifier = Modifier
+                .padding(paddingValues)
+                .fillMaxWidth()
+        ){
+            item {
+                ProfileSection(
+                    profileImage = profileImage,
+                    username = "JKKiddding",
+                    name = "heloiiw"
+                )
+            }
+            item {
+                OrderCard(
+                    onClick = {},
+                    cardTitle = "My Orders",
+                    viewmore = "View More",
+                    unpaid = unpaid,
+                    tracking = tracking,
+                    returns = returns,
+                    delivered = delivered,
+                    unpaidLabel = "Unpaid",
+                    trackingLabel = "Tracking",
+                    deliveredLabel = "Delivered",
+                    returnsLabel = "Returns"
+                )
+            }
+            item {
+                CustomCard(
+                    onClick = {}
+                ) {
+                    Column(
+                        modifier = Modifier.padding(10.dp),
+                        horizontalAlignment = Alignment.Start
+                    ) {
+                        Text(
+                            text = "My Profile",
+                            fontSize = 12.sp,
+                            fontWeight = FontWeight.Thin
+                        )
+                        Divider(thickness = 1.dp)
+                        Text(
+                            text = "Refer and earn",
+                            fontSize = 12.sp,
+                            fontWeight = FontWeight.Thin
+                        )
+                        Divider(thickness = 1.dp)
+                    }
+                }
+            }
+            item {
+                CustomCard(
+                    onClick = {}
+                ) {
+                    Column(
+                        modifier = Modifier.padding(10.dp),
+                        horizontalAlignment = Alignment.Start
+                    ) {
+                        Text(
+                            text = "My Profile",
+                            fontSize = 12.sp,
+                            fontWeight = FontWeight.Thin
+                        )
+                        Divider(thickness = 1.dp)
+                        Text(
+                            text = "Refer and earn",
+                            fontSize = 12.sp,
+                            fontWeight = FontWeight.Thin
+                        )
+                    }
+                }
+            }
+            item {
+                CustomCard(
+                    onClick = {}
+                ) {
+                    Column(
+                        modifier = Modifier.padding(10.dp),
+                        horizontalAlignment = Alignment.Start
+                    ) {
+                        Text(
+                            text = "Help Center",
+                            fontSize = 12.sp,
+                            fontWeight = FontWeight.Thin
+                        )
+                        Divider(thickness = 1.dp)
+                        Text(
+                            text = "Customer Service",
+                            fontSize = 12.sp,
+                            fontWeight = FontWeight.Thin
+                        )
+                        Divider(thickness = 1.dp)
+                        Text(
+                            text = "Return Policy",
+                            fontSize = 12.sp,
+                            fontWeight = FontWeight.Thin
+                        )
+                        Divider(thickness = 1.dp)
+                        Text(
+                            text = "Shipping Delivery",
+                            fontSize = 12.sp,
+                            fontWeight = FontWeight.Thin
+                        )
+                    }
+                }
+            }
+
+            item {
+
+                CustomCard(
+                    onClick = {}
+                ) {
+                    Column(
+                        modifier = Modifier.padding(10.dp),
+                        horizontalAlignment = Alignment.Start
+                    ) {
+                        Text(
+                            text = "About Shoppie",
+                            fontSize = 12.sp,
+                            fontWeight = FontWeight.Thin
+                        )
+                        Divider(thickness = 1.dp)
+                        Text(
+                            text = "About us",
+                            fontSize = 12.sp,
+                            fontWeight = FontWeight.Thin
+                        )
+                    }
+                }
+
+            }
         }
     }
-
-    CustomCard(
-        onClick = {}
-    ) {
-        Column(
-            modifier = Modifier.padding(10.dp),
-            horizontalAlignment = Alignment.Start
-        ) {
-            Text(
-                text = "My Profile",
-                fontSize = 12.sp,
-                fontWeight = FontWeight.Thin
-            )
-            Divider(thickness = 1.dp)
-            Text(
-                text = "Refer and earn",
-                fontSize = 12.sp,
-                fontWeight = FontWeight.Thin
-            )
-        }
-    }
-
-    CustomCard(
-        onClick = {}
-    ) {
-        Column(
-            modifier = Modifier.padding(10.dp),
-            horizontalAlignment = Alignment.Start
-        ) {
-            Text(
-                text = "Help Center",
-                fontSize = 12.sp,
-                fontWeight = FontWeight.Thin
-            )
-            Divider(thickness = 1.dp)
-            Text(
-                text = "Customer Service",
-                fontSize = 12.sp,
-                fontWeight = FontWeight.Thin
-            )
-            Divider(thickness = 1.dp)
-            Text(
-                text = "Return Policy",
-                fontSize = 12.sp,
-                fontWeight = FontWeight.Thin
-            )
-            Divider(thickness = 1.dp)
-            Text(
-                text = "Shipping Delivery",
-                fontSize = 12.sp,
-                fontWeight = FontWeight.Thin
-            )
-        }
-    }
-    CustomCard(
-        onClick = {}
-    ) {
-        Column(
-            modifier = Modifier.padding(10.dp),
-            horizontalAlignment = Alignment.Start
-        ) {
-            Text(
-                text = "About Shoppie",
-                fontSize = 12.sp,
-                fontWeight = FontWeight.Thin
-            )
-            Divider(thickness = 1.dp)
-            Text(
-                text = "About us",
-                fontSize = 12.sp,
-                fontWeight = FontWeight.Thin
-            )
-        }
-    }
-
-
-
 }
+
 
 @Composable
 fun ProfileSection(

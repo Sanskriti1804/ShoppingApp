@@ -25,7 +25,9 @@ fun AppNavGraph(navController: NavHostController){
         CartNavGraph(navController)
         ProductNavGraph(navController)
         composable(Screen.ProfileScreen.route) {
-            ProfileScreen()
+            ProfileScreen(
+//                navController = navController
+            )
         }
 
     }

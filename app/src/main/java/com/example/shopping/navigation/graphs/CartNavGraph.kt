@@ -31,7 +31,7 @@ fun NavGraphBuilder.CartNavGraph(navController: NavHostController){
         )
 
         composable(Screen.CartScreen.route) {
-            CartScreen()
+            CartScreen(navController = navController)
         }
         composable(Screen.CancellationScreen.route) {
             CancellationScreen()

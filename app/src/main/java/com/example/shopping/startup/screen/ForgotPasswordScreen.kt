@@ -60,10 +60,8 @@ fun ForgotPasswordScreen(navController: NavHostController){
             title = "Forgot Password",
             fontWeight = FontWeight.ExtraBold,
             titleOverflow = TextOverflow.Ellipsis,
-            navigationIcon = Icons.Default.ArrowBack,
             navigationIconColor = Color.Black,
             onNavigationClick = {},
-            actionIcon = Icons.Default.Favorite,
             containerColor = app_lGray, // Assuming this color is defined elsewhere
             titleColor = Color.Black,
             actionIconColor = Color.Black,

@@ -51,7 +51,6 @@ fun FilterScreen(){
                 title = "Filter",
                 fontWeight = FontWeight.ExtraBold,
                 titleOverflow = TextOverflow.Ellipsis,
-                navigationIcon = Icons.Default.ArrowBack,
                 navigationIconColor = Color.Black,
                 onNavigationClick = {},
                 containerColor = Color.White,
