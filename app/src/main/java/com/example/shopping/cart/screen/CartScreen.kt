@@ -32,42 +32,46 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.foundation.lazy.items
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import coil.compose.rememberAsyncImagePainter
+import com.example.shopping.R
 import com.example.shopping.cart.data.CartProduct
 import com.example.shopping.cart.viewmodel.CartViewModel
 import com.example.shopping.components.CustomDivider
+import com.example.shopping.components.CustomNavigationBar
 import com.example.shopping.components.CustomTitle
 import com.example.shopping.components.CustomTopBar
 import com.example.shopping.components.QuantityButton
 import com.example.shopping.components.SizeButton
 import com.example.shopping.ui.theme.app_dBlack
+import com.example.shopping.ui.theme.app_white_bg
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CartScreen() {
+fun CartScreen(navController: NavHostController) {
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
 
     val viewModel : CartViewModel = viewModel()
     val cartProduct : List<CartProduct> = viewModel.cartList ?: emptyList()
 
     Scaffold(
+        containerColor = app_white_bg,
         topBar = {
             CustomTopBar(
-                title = "Shoppie",
-                fontWeight = FontWeight.ExtraBold,
+                fontWeight = FontWeight.Bold,
                 titleOverflow = TextOverflow.Ellipsis,
-                navigationIcon = Icons.Default.ArrowBack,
-                navigationIconColor = Color.Black,
                 onNavigationClick = {},
-                actionIcon = Icons.Default.Favorite,
-                containerColor = app_dBlack, // Assuming this color is defined elsewhere
-                titleColor = Color.Black,
-                actionIconColor = Color.Black,
+                actionIcon = painterResource(R.drawable.ic_app_cart),
                 scrollBehavior = scrollBehavior
             )
+        },
+        bottomBar = {
+            CustomNavigationBar(navController = navController)
         }
     ) { paddingValues ->
         LazyColumn (
@@ -167,9 +171,9 @@ fun CartProdCard(
 }
 
 
-@Preview(showBackground = true)
-@Composable
-fun CartScreenPreview()
-{
-    CartScreen()
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun CartScreenPreview()
+//{
+//    CartScreen()
+//}

@@ -42,9 +42,12 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import com.example.shopping.Profile.Screen.ProfileScreen
 import com.example.shopping.R
 import com.example.shopping.components.CustomIcon
+import com.example.shopping.components.CustomNavigationBar
 import com.example.shopping.components.CustomSuggestionChip
 import com.example.shopping.components.CustomTitle
 import com.example.shopping.components.CustomTopBar
@@ -55,11 +58,12 @@ import com.example.shopping.home.viewmodel.ProductViewModel
 import com.example.shopping.ui.theme.app_dBlack
 import com.example.shopping.ui.theme.app_lBlack
 import com.example.shopping.ui.theme.app_lGray
+import com.example.shopping.ui.theme.app_white_bg
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MenuScreen() {
+fun MenuScreen(navController: NavHostController) {
     val viewModel : ProductViewModel = viewModel()
     val product = viewModel.productList
 
@@ -68,6 +72,7 @@ fun MenuScreen() {
     var active by remember { mutableStateOf(false) } // Changed from true to false for better default state
 
     Scaffold(
+        containerColor = app_white_bg,
         topBar = {
             CustomTopBar(
                 titleOverflow = TextOverflow.Ellipsis,
@@ -75,6 +80,11 @@ fun MenuScreen() {
                 onNavigationClick = {},
                 actionIcon = painterResource(R.drawable.ic_app_search),
                 scrollBehavior = scrollBehavior
+            )
+        },
+        bottomBar = {
+            CustomNavigationBar(
+                navController = navController
             )
         }
     ) { paddingValues ->
@@ -219,13 +229,6 @@ fun MenuScreen() {
             }
         }
     }
-}
-
-
-@Preview(showBackground = true)
-@Composable
-fun MenuScreenPreview(){
-    MenuScreen()
 }
 
 @Composable
