@@ -76,10 +76,8 @@ fun ProductListScreen(navController : NavHostController) {
         topBar = {
             CustomTopBar(
                 titleOverflow = TextOverflow.Ellipsis,
-                navigationIcon = Icons.Default.ArrowBack,
                 onNavigationClick = {},
                 fontWeight = FontWeight.ExtraBold,
-                actionIcon = Icons.Default.Favorite,
                 scrollBehavior = scrollBehavior
             )
         },
@@ -214,7 +212,6 @@ fun ProductListScreen(navController : NavHostController) {
                 Box(modifier = Modifier.padding(8.dp)) {
                     CategoryCardRow(
                         categoryList = categoryList,
-                        size = 45.dp,
                         onClick = {}
                     )
                 }
@@ -373,7 +370,7 @@ fun DiscountCard(
 @Composable
 fun CategoryCardRow(
     categoryList : List<CategoryData>,
-    size : Dp,
+    size : Dp = 45.dp,
     onClick : () -> Unit,
     CardColor : Color = app_white_bg,
     borderStroke : Dp = 1.dp,

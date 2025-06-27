@@ -11,11 +11,14 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
+import com.example.shopping.R
 import com.example.shopping.ui.theme.Strings
 import com.example.shopping.ui.theme.app_dBlack
 import com.example.shopping.ui.theme.app_lBlack
@@ -27,10 +30,10 @@ fun CustomTopBar(
     fontWeight : FontWeight = FontWeight.Bold,
     titleOverflow: TextOverflow,
     //navIcon
-    navigationIcon: ImageVector,
+    navigationIcon: Painter = painterResource(R.drawable.ic_app_back),
     navigationIconColor: Color = app_lBlack,
     onNavigationClick: (() -> Unit)? = null,
-    actionIcon: ImageVector? = null,
+    actionIcon: Painter = painterResource(R.drawable.ic_app_search),
     containerColor: Color = Color.White,
     titleColor: Color = app_dBlack,
     actionIconColor: Color = app_lBlack,
@@ -45,12 +48,12 @@ fun CustomTopBar(
     },
     navigationIcon = {
         IconButton(onClick = {}) {
-            Icon(imageVector = navigationIcon, contentDescription = null)
+            CustomIcon(painter = navigationIcon)
         }
     },
     actions = {
         IconButton(onClick = {}) {
-            Icon(imageVector = navigationIcon, contentDescription = null)
+            CustomIcon(painter = actionIcon)
         }
     },
     scrollBehavior = scrollBehavior,

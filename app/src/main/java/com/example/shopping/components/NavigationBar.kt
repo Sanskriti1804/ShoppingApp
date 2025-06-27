@@ -64,6 +64,7 @@ fun CustomNavigationBar(
                     ) {
                         CustomIcon(
                             painter = painterResource(item.iconResId),
+                            iconColor = app_white
                         )
                     }
                 }

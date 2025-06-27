@@ -2,6 +2,8 @@ package com.example.shopping.components
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material3.AssistChip
@@ -12,10 +14,17 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.InputChip
 import androidx.compose.material3.Shapes
 import androidx.compose.material3.SuggestionChip
+import androidx.compose.material3.SuggestionChipDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.unit.dp
+import com.example.shopping.ui.theme.app_dBlack
+import com.example.shopping.ui.theme.app_lBlack
+import com.example.shopping.ui.theme.app_white_bg
 
 @Composable
 fun CustomAssistChip(
@@ -75,10 +84,23 @@ fun CustomInputChip(
 @Composable
 fun CustomSuggestionChip(
     onClick: () -> Unit,
-    label: String
+    label: String,
+    shape: Shape = RoundedCornerShape(4.dp),
+    containerColor : Color = app_lBlack,
+    labelColor : Color = app_white_bg,
+    disabledContainerColor : Color = app_white_bg,
+    disabledLabelColor : Color = app_lBlack
 ){
     SuggestionChip(
         onClick = onClick,
-        label = { Text(label) }
+        label = { Text(label) },
+        shape = shape,
+        colors = SuggestionChipDefaults.suggestionChipColors(
+            containerColor = containerColor,
+            labelColor = labelColor,
+            disabledContainerColor =  disabledContainerColor,
+            disabledLabelColor = disabledLabelColor
+        )
+
     )
 }
