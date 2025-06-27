@@ -19,14 +19,14 @@ fun MainApp(){
 fun AppNavGraph(navController: NavHostController){
     NavHost(
         navController = navController,
-        startDestination = Screen.HomeScreen.route
+        startDestination = Screen.ForgotPasswordScreen.route
     ) {
         StartupNavGraph(navController)
         CartNavGraph(navController)
         ProductNavGraph(navController)
         composable(Screen.ProfileScreen.route) {
             ProfileScreen(
-//                navController = navController
+                navController = navController
             )
         }
 

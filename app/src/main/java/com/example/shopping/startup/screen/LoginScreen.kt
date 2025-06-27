@@ -17,8 +17,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.shopping.R
@@ -29,6 +33,7 @@ import com.example.shopping.components.CustomTextField
 import com.example.shopping.components.CustomTitle
 import com.example.shopping.navigation.Screen
 import com.example.shopping.startup.viewmodel.AuthViewModel
+import com.example.shopping.ui.theme.Strings
 
 @Composable
 fun LoginScreen(
@@ -43,8 +48,9 @@ fun LoginScreen(
     var isLoading by remember { mutableStateOf(false) }
 
     Column (
-        modifier = Modifier.padding(12.dp),
-        verticalArrangement = Arrangement.Center
+        modifier = Modifier.padding(top = 100.dp, start = 30.dp, end = 30.dp, bottom = 30.dp),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
     ){
         AppLogo(
             logoImage = appLogo
@@ -53,10 +59,12 @@ fun LoginScreen(
         Spacer(modifier = Modifier.height(36.dp))
 
         CustomTitle(
-            header = "LOGIN SCREEN"
+            header = stringResource(Strings.login),
+            fontWeight = FontWeight.ExtraBold,
+            fontSize = 40.sp
         )
 
-        Spacer(modifier = Modifier.height(18.dp))
+        Spacer(modifier = Modifier.height(12.dp))
 
         CustomCard(
             onClick = {}
@@ -80,13 +88,10 @@ fun LoginScreen(
                 CustomTextField(
                     value = password,
                     onValueChange = {password = it},
-                    placeholder = "Enter your password"
+                    placeholder = "Enter your password",
+                    visualTransformation = PasswordVisualTransformation()
                 )
-                Text(
-                    text = "Forgot Password",
-                    color = Color.Red,
-                    modifier = Modifier.clickable{(navController.navigate(Screen.ForgotPasswordScreen.route))}
-                )
+
                 Spacer(modifier = Modifier.height(12.dp))
 
                 CustomButton(
@@ -94,10 +99,18 @@ fun LoginScreen(
                     onClick = {
                         authViewModel.login(email, password)
                         navController.navigate(Screen.HomeScreen.route)},
-                    buttonText = "LOG IN",
+                    buttonText = stringResource(Strings.login),
                     elevation = ButtonDefaults.buttonElevation(4.dp),
-                    buttonDescription = "signup"
+                    buttonDescription = "login"
+                )
 
+                CustomTitle(
+                    header = "Forgot Password",
+                    fontSize = 10.sp,
+                    modifier = Modifier
+                        .clickable(
+                            onClick = {navController.navigate(Screen.ForgotPasswordScreen.route)}
+                        )
                 )
             }
         }

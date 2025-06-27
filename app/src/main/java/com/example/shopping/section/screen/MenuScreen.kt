@@ -101,8 +101,16 @@ fun MenuScreen(navController: NavHostController) {
             }
 
             item(span = { GridItemSpan(2)}) {
-                val section = listOf<String>(
-                    "NEW IN TOWN","FRESH PICKS", "TRENDING NOW", "JUST DROPPED", "BEST SELLERS", "DAILY SELLERS", "ON THE GO", "BACK IN STOCKS", "SEASONAL STAPLES"
+                val section = listOf(
+                    "NEW IN TOWN",
+                    "FRESH PICKS",
+                    "TRENDING NOW",
+                    "JUST DROPPED",
+                    "BEST SELLERS",
+                    "DAILY SELLERS",
+                    "ON THE GO",
+                    "BACK IN STOCKS",
+                    "SEASONAL STAPLES"
                 )
 
                 Section(
@@ -204,11 +212,15 @@ fun MenuScreen(navController: NavHostController) {
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     CustomTitle(
-                        header = "NEW ARRIVAL"
+                        header = "NEW ARRIVAL",
+                        fontSize = 22.sp,
+                        fontWeight = FontWeight.Normal
                     )
                     Row {
                         CustomTitle(
-                            header = "See all sections"
+                            header = "See all sections",
+                            fontSize = 20.sp,
+                            fontWeight = FontWeight.Thin
                         )
                         CustomIcon(
                             painter = painterResource(R.drawable.ic_app_arrow)

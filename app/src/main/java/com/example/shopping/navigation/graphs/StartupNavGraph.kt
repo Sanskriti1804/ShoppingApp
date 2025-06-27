@@ -21,8 +21,7 @@ fun NavGraphBuilder.StartupNavGraph(navController: NavHostController){
         }
         composable(Screen.SignupScreen.route){
             val authViewModel : AuthViewModel = koinViewModel()
-            SignupScreen(navController)
-//                authViewModel)
+            SignupScreen(navController, authViewModel)
         }
         composable(Screen.LoginScreen.route){
             val authViewModel : AuthViewModel = koinViewModel()

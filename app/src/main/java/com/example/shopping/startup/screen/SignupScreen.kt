@@ -1,5 +1,6 @@
 package com.example.shopping.startup.screen
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -36,7 +37,7 @@ import com.example.shopping.ui.theme.Strings
 @Composable
 fun SignupScreen(
     navController: NavHostController,
-//    authViewModel: AuthViewModel
+    authViewModel: AuthViewModel
 ){
     val appLogo = painterResource(id = R.drawable.iconapp)
 
@@ -88,7 +89,6 @@ fun SignupScreen(
                     value = name,
                     onValueChange = {name = it},
                     placeholder = "Enter your name",
-                    visualTransformation = PasswordVisualTransformation()
                 )
                 CustomTitle(
                     header = "Password"
@@ -96,8 +96,8 @@ fun SignupScreen(
                 CustomTextField(
                     value = password,
                     onValueChange = {password = it},
-
-                    placeholder = "Enter your password"
+                    placeholder = "Enter your password",
+                    visualTransformation = PasswordVisualTransformation()
                 )
 
                 Spacer(modifier = Modifier.height(12.dp))
@@ -105,24 +105,32 @@ fun SignupScreen(
                 CustomButton(
                     textButton = true,
                     onClick = {
-//                        authViewModel.register(name, email, password)
-                        navController.navigate(Screen.LoginScreen.route)
+                        authViewModel.register(name, email, password)
+                        navController.navigate(Screen.HomeScreen.route)
                         },
                     buttonText = stringResource(Strings.signup),
                     elevation = ButtonDefaults.buttonElevation(4.dp),
                     buttonDescription = "signup",
                     modifier = Modifier.fillMaxWidth()
+                )
 
+                CustomTitle(
+                    header = "Already have an Account? Login",
+                    fontSize = 10.sp,
+                    modifier = Modifier
+                        .clickable(
+                            onClick = {navController.navigate(Screen.LoginScreen.route)}
+                        )
                 )
             }
             }
         }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun SignupScreenPreview(){
-    val dummyNavController = rememberNavController()
-//    val dummyAuthViewModel = object : AuthViewModel(authRepository = DummyRepo()) {}
-    SignupScreen(dummyNavController)
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun SignupScreenPreview(){
+//    val dummyNavController = rememberNavController()
+////    val dummyAuthViewModel = object : AuthViewModel(authRepository = DummyRepo()) {}
+//    SignupScreen(dummyNavController)
+//}

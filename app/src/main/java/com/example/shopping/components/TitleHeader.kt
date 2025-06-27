@@ -26,7 +26,7 @@ fun CustomTitle(
     header : String,
     headerColor : Color = app_dBlack,
     fontWeight: FontWeight = FontWeight.SemiBold,
-    fontSize : TextUnit = 24.sp,
+    fontSize : TextUnit = 22.sp,
     style: TextStyle = MaterialTheme.typography.titleLarge,
     modifier: Modifier = Modifier.padding(1.dp),
     maxLine: Int = 5

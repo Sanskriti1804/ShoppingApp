@@ -1,5 +1,6 @@
 package com.example.shopping.components
 
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -12,6 +13,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.Placeholder
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.example.shopping.ui.theme.app_lBlack
 import com.example.shopping.ui.theme.app_white
@@ -20,6 +22,7 @@ import com.example.shopping.ui.theme.app_white
 @Composable
 fun CustomTextField(
     value : String,
+    padding : Dp = 2.dp,
     onValueChange : (String) -> Unit,
     shape: Shape = RoundedCornerShape(6.dp),
     placeholder: String,
@@ -28,6 +31,8 @@ fun CustomTextField(
     visualTransformation : VisualTransformation = VisualTransformation.None
 ){
     OutlinedTextField(
+        modifier = Modifier
+            .padding(padding),
         value = value,
         onValueChange =  onValueChange,
         shape = shape,

@@ -3,6 +3,7 @@ package com.example.shopping.startup.screen
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -22,6 +23,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.airbnb.lottie.compose.LottieCompositionSpec
@@ -36,6 +38,7 @@ import com.example.shopping.components.CustomTopBar
 import com.example.shopping.components.EmptyState
 import com.example.shopping.navigation.Screen
 import com.example.shopping.ui.theme.app_lGray
+import com.example.shopping.ui.theme.app_white_bg
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -54,25 +57,20 @@ fun NewPasswordScreen(navController: NavHostController){
     )
 
     Scaffold (
-
+        containerColor = app_white_bg,
         topBar = {
             CustomTopBar(
                 title = "Create New Password",
-                fontWeight = FontWeight.ExtraBold,
                 titleOverflow = TextOverflow.Ellipsis,
-                navigationIconColor = Color.Black,
-                onNavigationClick = {},
-                containerColor = app_lGray,
-                titleColor = Color.Black,
-                actionIconColor = Color.Black,
                 scrollBehavior = scrollBehavior
             )}
     ){ paddingValues ->
         Column (
             modifier = Modifier.padding(paddingValues),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.SpaceEvenly
+            verticalArrangement = Arrangement.Center
         ){
+            Spacer(modifier = Modifier.height(50.dp))
             composition?.let {
                 EmptyState(
                     composition = it,
@@ -80,9 +78,11 @@ fun NewPasswordScreen(navController: NavHostController){
                 )
             }
 
-            Spacer(modifier = Modifier.height(4.dp))
+            Spacer(modifier = Modifier.height(15.dp))
             CustomTitle(
-                header = "Your New Password must be differnet from previously used Password"
+                header = "Your New Password must be different from previously used Password",
+                fontWeight = FontWeight.Normal,
+                fontSize = 22.sp
             )
             Spacer(modifier = Modifier.height(10.dp))
 
@@ -97,11 +97,13 @@ fun NewPasswordScreen(navController: NavHostController){
                 onValueChange = {},
                 placeholder = "Confirm Password"
             )
-            Spacer(modifier = Modifier.height(15.dp))
+            Spacer(modifier = Modifier.height(10.dp))
 
 
             CustomButton(
                 textButton = true,
+                modifier = Modifier
+                    .fillMaxWidth(),
                 onClick = {navController.navigate(Screen.HomeScreen.route)},
                 buttonText = "Save",
                 elevation = ButtonDefaults.buttonElevation(4.dp),

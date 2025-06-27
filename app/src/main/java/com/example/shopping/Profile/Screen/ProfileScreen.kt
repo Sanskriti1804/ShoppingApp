@@ -45,7 +45,7 @@ import com.example.shopping.ui.theme.app_white_bg
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ProfileScreen(
-//    navController: NavHostController
+    navController: NavHostController
 ){
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
 
@@ -59,9 +59,9 @@ fun ProfileScreen(
                 scrollBehavior = scrollBehavior
             )
         },
-//        bottomBar = {
-//            CustomNavigationBar(navController = navController)
-//        }
+        bottomBar = {
+            CustomNavigationBar(navController = navController)
+        }
     ) {paddingValues ->
         LazyColumn (
             modifier = Modifier
@@ -302,8 +302,8 @@ fun orderIcon(
     )
 }
 
-@Preview(showBackground = true)
-@Composable
-fun ProfileScreenPreview(){
-    ProfileScreen()
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun ProfileScreenPreview(){
+//    ProfileScreen()
+//}

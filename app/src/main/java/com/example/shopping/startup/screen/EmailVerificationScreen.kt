@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -23,6 +24,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.airbnb.lottie.compose.LottieCompositionSpec
@@ -37,6 +39,7 @@ import com.example.shopping.components.CustomTopBar
 import com.example.shopping.components.EmptyState
 import com.example.shopping.navigation.Screen
 import com.example.shopping.ui.theme.app_dBlack
+import com.example.shopping.ui.theme.app_white_bg
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -52,16 +55,11 @@ fun EmailVerificationScreen(navController: NavHostController){
         iterations = LottieConstants.IterateForever
     )
     Scaffold(
+        containerColor = app_white_bg,
         topBar = {
             CustomTopBar(
                 title = "Verify Your Email",
-                fontWeight = FontWeight.ExtraBold,
                 titleOverflow = TextOverflow.Ellipsis,
-                navigationIconColor = Color.Black,
-                onNavigationClick = {},
-                containerColor = app_dBlack, // Assuming this color is defined elsewhere
-                titleColor = Color.Black,
-                actionIconColor = Color.Black,
                 scrollBehavior = scrollBehavior
             )
         }
@@ -69,8 +67,10 @@ fun EmailVerificationScreen(navController: NavHostController){
         Column(
             modifier = Modifier.padding(paddingValues),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.SpaceEvenly
+            verticalArrangement = Arrangement.Center
         ) {
+            Spacer(modifier = Modifier.height(50.dp))
+
             composition?.let {
                 EmptyState(
                     composition = it,
@@ -78,14 +78,16 @@ fun EmailVerificationScreen(navController: NavHostController){
                 )
             }
 
-            Spacer(modifier = Modifier.height(4.dp))
+            Spacer(modifier = Modifier.height(15.dp))
             CustomTitle(
-                header = "Please Enter the 4 digit code sent to sans@gmail.com"
+                header = "Please Enter the 4 digit code sent to sans@gmail.com",
+                fontWeight = FontWeight.Normal,
+                fontSize = 22.sp
             )
             Spacer(modifier = Modifier.height(10.dp))
 
             Row (
-                modifier = Modifier.padding(start = 20.dp, end = 20.dp),
+                modifier = Modifier.padding(20.dp),
                 horizontalArrangement = Arrangement.SpaceEvenly
             ){
                 CustomField(
@@ -110,10 +112,12 @@ fun EmailVerificationScreen(navController: NavHostController){
                 )
             }
 
-            Spacer(modifier = Modifier.height(15.dp))
+            Spacer(modifier = Modifier.height(10.dp))
 
             CustomButton(
                 textButton = true,
+                modifier = Modifier
+                    .fillMaxWidth(),
                 onClick = {navController.navigate(Screen.NewPasswordScreen.route)},
                 buttonText = "Verify",
                 elevation = ButtonDefaults.buttonElevation(4.dp),
