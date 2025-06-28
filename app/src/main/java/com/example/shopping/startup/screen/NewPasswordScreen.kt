@@ -47,6 +47,7 @@ fun NewPasswordScreen(navController: NavHostController){
 
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
 
+
     val composition by rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.forgot_password))
     val lottieProg by animateLottieCompositionAsState(
         composition = composition,

@@ -19,7 +19,7 @@ fun MainApp(){
 fun AppNavGraph(navController: NavHostController){
     NavHost(
         navController = navController,
-        startDestination = Screen.ForgotPasswordScreen.route
+        startDestination = Screen.HomeScreen.route
     ) {
         StartupNavGraph(navController)
         CartNavGraph(navController)

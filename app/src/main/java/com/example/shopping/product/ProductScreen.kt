@@ -11,15 +11,15 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Divider
-import androidx.compose.material.Icon
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Star
+import androidx.compose.material3.Divider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -30,23 +30,34 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.shopping.R
+import com.example.shopping.components.CustomButton
+import com.example.shopping.components.CustomIcon
 import com.example.shopping.components.CustomInputChip
+import com.example.shopping.components.CustomReviewImage
 import com.example.shopping.components.CustomTitle
 import com.example.shopping.home.data.Product
 import com.example.shopping.home.viewmodel.ProductViewModel
+import com.example.shopping.navigation.Screen
+import com.example.shopping.ui.theme.app_lBlack
+import com.example.shopping.ui.theme.app_lGray
 import com.google.accompanist.pager.rememberPagerState
 import java.util.Date
 
 @Composable
-fun ProductDescriptionScreen(
-    productViewModel: ProductViewModel
-){
-    val product  = productViewModel.product
-    LazyRow (modifier = Modifier.padding(2.dp).fillMaxWidth()){
+fun ProductDescriptionScreen(){
+    val viewModel : ProductViewModel = viewModel()
+    val product  = viewModel.product
+    LazyColumn (
+        modifier = Modifier
+            .padding(12.dp)
+            .fillMaxWidth()
+    ){
         item {
             ProductDesc(
                 product = product
@@ -71,7 +82,7 @@ fun ProductDescriptionScreen(
 @Composable
 fun ProductDesc(
     product: Product?,
-    modifier: Modifier = Modifier.padding(2.dp).fillMaxSize()
+    padding : Dp = 5.dp
 ){
     val  pagerState = rememberPagerState()
     val productImage = listOf(
@@ -83,61 +94,84 @@ fun ProductDesc(
     )
 
     Column(
-        modifier = modifier
-    ){  }
-    ProductCarousel(
-        state = pagerState,
-        images = productImage
-    )
-    Spacer(modifier = Modifier.height(10.dp))
-    CustomTitle(
-        header = product?.title ?: "unavailable"
-    )
-    CustomTitle(
-        header = product?.price.toString(),
-        fontWeight = FontWeight.Bold,
-        fontSize = 26.sp
-    )
-    CustomTitle(
-        header = "Inclusive of all taxes",
-        headerColor = Color.LightGray,
-        fontWeight = FontWeight.Thin,
-        fontSize = 20.sp
-    )
-    Spacer(modifier = Modifier.height(5.dp))
-    CustomTitle(
-        header = "SIZE",
-        fontWeight = FontWeight.Bold,
-        fontSize = 26.sp
-    )
-    Row (
-        modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceEvenly
-    ){
-        CustomInputChip(
-            selected = false,
-            onClick = {},
-            label = "Size Chip",
-            icon = Icons.Default.Favorite
+        modifier = Modifier
+            .padding(padding)
+            .fillMaxWidth()
+    ) {
+        ProductCarousel(
+            state = pagerState,
+            images = productImage
         )
-        CustomInputChip(
-            selected = false,
-            onClick = {},
-            label = "Size Chip",
-            icon = Icons.Default.Favorite
+        Spacer(modifier = Modifier.height(10.dp))
+        CustomTitle(
+            header = product?.title ?: "Summer Side Pleated Textured Midi Dress",
+            fontWeight = FontWeight.Thin,
+            fontSize = 12.sp
         )
-        CustomInputChip(
-            selected = false,
-            onClick = {},
-            label = "Size Chip",
-            icon = Icons.Default.Favorite
+        CustomTitle(
+            header = product?.price.toString() ?: "$45.67",
+            fontWeight = FontWeight.SemiBold,
+            fontSize = 15.sp
         )
-        CustomInputChip(
-            selected = false,
-            onClick = {},
-            label = "Size Chip",
-            icon = Icons.Default.Favorite
+        CustomTitle(
+            header = "Inclusive of all taxes",
+            headerColor = Color.LightGray,
+            fontWeight = FontWeight.ExtraLight,
+            fontSize = 6.sp
         )
+        Spacer(modifier = Modifier.height(10.dp))
+        Row (
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(5.dp),
+            horizontalArrangement = Arrangement.SpaceBetween
+        ){
+            CustomTitle(
+                header = "SIZE",
+                fontWeight = FontWeight.Normal,
+                fontSize = 12.sp
+            )
+            Row {
+                CustomTitle(
+                    header = "Size Guide and Model Info",
+                    fontWeight = FontWeight.Normal,
+                    fontSize = 10.sp
+                )
+                CustomIcon(
+                    painter = painterResource(R.drawable.ic_app_arrow)
+                )
+            }
+        }
+
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceEvenly
+        ) {
+            CustomInputChip(
+                selected = false,
+                onClick = {},
+                label = "Size Chip",
+                icon = Icons.Default.Favorite
+            )
+            CustomInputChip(
+                selected = false,
+                onClick = {},
+                label = "Size Chip",
+                icon = Icons.Default.Favorite
+            )
+            CustomInputChip(
+                selected = false,
+                onClick = {},
+                label = "Size Chip",
+                icon = Icons.Default.Favorite
+            )
+            CustomInputChip(
+                selected = false,
+                onClick = {},
+                label = "Size Chip",
+                icon = Icons.Default.Favorite
+            )
+        }
     }
 }
 
@@ -164,19 +198,15 @@ fun ReviewCard(
     ){
         Row {
             CustomTitle(
-                header = count
+                header = text
             )
             CustomTitle(
-                header = text
+                header = count
             )
         }
         LazyRow {
             item {
-                Image(
-                    painter = image,
-                    contentDescription = contentDescription,
-                    contentScale = contentScale
-                )
+                CustomReviewImage()
             }
         }
         LazyRow {
@@ -199,35 +229,57 @@ fun ReviewCard(
                                 .fillMaxWidth(),
                             horizontalArrangement = Arrangement.SpaceBetween
                         ) {
-                            Icon(
-                                imageVector = star,
-                                contentDescription = starDesc,
+                            Row {
+                                CustomIcon(
+                                    painter = painterResource(R.drawable.ic_app_star_fill)
+                                )
+                                CustomIcon(
+                                    painter = painterResource(R.drawable.ic_app_star_fill)
+                                )
+                                CustomIcon(
+                                    painter = painterResource(R.drawable.ic_app_star_fill)
+                                )
+                                CustomIcon(
+                                    painter = painterResource(R.drawable.ic_app_star)
+                                )
+                            }
+                            CustomIcon(
+                                painter = painterResource(R.drawable.ic_app_star_fill)
                             )
-                            Date()
+                            CustomTitle(
+                                header = Date().toString(),
+                                fontWeight = FontWeight.Thin,
+                                fontSize = 8.sp,
+                                headerColor = app_lGray
+                            )
                         }
                         CustomTitle(
-                            header = review
-                        )
-                        Image(
-                            painter = image,
-                            contentDescription = contentDescription
+                            header = review,
+                            fontWeight = FontWeight.Thin,
+                            fontSize = 10.sp,
+                            headerColor = app_lBlack
                         )
                     }
                 }
 
             }
         }
+        CustomButton(
+            textButton = true,
+            buttonDescription = "reviews button",
+            onClick = {},
+            buttonText = "See all Reviews"
+        )
 
     }
 }
 
 @Composable
 fun DeliveryInfo(
-    modifier : Modifier = Modifier.padding(2.dp).fillMaxWidth(),
+    modifier : Modifier = Modifier.padding(10.dp).fillMaxWidth(),
     deliveryInfo : String = "DELIVERY INFO",
-    qnaIcon : ImageVector = Icons.Default.Info,
-    qnaDesc : String = "delivery info",
-    searchModifier : Modifier = Modifier.fillMaxWidth().padding(2.dp),
+    qnaIcon : Painter = painterResource(R.drawable.ic_app_info),
+    searchModifier : Modifier = Modifier.fillMaxWidth().padding(12.dp),
     pincodeQuery : String = " Enter pincode to check"
 ){
     Column(
@@ -236,11 +288,13 @@ fun DeliveryInfo(
     ) {
         Row {
             CustomTitle(
-                header =  deliveryInfo
+                header =  deliveryInfo,
+                fontWeight = FontWeight.Normal,
+                fontSize = 12.sp
             )
-            Icon(
-                imageVector = qnaIcon,
-                contentDescription = qnaDesc,
+            CustomIcon(
+                painter = painterResource(R.drawable.ic_app_info),
+                iconColor = app_lGray
             )
         }
 
@@ -256,46 +310,55 @@ fun DeliveryInfo(
 //        )
 
         Row {
-            Icon(
-                imageVector = qnaIcon,
-                contentDescription = qnaDesc
+            CustomIcon(
+                painter = painterResource(R.drawable.ic_app_info),
+                iconColor = app_lGray
+
             )
             CustomTitle(
                 header = "Fast Delivery available on all products",
-                fontWeight = FontWeight.Bold,
+                fontWeight = FontWeight.Normal,
+                fontSize = 8.sp
             )
         }
         Row {
-            Icon(
-                imageVector = qnaIcon,
-                contentDescription = qnaDesc
+            CustomIcon(
+                painter = painterResource(R.drawable.ic_app_info),
+                iconColor = app_lGray
             )
             CustomTitle(
                 header = "Standard Delivery",
-                fontWeight = FontWeight.Bold,
+                fontWeight = FontWeight.Normal,
+                fontSize = 8.sp
             )
             CustomTitle(
-                header = "Free shipping on this product. Please enter pincode to check delivery time"
+                header = "Free shipping on this product. Please enter pincode to check delivery time," ,
+                fontWeight = FontWeight.Thin,
+                fontSize = 8.sp
             )
         }
 
         Row {
-            Icon(
-                imageVector = qnaIcon,
-                contentDescription = qnaDesc
+            CustomIcon(
+                painter = painterResource(R.drawable.ic_order_return),
+                iconColor = app_lGray
             )
             CustomTitle(
                 header = "7 days easy return with pickup besides special offer products",
+                fontWeight = FontWeight.Thin,
+                fontSize = 8.sp
             )
         }
 
         Row {
-            Icon(
-                imageVector = qnaIcon,
-                contentDescription = qnaDesc
+            CustomIcon(
+                painter = painterResource(R.drawable.ic_app_info),
+                iconColor = app_lGray
             )
             CustomTitle(
                 header = "Cash on delivery available in most areas",
+                fontWeight = FontWeight.Thin,
+                fontSize = 8.sp
             )
         }
     }
@@ -303,7 +366,7 @@ fun DeliveryInfo(
 
 @Composable
 fun ProductDetail(
-    modifier : Modifier = Modifier.padding(2.dp).fillMaxWidth(),
+    modifier : Modifier = Modifier.padding(12.dp).fillMaxWidth(),
     productDetail : String = "Product Detail",
     divModifier : Modifier = Modifier.padding(1.dp),
     divColor : Color = Color.LightGray,
@@ -331,34 +394,42 @@ fun ProductDetail(
         Row (
             horizontalArrangement = Arrangement.SpaceBetween
         ){
-            Icon(
-                painter = productIcon,
-                contentDescription = productDesc
+            CustomIcon(
+                painter = painterResource(R.drawable.ic_cat_tshirt)
             )
             CustomTitle(
-                header = detailOne
+                header = detailOne,
+                fontWeight = FontWeight.Normal,
+                fontSize = 12.sp
             )
-            Icon(
-                imageVector = collapseIcon,
-                contentDescription = collapseIconDesc
+            CustomIcon(
+                painter = painterResource(R.drawable.ic_app_info),
+                iconColor = app_lGray
             )
         }
         Row (
             horizontalArrangement = Arrangement.SpaceBetween
         ){
-            Icon(
-                painter = productIcon,
-                contentDescription = productDesc
+            CustomIcon(
+                painter = painterResource(R.drawable.ic_cat_tshirt)
             )
             CustomTitle(
-                header = detailTwo
+                header = detailTwo,
+                fontWeight = FontWeight.Normal,
+                fontSize = 12.sp
             )
-            Icon(
-                imageVector = collapseIcon,
-                contentDescription = collapseIconDesc
+            CustomIcon(
+                painter = painterResource(R.drawable.ic_app_info),
+                iconColor = app_lGray
             )
 
         }
 
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun Screen.ProductDescriptionScreenPreview(){
+    ProductDescriptionScreen()
 }

@@ -38,10 +38,12 @@ class ProductViewModel : ViewModel(){
     private fun fetchProductById(){
         viewModelScope.launch {
             try {
-                val response = RetrofitInstance.api.getProducts(limit = 1, skip = 0)
+                val response = RetrofitInstance.api.getProducts(limit = 100, skip = 0)
+                println(" \uD83D\uDFE2 Response received: ${response.products.size} products")
                 product = response.products.firstOrNull()
             }
             catch (e : Exception){
+                println("🔴 Error fetching products: ${e.message}")
                 e.printStackTrace()
             }
 

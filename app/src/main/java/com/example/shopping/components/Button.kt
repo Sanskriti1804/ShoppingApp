@@ -5,6 +5,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentWidth
@@ -41,11 +42,11 @@ fun CustomButton(
     shape : Shape = RoundedCornerShape(4.dp),
     containerColor: Color = app_lBlack,
     contentColor : Color = app_white,
-    elevation: ButtonElevation,
+    elevation: ButtonElevation = ButtonDefaults.buttonElevation(2.dp),
     buttonText: String? = null,
     buttonIcon : ImageVector? = null,
     buttonDescription: String,
-    modifier: Modifier = Modifier.padding(2.dp)
+    modifier: Modifier = Modifier.padding(2.dp).fillMaxWidth()
 ){
     Button(
         onClick = onClick,

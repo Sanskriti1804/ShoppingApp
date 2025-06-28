@@ -83,13 +83,13 @@ fun CartScreen(navController: NavHostController) {
                 )
                 CustomDivider()
             }
-            items(cartProduct) { product ->
-                CartProdCard(
-                    cartProduct = product,
-                    onClick = {},
-
-                )
-            }
+//            items(cartProduct) { product ->
+//                CartProdCard(
+//                    cartProduct = product,
+//                    onClick = {},
+//
+//                )
+//            }
 
         }
 

@@ -55,6 +55,7 @@ import com.example.shopping.home.data.CategoryData
 import com.example.shopping.home.screen.CategoryCardRow
 import com.example.shopping.home.screen.ProductCard
 import com.example.shopping.home.viewmodel.ProductViewModel
+import com.example.shopping.navigation.Screen
 import com.example.shopping.ui.theme.app_dBlack
 import com.example.shopping.ui.theme.app_lBlack
 import com.example.shopping.ui.theme.app_lGray
@@ -236,7 +237,10 @@ fun MenuScreen(navController: NavHostController) {
             ) {
                 item ->
                 ProductCard(
-                    product = item
+                    product = item,
+                    onClick = {
+                        navController.navigate(Screen.ProductDescriptionScreen.route)
+                    }
                 )
             }
         }

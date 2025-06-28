@@ -51,6 +51,7 @@ import com.example.shopping.home.data.CategoryData
 import com.example.shopping.home.data.DiscountData
 import com.example.shopping.home.data.Product
 import com.example.shopping.home.viewmodel.ProductViewModel
+import com.example.shopping.navigation.Screen
 import com.example.shopping.ui.theme.app_dBlack
 import com.example.shopping.ui.theme.app_lBlack
 import com.example.shopping.ui.theme.app_lGray
@@ -90,6 +91,9 @@ fun ProductListScreen(navController : NavHostController) {
             modifier = Modifier.fillMaxSize().padding(top = 95.dp, bottom = 18.dp, start = 18.dp, end = 18.dp)
 
         ) {
+            item {
+                featureRow()
+            }
             item(span = { GridItemSpan(2)}) {
                 val discountImage = listOf(
                     R.drawable.ic_discount1,
@@ -242,18 +246,87 @@ fun ProductListScreen(navController : NavHostController) {
                 }
             }
 
-            items(
-                items = products,
-                key = {products -> products.id}
-            ){ product ->
-                ProductCard(
-                    product = product
-                )
+
+            if (products.isEmpty()) {
+                item(span = { GridItemSpan(2) }) {
+                    Text("No products found", modifier = Modifier.fillMaxWidth().padding(16.dp))
+                }
+            } else {
+                items(items = products, key = { product -> product.id }) { product ->
+                    ProductCard(
+                        product = product,
+                        onClick = {
+                            navController.navigate(Screen.ProductDescriptionScreen.route)
+                        }
+                    )
+                }
             }
         }
     }
 }
 
+@Composable
+fun featureRow(
+    padding : Dp = 4.dp
+){
+    Row(
+        modifier = Modifier
+            .padding(padding)
+            .fillMaxWidth()
+    ) {
+        Row {
+            CustomIcon(
+                painter = painterResource(R.drawable.ic_order_return)
+            )
+            Column {
+                CustomTitle(
+                    header = "Easy Return",
+                    fontSize = 14.sp
+                )
+                CustomTitle(
+                    header = "Free pick up",
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.Thin
+                )
+            }
+        }
+
+        Row {
+            CustomIcon(
+                painter = painterResource(R.drawable.ic_app_star)
+            )
+            Column {
+                CustomTitle(
+                    header = "Fast Delivery",
+                    fontSize = 14.sp
+                )
+                CustomTitle(
+                    header = "100+ Styles",
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.Thin
+                )
+            }
+        }
+
+        Row {
+            CustomIcon(
+                painter = painterResource(R.drawable.ic_app_processing)
+            )
+            Column {
+                CustomTitle(
+                    header = "Free Shipping",
+                    fontSize = 14.sp
+                )
+                CustomTitle(
+                    header = "For orders 50+",
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.Thin
+                )
+            }
+        }
+
+    }
+}
 @Composable
 fun ProductCard(
     product : Product,
@@ -264,7 +337,8 @@ fun ProductCard(
     innerPadding: Dp = 16.dp,
     imageSize : Dp = 100.dp,
     contentScale: ContentScale = ContentScale.Crop,
-    spacerHeight : Dp = 4.dp
+    spacerHeight : Dp = 4.dp,
+    onClick: () -> Unit
 ){
     Card(
         modifier = Modifier
@@ -273,8 +347,9 @@ fun ProductCard(
         colors = CardDefaults.cardColors(
             containerColor = containerColor
         ),
-        elevation = elevation
-    ) {
+        elevation = elevation,
+        onClick = onClick,
+        ) {
         Column(modifier = Modifier.padding(innerPadding)) {
             Image(
                 painter = rememberAsyncImagePainter(product.thumbnail),
@@ -426,70 +501,3 @@ fun PreviewDiscountCard(){
     )
 }
 
-
-
-
-
-
-
-//@Composable
-//fun ProductGrid(
-//
-//) {
-//    LazyVerticalGrid(
-//        columns = GridCells.Fixed(2),
-//        verticalArrangement = Arrangement.spacedBy(12.dp),
-//        horizontalArrangement = Arrangement.spacedBy(12.dp)
-//    ) {
-//
-//        items(products) { product ->
-//
-//        }
-//    }
-//}
-
-
-//        LazyColumn(
-//            modifier = Modifier
-//                .fillMaxSize()
-//                .background(Color.White)
-//                .padding(paddingValues)
-//                .padding(12.dp)
-//        ) {
-//            item {
-//                Box(
-//                    modifier = Modifier.fillMaxSize()
-//                ){
-//                    CustomSearch(
-//                        modifier = Modifier
-//                            .fillMaxWidth()
-//                            .wrapContentHeight(),
-//                        query = query,
-//                        onQueryChange = {query = it},
-//                        active = active,
-//                        onActiveChange = { active = it},
-//                        leadingIcon = Icons.Default.ArrowBack,
-//                        trailingIcon = Icons.Default.Close,
-//                        micIcon = painterResource(R.drawable.ic_mic),
-//                        containerColor = Color.Gray,
-//                        placeholder = {Text("Search")},
-//                        onClick = {},
-//                        historyIcon = painterResource(R.drawable.ic_history),
-//                        searchHistory = searchHistory,
-//                    )
-//                }
-//            }
-//            item {
-//                    }
-//            item {
-//}
-//            items(products) {products->
-//                ProductCard(
-//                    product = products,
-//                    containerColor = T_CardColor,
-//                    shape = RoundedCornerShape(4.dp)
-//                )
-//            }
-//        }
-//    }
-//}
