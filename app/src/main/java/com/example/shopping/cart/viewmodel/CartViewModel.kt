@@ -12,7 +12,6 @@ import kotlinx.coroutines.launch
 
 class CartViewModel : ViewModel() {
     var cartList by mutableStateOf<List<CartProduct>>(emptyList())
-        private  set
 
     init {
         fetchCartProd()
@@ -22,7 +21,8 @@ class CartViewModel : ViewModel() {
         viewModelScope.launch {
             try {
                 val response = RetrofitInstance.cartApi.getCartProducts(limit = 4, skip = 0)
-                cartList = response.cart
+                val allProducts = response.carts.firstOrNull()?.products ?: emptyList()
+                cartList = allProducts
             }
             catch (e : Exception){
                 e.printStackTrace()

@@ -1,11 +1,14 @@
 package com.example.shopping.cart.screen
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -34,6 +37,7 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.foundation.lazy.items
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
@@ -48,6 +52,7 @@ import com.example.shopping.components.CustomTopBar
 import com.example.shopping.components.QuantityButton
 import com.example.shopping.components.SizeButton
 import com.example.shopping.ui.theme.app_dBlack
+import com.example.shopping.ui.theme.app_lGray
 import com.example.shopping.ui.theme.app_white_bg
 
 
@@ -57,7 +62,7 @@ fun CartScreen(navController: NavHostController) {
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
 
     val viewModel : CartViewModel = viewModel()
-    val cartProduct : List<CartProduct> = viewModel.cartList ?: emptyList()
+    val cartProduct = viewModel.cartList
 
     Scaffold(
         containerColor = app_white_bg,
@@ -83,13 +88,21 @@ fun CartScreen(navController: NavHostController) {
                 )
                 CustomDivider()
             }
-//            items(cartProduct) { product ->
-//                CartProdCard(
-//                    cartProduct = product,
-//                    onClick = {},
-//
-//                )
-//            }
+            if (cartProduct.isEmpty()){
+                item {
+                    Text("cart is Empty")
+                }
+            }
+            else{
+                items(cartProduct) { product ->
+                    CartProdCard(
+                        cartProduct = product,
+                        onClick = {},
+
+                        )
+                }
+            }
+
 
         }
 
@@ -101,9 +114,10 @@ fun CartProdCard(
     cartProduct: CartProduct,
     onClick : () -> Unit,
     contentDescription : String = "Cart Product",
-    modifier : Modifier = Modifier.padding(10.dp),
-    shape : Shape  = RoundedCornerShape(4.dp),
-    containerColor: Color = app_dBlack,
+   padding : Dp = 8.dp,
+    shape : Shape  = RoundedCornerShape(8.dp),
+    containerColor: Color = app_lGray,
+    imageSize : Dp = 80.dp,
     contentColor: Color = Color.Black,
     elevation: CardElevation = CardDefaults.cardElevation(2.dp),
     titleColor: Color = app_dBlack,
@@ -114,7 +128,9 @@ fun CartProdCard(
     ){
     Card(
         onClick = onClick,
-        modifier = modifier,
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(padding),
         shape = shape,
         colors = CardDefaults.cardColors(
             containerColor = containerColor,
@@ -122,50 +138,51 @@ fun CartProdCard(
         ),
         elevation = elevation
     ) {
-        Row (
-             modifier = Modifier.padding(12.dp)
-        ){
+        Row(
+            modifier = Modifier.padding(12.dp)
+        ) {
             Image(
                 painter = rememberAsyncImagePainter(cartProduct.thumbnail),
                 contentDescription = contentDescription,
+                modifier = Modifier.size(imageSize),
                 contentScale = ContentScale.Crop
             )
             Spacer(modifier = Modifier.width(3.dp))
             Column {
-                Text(
-                    text = cartProduct.title,
-                    color = titleColor,
-                    fontWeight = FontWeight.Bold,
-                    fontSize = titleSize
+                CustomTitle(
+                    header = cartProduct.title,
+                    fontWeight = FontWeight.Normal,
+                    fontSize = 18.sp
                 )
                 Spacer(modifier = Modifier.height(2.dp))
                 Row {
-                    Text(
-                        text = cartProduct.price.toString(),
-                        color = textColor,
-                        fontWeight = FontWeight.Bold,
-                        fontSize = textSize
+                    CustomTitle(
+                        header = cartProduct.price.toString(),
+                        fontWeight = FontWeight.Light,
+                        fontSize = 18.sp
                     )
-                    Text(
-                        text = cartProduct.discountPercentage.toString(),
-                        color = textColor,
-                        fontWeight = FontWeight.Thin,
-                        fontSize = textSize
+                    Spacer(modifier = Modifier.width(4.dp))
+                    CustomTitle(
+                        header = cartProduct.discountPercentage.toString(),
+                        fontWeight = FontWeight.Light,
+                        fontSize = 18.sp
                     )
-                }
-                Row {
-                    SizeButton(
-                        onClick = {},
-                        quantity = cartProduct.quantity.toString(),
-                    )
+                    Row(
+                        modifier = Modifier.padding(5.dp),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                    ) {
+                        SizeButton(
+                            onClick = {},
+                            quantity = cartProduct.quantity.toString(),
+                        )
 
-                    QuantityButton(
-                        onClick = {},
-                        quantity = cartProduct.quantity.toString(),
-                    )
+                        QuantityButton(
+                            onClick = {},
+                            quantity = cartProduct.quantity.toString(),
+                        )
+                    }
                 }
             }
-
         }
     }
 }

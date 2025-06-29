@@ -7,6 +7,9 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.scrollable
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.collectIsDraggedAsState
+import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.lazy.LazyColumn
@@ -52,14 +55,17 @@ import com.example.shopping.home.data.DiscountData
 import com.example.shopping.home.data.Product
 import com.example.shopping.home.viewmodel.ProductViewModel
 import com.example.shopping.navigation.Screen
+import com.example.shopping.product.ProductCarousel
 import com.example.shopping.ui.theme.app_dBlack
 import com.example.shopping.ui.theme.app_lBlack
 import com.example.shopping.ui.theme.app_lGray
 import com.example.shopping.ui.theme.app_white
 import com.example.shopping.ui.theme.app_white_bg
+import com.google.accompanist.pager.rememberPagerState
+import kotlinx.coroutines.delay
 
 
-@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter", "SuspiciousIndentation")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ProductListScreen(navController : NavHostController) {
@@ -79,7 +85,8 @@ fun ProductListScreen(navController : NavHostController) {
                 titleOverflow = TextOverflow.Ellipsis,
                 onNavigationClick = {},
                 fontWeight = FontWeight.ExtraBold,
-                scrollBehavior = scrollBehavior
+                scrollBehavior = scrollBehavior,
+                onActionClick = {navController.navigate(Screen.SearchScreen.route)}
             )
         },
         bottomBar = {
@@ -89,11 +96,12 @@ fun ProductListScreen(navController : NavHostController) {
         LazyVerticalGrid(
             columns = GridCells.Fixed(2),
             modifier = Modifier.fillMaxSize().padding(top = 95.dp, bottom = 18.dp, start = 18.dp, end = 18.dp)
+//            modifier = Modifier.fillMaxSize().padding(20.dp)
 
         ) {
-            item {
-                featureRow()
-            }
+//            item {
+//                featureRow()
+//            }
             item(span = { GridItemSpan(2)}) {
                 val discountImage = listOf(
                     R.drawable.ic_discount1,
@@ -132,6 +140,39 @@ fun ProductListScreen(navController : NavHostController) {
                 )
 
                 Spacer(modifier = Modifier.height(12.dp))
+            }
+
+            item (
+                span = { GridItemSpan(2)}
+            ){
+                val pagerState = rememberPagerState()
+                val productImage = listOf(
+                    R.drawable.ic_discount1,
+                    R.drawable.ic_discount2,
+                    R.drawable.ic_discount3,
+                    R.drawable.ic_discount4,
+                    R.drawable.ic_discount5
+                )
+
+                val pagerIsDragged by pagerState.interactionSource.collectIsDraggedAsState()
+                val pagerInteractionSource = remember { MutableInteractionSource() }        //remember new interaction source - like user gestures
+                val pagerIsPressed by pagerInteractionSource.collectIsPressedAsState()
+
+                val autoAdvance = !pagerIsDragged && !pagerIsPressed        //auto afvancing when pager is not dragged or advancing
+
+                    LaunchedEffect(autoAdvance) {
+                        if (autoAdvance){
+                        while (true){
+                            delay(2000)
+                            val nextPage = (pagerState.currentPage + 1)  % productImage.size        // % productImage.size- 0 if on last page
+                            pagerState.animateScrollToPage(nextPage)
+                        }
+                    }
+                }
+                ProductCarousel(
+                    state = pagerState,
+                    images = productImage
+                )
             }
 
             item(span = { GridItemSpan(2)}) {
@@ -276,16 +317,17 @@ fun featureRow(
     ) {
         Row {
             CustomIcon(
-                painter = painterResource(R.drawable.ic_order_return)
+                painter = painterResource(R.drawable.ic_order_return),
+                iconSize = 15.dp
             )
             Column {
                 CustomTitle(
                     header = "Easy Return",
-                    fontSize = 14.sp
+                    fontSize = 8.sp
                 )
                 CustomTitle(
                     header = "Free pick up",
-                    fontSize = 14.sp,
+                    fontSize = 8.sp,
                     fontWeight = FontWeight.Thin
                 )
             }
@@ -293,16 +335,17 @@ fun featureRow(
 
         Row {
             CustomIcon(
-                painter = painterResource(R.drawable.ic_app_star)
+                painter = painterResource(R.drawable.ic_app_star),
+                iconSize = 15.dp
             )
             Column {
                 CustomTitle(
                     header = "Fast Delivery",
-                    fontSize = 14.sp
+                    fontSize = 8.sp
                 )
                 CustomTitle(
                     header = "100+ Styles",
-                    fontSize = 14.sp,
+                    fontSize = 8.sp,
                     fontWeight = FontWeight.Thin
                 )
             }
@@ -310,16 +353,17 @@ fun featureRow(
 
         Row {
             CustomIcon(
-                painter = painterResource(R.drawable.ic_app_processing)
+                painter = painterResource(R.drawable.ic_app_processing),
+                iconSize = 15.dp
             )
             Column {
                 CustomTitle(
                     header = "Free Shipping",
-                    fontSize = 14.sp
+                    fontSize = 8.sp
                 )
                 CustomTitle(
                     header = "For orders 50+",
-                    fontSize = 14.sp,
+                    fontSize = 8.sp,
                     fontWeight = FontWeight.Thin
                 )
             }
@@ -327,6 +371,7 @@ fun featureRow(
 
     }
 }
+
 @Composable
 fun ProductCard(
     product : Product,
@@ -342,7 +387,9 @@ fun ProductCard(
 ){
     Card(
         modifier = Modifier
-            .padding(outerPadding),
+            .padding(outerPadding)
+            .heightIn(min = 220.dp, max = 260.dp)
+        ,
         shape = shape,
         colors = CardDefaults.cardColors(
             containerColor = containerColor
@@ -353,6 +400,7 @@ fun ProductCard(
         Column(modifier = Modifier.padding(innerPadding)) {
             Image(
                 painter = rememberAsyncImagePainter(product.thumbnail),
+
                 contentDescription = product.title,
                 modifier = Modifier.size(imageSize),
                 contentScale = contentScale

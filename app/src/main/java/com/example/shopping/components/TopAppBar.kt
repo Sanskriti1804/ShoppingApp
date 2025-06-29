@@ -33,6 +33,7 @@ fun CustomTopBar(
     navigationIcon: Painter = painterResource(R.drawable.ic_app_back),
     navigationIconColor: Color = app_lBlack,
     onNavigationClick: (() -> Unit)? = null,
+    onActionClick: (() -> Unit) = {},
     actionIcon: Painter = painterResource(R.drawable.ic_app_search),
     containerColor: Color = Color.White,
     titleColor: Color = app_dBlack,
@@ -47,12 +48,14 @@ fun CustomTopBar(
         )
     },
     navigationIcon = {
-        IconButton(onClick = {}) {
+        IconButton(onClick = {
+            onNavigationClick?.invoke()     //safely calls only if it is null
+        }) {
             CustomIcon(painter = navigationIcon)
         }
     },
     actions = {
-        IconButton(onClick = {}) {
+        IconButton(onClick = {onActionClick()}) {
             CustomIcon(painter = actionIcon)
         }
     },

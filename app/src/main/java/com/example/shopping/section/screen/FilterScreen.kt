@@ -49,14 +49,9 @@ fun FilterScreen(){
         topBar = {
             CustomTopBar(
                 title = "Filter",
-                fontWeight = FontWeight.ExtraBold,
                 titleOverflow = TextOverflow.Ellipsis,
-                navigationIconColor = Color.Black,
                 onNavigationClick = {},
-                containerColor = Color.White,
-                titleColor = Color.Black,
-                scrollBehavior = scrollBehavior,
-                actionIconColor = Color.Black
+                scrollBehavior = scrollBehavior
             )
         }
     ) {paddingValues ->

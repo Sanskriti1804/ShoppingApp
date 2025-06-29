@@ -5,18 +5,17 @@ import androidx.compose.material3.Badge
 import androidx.compose.material3.BadgedBox
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
+import com.example.shopping.ui.theme.app_orange
+import com.example.shopping.ui.theme.app_white_bg
 
 @Composable
 fun CustomBadge(
-    showBadge : Boolean,
+    showBadge : Boolean = true,
     badgeContent : (@Composable () -> Unit)? = null,
-    badgeColor : Color,
-    contentColor : Color,
-    component : (@Composable () -> Unit)? = null
+    badgeColor : Color = app_orange,
+    contentColor : Color = app_white_bg
 ){
-    BadgedBox(
-        badge = {
-            if (showBadge) {
+    if (!showBadge) return
                 if (badgeContent != null) {
                     Badge(
                         containerColor = badgeColor,
@@ -27,11 +26,4 @@ fun CustomBadge(
                 } else {
                     Badge(containerColor = badgeColor)
                 }
-            }
-        }
-    ) {
-        if (component != null) {
-            component()
-        }
-    }
 }

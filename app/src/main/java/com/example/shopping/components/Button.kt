@@ -98,16 +98,16 @@ fun QuantityButton(
             modifier = Modifier.wrapContentWidth(),
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
-            Icon(
-                painter = upIcon,
-                contentDescription = contentDesciption
+            CustomIcon(
+                painter = painterResource(R.drawable.ic_app_arrow),
+                iconSize = 10.dp
             )
             Text(
                 text = quantity
             )
-            Icon(
-                imageVector = downIcon,
-                contentDescription = contentDesciption
+            CustomIcon(
+                painter = painterResource(R.drawable.ic_app_arrow),
+                iconSize = 10.dp
             )
         }
     }
@@ -147,16 +147,15 @@ fun SizeButton(
             )
 
             Row {
-                Icon(
-                    imageVector = upIcon,
-                    contentDescription = contentDesciption
+                CustomIcon(
+                    painter = painterResource(R.drawable.ic_app_arrow),
+                    iconSize = 10.dp
                 )
 
-                Icon(
-                    imageVector = downIcon,
-                    contentDescription = contentDesciption
+                CustomIcon(
+                    painter = painterResource(R.drawable.ic_app_arrow),
+                    iconSize = 10.dp
                 )
-
             }
         }
     }

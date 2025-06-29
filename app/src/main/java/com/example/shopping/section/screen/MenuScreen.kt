@@ -141,11 +141,7 @@ fun MenuScreen(navController: NavHostController) {
                         label = "null",
                         bgColor = app_lBlack
                     ),
-                    CategoryData(
-                        icon = painterResource(id = R.drawable.ic_cat_tie),
-                        label = "null",
-                        bgColor = app_lBlack
-                    ),
+
                     CategoryData(
                         icon = painterResource(id = R.drawable.ic_cat_dryer),
                         label = "null",
@@ -160,7 +156,19 @@ fun MenuScreen(navController: NavHostController) {
                         icon = painterResource(id = R.drawable.ic_cat_earrings),
                         label = "null",
                         bgColor = app_lBlack
-                    ),
+                    )
+                )
+
+                Box(modifier = Modifier.padding(8.dp)) {
+                    CategoryCardRow(
+                        categoryList = categoryList,
+                        onClick = {}
+                    )
+                }
+            }
+
+            item (span = { GridItemSpan(2)}) {
+                val categoryList = listOf(
                     CategoryData(
                         icon = painterResource(id = R.drawable.ic_cat_glasses),
                         label = "null",
@@ -205,6 +213,7 @@ fun MenuScreen(navController: NavHostController) {
                     )
                 }
             }
+
 
             item(span = { GridItemSpan(2)}) {
                 Row(

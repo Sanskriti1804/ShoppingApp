@@ -133,25 +133,25 @@ fun UsageScreen() {
 //
 //                }
 //            }
-            item {
-                Text("Assist Chip")
-                CustomAssistChip(
-                    onClick = {},
-                    label = "Add to wishList",
-                    icon = Icons.Default.Favorite,
-                    colors = AssistChipDefaults.assistChipColors(
-                        containerColor = Color.LightGray,
-                        labelColor = Color.Black
-                    ),
-                    elevation = AssistChipDefaults.assistChipElevation(
-                        elevation = 4.dp,
-                        pressedElevation = 16.dp
-                    ),
-                    border = BorderStroke(2.dp, Color.Yellow),
-                    interactionSource = interactionSource,
-                    shape = RoundedCornerShape(7.dp)
-                )
-            }
+//            item {
+//                Text("Assist Chip")
+//                CustomAssistChip(
+//                    onClick = {},
+//                    label = "Add to wishList",
+//                    icon = Icons.Default.Favorite,
+//                    colors = AssistChipDefaults.assistChipColors(
+//                        containerColor = Color.LightGray,
+//                        labelColor = Color.Black
+//                    ),
+//                    elevation = AssistChipDefaults.assistChipElevation(
+//                        elevation = 4.dp,
+//                        pressedElevation = 16.dp
+//                    ),
+//                    border = BorderStroke(2.dp, Color.Yellow),
+//                    interactionSource = interactionSource,
+//                    shape = RoundedCornerShape(7.dp)
+//                )
+//            }
 
             item {
                 Text("Filter Chip")
@@ -188,25 +188,25 @@ fun UsageScreen() {
                 )
             }
 
-            item {
-                CustomBadge(
-                    showBadge = showBadge,
-                    badgeContent = {
-                        Icon(
-                            imageVector = Icons.Outlined.FavoriteBorder,
-                            contentDescription = null
-                        )
-                    },
-                    badgeColor = Color.Red,
-                    contentColor = Color.White,
-                    component = {
-                        Image(
-                            painter = painterResource(R.drawable.t_ic),
-                            contentDescription = null
-                        )
-                    }
-                )
-            }
+//            item {
+//                CustomBadge(
+//                    showBadge = showBadge,
+//                    badgeContent = {
+//                        Icon(
+//                            imageVector = Icons.Outlined.FavoriteBorder,
+//                            contentDescription = null
+//                        )
+//                    },
+//                    badgeColor = Color.Red,
+//                    contentColor = Color.White,
+//                    component = {
+//                        Image(
+//                            painter = painterResource(R.drawable.t_ic),
+//                            contentDescription = null
+//                        )
+//                    }
+//                )
+//            }
 
             item {
                 CustomSwitch(

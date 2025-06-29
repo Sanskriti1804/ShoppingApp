@@ -25,7 +25,9 @@ import com.example.shopping.navigation.BottomNavScreens
 import com.example.shopping.navigation.bottomNavItems
 import com.example.shopping.ui.theme.app_dBlack
 import com.example.shopping.ui.theme.app_lBlack
+import com.example.shopping.ui.theme.app_orange
 import com.example.shopping.ui.theme.app_white
+import com.example.shopping.ui.theme.app_white_bg
 
 
 @Composable
@@ -53,12 +55,17 @@ fun CustomNavigationBar(
                     BadgedBox(
                         badge = {
                             if (item.badgeCount != null){
-                                Badge(){
+                                Badge(
+                                    backgroundColor = app_orange,
+                                    contentColor = app_white_bg
+                                ){
                                     Text(text = item.badgeCount.toString())
                                 }
                             }
                             else if (item.hasNews){
-                                Badge()
+                                Badge(
+                                    backgroundColor = app_orange,
+                                )
                             }
                         }
                     ) {

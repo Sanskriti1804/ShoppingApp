@@ -2,6 +2,8 @@ package com.example.shopping.components
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -16,27 +18,31 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.Placeholder
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
 import com.example.shopping.R
+import com.example.shopping.ui.theme.app_white
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CustomSearch(
-    modifier: Modifier,
+    padding : Dp = 5.dp,
     query : String,
     onQueryChange : (String) -> Unit,
     active : Boolean,
     onActiveChange : (Boolean) -> Unit,
-    leadingIcon : ImageVector,
-    trailingIcon : ImageVector,
-    micIcon : Painter = painterResource(R.drawable.ic_mic),
-    containerColor : Color = Color.White,
+    searchIcon : Painter = painterResource(R.drawable.ic_app_search),
+    containerColor : Color = app_white,
     placeholder: @Composable () -> Unit,
     onClick: @Composable () -> Unit,
     searchHistory : List<String>,
-    historyIcon : Painter
+    historyIcon : Painter = painterResource(R.drawable.ic_history)
 
 ){
     SearchBar(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(padding),
         query = query,
         onQueryChange = { onQueryChange},
         onSearch = {newQuery->
@@ -45,22 +51,23 @@ fun CustomSearch(
         active = active,
         onActiveChange = {onActiveChange},
         placeholder = { placeholder },
-        leadingIcon = {
-            Icon(imageVector = leadingIcon, contentDescription = null)
-        },
+//        leadingIcon = {
+//            Icon(imageVector = leadingIcon, contentDescription = null)
+//        },
         trailingIcon = {
             Row {
                 IconButton(onClick = {}) {
-                    Icon(
-                        painter = micIcon,
-                        contentDescription =  "mic icon"
+                    CustomIcon(
+                        painter = searchIcon
                     )
                 }
                 if (active) {
                     IconButton(
                         onClick = { onClick }
                     ) {
-                        Icon(imageVector = trailingIcon, contentDescription = null)
+                        CustomIcon(
+                            painter = searchIcon
+                        )
                     }
                 } else null
             }
