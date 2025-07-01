@@ -11,17 +11,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CardElevation
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Shapes
-import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
@@ -29,31 +24,27 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.TextUnit
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import androidx.compose.foundation.lazy.items
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import coil.compose.rememberAsyncImagePainter
 import com.example.shopping.R
 import com.example.shopping.cart.data.CartProduct
 import com.example.shopping.cart.viewmodel.CartViewModel
+import com.example.shopping.components.CustomBody
 import com.example.shopping.components.CustomDivider
 import com.example.shopping.components.CustomNavigationBar
-import com.example.shopping.components.CustomTitle
+import com.example.shopping.components.CustomLabel
 import com.example.shopping.components.CustomTopBar
 import com.example.shopping.components.QuantityButton
 import com.example.shopping.components.SizeButton
-import com.example.shopping.ui.theme.app_dBlack
-import com.example.shopping.ui.theme.app_lGray
-import com.example.shopping.ui.theme.app_white_bg
+import com.example.shopping.ui.theme.Dimensions
+import com.example.shopping.ui.theme.Shapes
+import com.example.shopping.ui.theme.app_lComponent
+import com.example.shopping.ui.theme.app_background
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -65,7 +56,7 @@ fun CartScreen(navController: NavHostController) {
     val cartProduct = viewModel.cartList
 
     Scaffold(
-        containerColor = app_white_bg,
+        containerColor = app_background,
         topBar = {
             CustomTopBar(
                 fontWeight = FontWeight.Bold,
@@ -83,29 +74,27 @@ fun CartScreen(navController: NavHostController) {
             modifier = Modifier.padding(paddingValues)
         ){
             item {
-                CustomTitle(
+                CustomBody(
                     header = "Cart"
                 )
                 CustomDivider()
             }
             if (cartProduct.isEmpty()){
                 item {
-                    Text("cart is Empty")
+                    CustomLabel(
+                        header = "Cart is Empty"
+                    )
                 }
             }
             else{
                 items(cartProduct) { product ->
                     CartProdCard(
                         cartProduct = product,
-                        onClick = {},
-
-                        )
+                        onClick = {}
+                    )
                 }
             }
-
-
         }
-
     }
 }
 
@@ -114,18 +103,13 @@ fun CartProdCard(
     cartProduct: CartProduct,
     onClick : () -> Unit,
     contentDescription : String = "Cart Product",
-   padding : Dp = 8.dp,
-    shape : Shape  = RoundedCornerShape(8.dp),
-    containerColor: Color = app_lGray,
-    imageSize : Dp = 80.dp,
+    padding : Dp = Dimensions.componentPadding,
+    shape : Shape  = Shapes.CardShape,
+    containerColor: Color = app_lComponent,
+    imageSize : Dp = Dimensions.cartCardSize,
     contentColor: Color = Color.Black,
-    elevation: CardElevation = CardDefaults.cardElevation(2.dp),
-    titleColor: Color = app_dBlack,
-    titleSize : TextUnit = 24.sp,
-    textColor: Color = Color.Black,
-    textSize : TextUnit = 14.sp,
-
-    ){
+    elevation: CardElevation = CardDefaults.cardElevation(Dimensions.cardElevation)
+){
     Card(
         onClick = onClick,
         modifier = Modifier
@@ -139,7 +123,7 @@ fun CartProdCard(
         elevation = elevation
     ) {
         Row(
-            modifier = Modifier.padding(12.dp)
+            modifier = Modifier.padding(Dimensions.cardElementsPadding)
         ) {
             Image(
                 painter = rememberAsyncImagePainter(cartProduct.thumbnail),
@@ -147,28 +131,23 @@ fun CartProdCard(
                 modifier = Modifier.size(imageSize),
                 contentScale = ContentScale.Crop
             )
-            Spacer(modifier = Modifier.width(3.dp))
+            Spacer(modifier = Modifier.width(Dimensions.smallSpacer))
+
             Column {
-                CustomTitle(
-                    header = cartProduct.title,
-                    fontWeight = FontWeight.Normal,
-                    fontSize = 18.sp
+                CustomBody(
+                    header = cartProduct.title
                 )
-                Spacer(modifier = Modifier.height(2.dp))
+                Spacer(modifier = Modifier.height(Dimensions.smallSpacer))
                 Row {
-                    CustomTitle(
-                        header = cartProduct.price.toString(),
-                        fontWeight = FontWeight.Light,
-                        fontSize = 18.sp
+                    CustomLabel(
+                        header = cartProduct.price.toString()
                     )
-                    Spacer(modifier = Modifier.width(4.dp))
-                    CustomTitle(
-                        header = cartProduct.discountPercentage.toString(),
-                        fontWeight = FontWeight.Light,
-                        fontSize = 18.sp
+                    Spacer(modifier = Modifier.width(Dimensions.medSpacer))
+                    CustomLabel(
+                        header = cartProduct.discountPercentage.toString()
                     )
                     Row(
-                        modifier = Modifier.padding(5.dp),
+                        modifier = Modifier.padding(Dimensions.medSpacer),
                         horizontalArrangement = Arrangement.SpaceBetween,
                     ) {
                         SizeButton(

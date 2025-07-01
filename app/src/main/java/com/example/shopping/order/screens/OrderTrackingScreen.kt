@@ -124,9 +124,7 @@ fun DeliveryPartener(){
         Row (
             modifier = Modifier.padding(Dimensions.componentPadding)
         ){
-            CustomProfilePic(
-                profilePadding = Dimensions.barProfileSize
-            )
+            CustomProfilePic()
 
             Column {
                 CustomLabel(

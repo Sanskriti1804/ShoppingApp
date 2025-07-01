@@ -7,12 +7,13 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.airbnb.lottie.LottieComposition
 import com.airbnb.lottie.compose.LottieAnimation
+import com.example.shopping.ui.theme.Dimensions
 
 @Composable
 fun EmptyState(
     composition: LottieComposition,
     progress : () -> Float,
-    lottieSize : Dp = 300.dp
+    lottieSize : Dp = Dimensions.AnimationSize
 ) {
         LottieAnimation(
         composition = composition,

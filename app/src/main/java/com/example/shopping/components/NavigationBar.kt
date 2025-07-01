@@ -1,14 +1,11 @@
 package com.example.shopping.components
 
-import android.R.attr.contentDescription
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Badge
 import androidx.compose.material.Text
 import androidx.compose.material3.BadgedBox
-import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.runtime.Composable
@@ -19,24 +16,23 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
-import com.example.shopping.navigation.BottomNavScreens
 import com.example.shopping.navigation.bottomNavItems
-import com.example.shopping.ui.theme.app_dBlack
-import com.example.shopping.ui.theme.app_lBlack
-import com.example.shopping.ui.theme.app_orange
-import com.example.shopping.ui.theme.app_white
-import com.example.shopping.ui.theme.app_white_bg
+import com.example.shopping.ui.theme.Dimensions
+import com.example.shopping.ui.theme.Shapes
+import com.example.shopping.ui.theme.app__dtext
+import com.example.shopping.ui.theme.app_highlight
+import com.example.shopping.ui.theme.app_llComponent
+import com.example.shopping.ui.theme.app_background
 
 
 @Composable
 fun CustomNavigationBar(
-    navBarPadding : Dp = 8.dp,
-    bottomBarColor : Color = app_dBlack,
-    contentColor : Color = app_white,
+    navBarPadding : Dp = Dimensions.barPadding,
+    bottomBarColor : Color = app__dtext,
+    contentColor : Color = app_llComponent,
     selected : Boolean = false,
-    navBarShape : Shape = RoundedCornerShape(8.dp),
+    navBarShape : Shape = Shapes.BarShape,
     navController: NavHostController
     ){
     NavigationBar(
@@ -56,22 +52,22 @@ fun CustomNavigationBar(
                         badge = {
                             if (item.badgeCount != null){
                                 Badge(
-                                    backgroundColor = app_orange,
-                                    contentColor = app_white_bg
+                                    backgroundColor = app_highlight,
+                                    contentColor = app_background
                                 ){
                                     Text(text = item.badgeCount.toString())
                                 }
                             }
                             else if (item.hasNews){
                                 Badge(
-                                    backgroundColor = app_orange,
+                                    backgroundColor = app_highlight,
                                 )
                             }
                         }
                     ) {
                         CustomIcon(
                             painter = painterResource(item.iconResId),
-                            iconColor = app_white
+                            iconColor = app_llComponent
                         )
                     }
                 }

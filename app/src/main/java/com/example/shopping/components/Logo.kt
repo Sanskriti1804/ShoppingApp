@@ -8,11 +8,12 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.example.shopping.ui.theme.Dimensions
 
 @Composable
 fun AppLogo(
     logoImage : Painter,
-    appSize : Dp = 150.dp,
+    appSize : Dp = Dimensions.appLogoSize,
     appScale : ContentScale = ContentScale.Crop
 
 ){

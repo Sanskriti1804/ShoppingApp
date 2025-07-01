@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Text
@@ -17,9 +16,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.shopping.cart.data.Summary
+import com.example.shopping.components.CustomBody
 import com.example.shopping.components.CustomButton
 import com.example.shopping.components.CustomCard
-import com.example.shopping.ui.theme.app_lBlack
+import com.example.shopping.components.CustomDivider
+import com.example.shopping.components.CustomLabel
+import com.example.shopping.components.CustomTitle
+import com.example.shopping.ui.theme.Dimensions
+import com.example.shopping.ui.theme.app_ltext
 
 @Composable
 fun CheckoutSummary(summary : Summary){
@@ -28,28 +32,40 @@ fun CheckoutSummary(summary : Summary){
         onClick = {}
     ){
         Column(
-            modifier = Modifier.padding(16.dp),
+            modifier = Modifier
+                .padding(Dimensions.componentPadding),
             horizontalAlignment = Alignment.CenterHorizontally
         ){
-            Text(
-                text = "Summary"
+            CustomBody(
+                header = "Summary"
             )
-            Divider(thickness = 1.dp, color = Color.LightGray)
-            Spacer(modifier = Modifier.height(3.dp))
-            Text("Subtotal  :   ${summary.Subtotal}")
-            Text("Shipping  :   ${summary.Shipping}")
-            Text("Tax :   ${summary.Tax}")
 
-            Spacer(modifier = Modifier.height(5.dp))
-            Text("Total  : ${summary.Total}", fontSize = 18.sp, fontWeight = FontWeight.Bold)
+            CustomDivider()
+
+            Spacer(modifier = Modifier.height(Dimensions.smallSpacer))
+
+            CustomLabel(
+                header = "Subtotal  :   ${summary.Subtotal}"
+            )
+            CustomLabel(
+                header = "Shipping  :   ${summary.Shipping}"
+            )
+            CustomLabel(
+                header =  "Tax :   ${summary.Tax}"
+            )
+
+            Spacer(modifier = Modifier.height(Dimensions.medSpacer))
+
+            CustomTitle(
+                header = "Total  : ${summary.Total}"
+            )
         }
-        Spacer(modifier = Modifier.height(5.dp))
+
+        Spacer(modifier = Modifier.height(Dimensions.medSpacer))
+
         CustomButton(
             textButton = true,
             onClick = {},
-            containerColor = app_lBlack,
-            contentColor = app_lBlack,
-            elevation = ButtonDefaults.buttonElevation(4.dp),
             buttonText = "PROCEED TO PAY",
             buttonDescription = "payment button"
         )

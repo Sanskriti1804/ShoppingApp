@@ -2,9 +2,6 @@ package com.example.shopping.cart.screen
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
@@ -25,14 +22,15 @@ import com.airbnb.lottie.compose.LottieConstants
 import com.airbnb.lottie.compose.animateLottieCompositionAsState
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.example.shopping.R
+import com.example.shopping.components.CustomBody
 import com.example.shopping.components.CustomButton
 import com.example.shopping.components.CustomDivider
 import com.example.shopping.components.CustomTitle
 import com.example.shopping.components.CustomTopBar
 import com.example.shopping.components.EmptyState
-import com.example.shopping.ui.theme.app_lBlack
-import com.example.shopping.ui.theme.app_lGray
-import com.example.shopping.ui.theme.app_white
+import com.example.shopping.ui.theme.app_ltext
+import com.example.shopping.ui.theme.app_lComponent
+import com.example.shopping.ui.theme.app_llComponent
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -52,14 +50,8 @@ fun EmptyCartScreen(
     Scaffold(
         topBar = {
             CustomTopBar(
-                title = "Shoppie",
-                fontWeight = FontWeight.ExtraBold,
                 titleOverflow = TextOverflow.Ellipsis,
-                navigationIconColor = Color.Black,
                 onNavigationClick = {},
-                containerColor = app_white, // Assuming this color is defined elsewhere
-                titleColor = Color.Black,
-                actionIconColor = Color.Black,
                 scrollBehavior = scrollBehavior
             )
         }
@@ -71,7 +63,6 @@ fun EmptyCartScreen(
             CustomTitle(
                 header = "Cart"
             )
-
             CustomDivider()
 
             composition?.let {
@@ -82,30 +73,17 @@ fun EmptyCartScreen(
             }
 
             CustomTitle(
-                header = "Empty Cart",
-                headerColor = app_lGray,
-                fontWeight = FontWeight.ExtraBold,
-                fontSize = 36.sp
+                header = "Empty Cart"
             )
-
-            CustomTitle(
-                header = "Your Cart is Empty",
-                headerColor = app_white,
-                fontWeight = FontWeight.Bold,
-                fontSize = 24.sp
+            CustomBody(
+                header = "Your Cart is Empty"
             )
-
             CustomButton(
                 textButton = true,
                 onClick = {},
-                containerColor = app_lBlack,
-                contentColor = Color.Black,
-                elevation = ButtonDefaults.buttonElevation(2.dp),
                 buttonText = "START SHOPPING",
                 buttonDescription = "shart shopping button"
-
             )
-
         }
     }
 }

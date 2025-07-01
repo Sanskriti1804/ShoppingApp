@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -15,24 +14,23 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import com.example.shopping.R
 import com.example.shopping.components.AppLogo
+import com.example.shopping.components.CustomBody
 import com.example.shopping.components.CustomButton
 import com.example.shopping.components.CustomCard
 import com.example.shopping.components.CustomTextField
 import com.example.shopping.components.CustomTitle
 import com.example.shopping.navigation.Screen
 import com.example.shopping.startup.viewmodel.AuthViewModel
+import com.example.shopping.ui.theme.Dimensions
 import com.example.shopping.ui.theme.Strings
 
 @Composable
@@ -48,7 +46,7 @@ fun LoginScreen(
     var isLoading by remember { mutableStateOf(false) }
 
     Column (
-        modifier = Modifier.padding(top = 100.dp, start = 30.dp, end = 30.dp, bottom = 30.dp),
+        modifier = Modifier.padding(Dimensions.appPadding),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ){
@@ -56,25 +54,23 @@ fun LoginScreen(
             logoImage = appLogo
         )
 
-        Spacer(modifier = Modifier.height(36.dp))
+        Spacer(modifier = Modifier.height(Dimensions.medSpacer))
 
         CustomTitle(
-            header = stringResource(Strings.login),
-            fontWeight = FontWeight.ExtraBold,
-            fontSize = 40.sp
+            header = stringResource(Strings.login)
         )
 
-        Spacer(modifier = Modifier.height(12.dp))
+        Spacer(modifier = Modifier.height(Dimensions.medSpacer))
 
         CustomCard(
             onClick = {}
         ) {
             Column(
-                modifier = Modifier.padding(28.dp),
+                modifier = Modifier.padding(Dimensions.componentPadding),
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                CustomTitle(
+                CustomBody(
                     header = "email"
                 )
                 CustomTextField(
@@ -82,7 +78,7 @@ fun LoginScreen(
                     onValueChange = {email = it},
                     placeholder = "Enter your email"
                 )
-                CustomTitle(
+                CustomBody(
                     header = "Password"
                 )
                 CustomTextField(
@@ -92,7 +88,7 @@ fun LoginScreen(
                     visualTransformation = PasswordVisualTransformation()
                 )
 
-                Spacer(modifier = Modifier.height(12.dp))
+                Spacer(modifier = Modifier.height(Dimensions.medSpacer))
 
                 CustomButton(
                     textButton = true,
@@ -100,11 +96,10 @@ fun LoginScreen(
                         authViewModel.login(email, password)
                         navController.navigate(Screen.HomeScreen.route)},
                     buttonText = stringResource(Strings.login),
-                    elevation = ButtonDefaults.buttonElevation(4.dp),
                     buttonDescription = "login"
                 )
 
-                CustomTitle(
+                CustomBody(
                     header = "Forgot Password",
                     fontSize = 10.sp,
                     modifier = Modifier

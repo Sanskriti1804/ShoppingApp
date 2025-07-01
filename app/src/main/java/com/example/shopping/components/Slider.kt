@@ -21,21 +21,26 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.shopping.R
-
+import com.example.shopping.ui.theme.Dimensions
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CustomSlider(){
+fun CustomSlider(
+    padding : Dp = Dimensions.componentPadding,
+    icon : Painter = painterResource(R.drawable.ic_app_fav)
+){
 
     var sliderPosn by remember{ mutableStateOf(0f) }
 
     Column (
-        modifier = Modifier.padding(10.dp),
+        modifier = Modifier.padding(padding),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Slider(
@@ -44,23 +49,21 @@ fun CustomSlider(){
             steps = 5,
             onValueChangeFinished = {},     //called when the user lifts their finger after dragging
             thumb = {
-                Icon(
-                    imageVector = Icons.Outlined.FavoriteBorder,
-                    contentDescription = null,
-                    modifier = Modifier.size(ButtonDefaults.IconSize),
-                    tint = Color.Red
+                CustomIcon(
+                    painter = icon
                 )
             })
     }
 }
 
 @Composable
-fun CustomRangeSlider(){
-
+fun CustomRangeSlider(
+    padding : Dp = Dimensions.componentPadding
+){
     var sliderPosn by remember{ mutableStateOf(0f..100f) }
 
     Column (
-        modifier = Modifier.padding(10.dp),
+        modifier = Modifier.padding(padding),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(text = sliderPosn.toString())

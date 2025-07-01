@@ -23,14 +23,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.example.shopping.components.CustomAssistChip
+import com.example.shopping.components.CustomBody
 import com.example.shopping.components.CustomSearch
 import com.example.shopping.components.CustomTitle
 import com.example.shopping.components.CustomTopBar
-import com.example.shopping.navigation.Screen
-import com.example.shopping.ui.theme.app_white_bg
+import com.example.shopping.ui.theme.Dimensions
+import com.example.shopping.ui.theme.app_background
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter", "UnrememberedMutableState")
 @OptIn(ExperimentalMaterial3Api::class)
@@ -44,7 +43,7 @@ fun SearchScreen(){
     val searchHistory = listOf("First Search", "Second Search", "Third Search")
 
     Scaffold(
-        containerColor = app_white_bg,
+        containerColor = app_background,
         topBar = {
             CustomTopBar(
                 titleOverflow = TextOverflow.Ellipsis,
@@ -57,8 +56,8 @@ fun SearchScreen(){
     ) { Column (
             modifier = Modifier
                 .fillMaxWidth()
-                .background(app_white_bg)
-                .padding(12.dp),
+                .background(app_background)
+                .padding(Dimensions.componentPadding),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.SpaceEvenly
         ) {
@@ -72,14 +71,12 @@ fun SearchScreen(){
             searchHistory = searchHistory,
         )
         CustomTitle(
-            header = "Recent Searches",
-            fontWeight = FontWeight.Normal,
-            fontSize = 22.sp
+            header = "Recent Searches"
         )
         LazyRow(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(8.dp)
+                .padding(Dimensions.componentPadding)
         ) {
             item {
                 CustomAssistChip(
@@ -100,65 +97,55 @@ fun SearchScreen(){
                 )
             }
         }
-        Spacer(modifier = Modifier.height(12.dp))
+        Spacer(modifier = Modifier.height(Dimensions.medSpacer))
 
         CustomTitle(
-            header = "TRENDING",
-            fontWeight = FontWeight.Bold,
-            fontSize = 22.sp
+            header = "TRENDING"
         )
         Column(
             modifier = Modifier
-                .padding(4.dp)
+                .padding(Dimensions.componentPadding)
                 .fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Row(
                 modifier = Modifier.fillMaxWidth()
             ) {
-                CustomTitle(
-                    header = "1",
-                    fontSize = 18.sp
+                CustomBody(
+                    header = "1"
                 )
-                CustomTitle(
-                    header = "Lobabu dolls",
-                    fontSize = 18.sp
+                CustomBody(
+                    header = "Lobabu dolls"
                 )
             }
             Row(
                 modifier = Modifier.fillMaxWidth()
             ) {
-                CustomTitle(
-                    header = "2",
-                    fontSize = 18.sp
+                CustomBody(
+                    header = "2"
                 )
-                CustomTitle(
-                    header = "Pop on nails",
-                    fontSize = 18.sp
+                CustomBody(
+                    header = "Pop on nails"
                 )
             }
             Row(
                 modifier = Modifier.fillMaxWidth()
             ) {
-                CustomTitle(
-                    header = "3",
-                    fontSize = 18.sp
+                CustomBody(
+                    header = "3"
                 )
-                CustomTitle(
-                    header = "playstation 5 ",
-                    fontSize = 18.sp
+                CustomBody(
+                    header = "playstation 5 "
                 )
             }
             Row(
                 modifier = Modifier.fillMaxWidth()
             ) {
-                CustomTitle(
-                    header = "4",
-                    fontSize = 18.sp
+                CustomBody(
+                    header = "4"
                 )
-                CustomTitle(
-                    header = "A Line Dress",
-                    fontSize = 18.sp
+                CustomBody(
+                    header = "A Line Dress"
                 )
             }
         }

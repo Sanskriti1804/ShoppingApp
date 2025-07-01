@@ -33,12 +33,15 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.example.shopping.Profile.Screen.ProfileScreen
 import com.example.shopping.components.CustomButton
+import com.example.shopping.components.CustomDivider
 import com.example.shopping.components.CustomFilteringChip
 import com.example.shopping.components.CustomTopBar
 import com.example.shopping.section.data.filters
+import com.example.shopping.ui.theme.Dimensions
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -67,33 +70,23 @@ fun FilterScreen(){
                     collapseIcon = "Collapse Icon"
 
                 )
-                Divider(thickness = 2.dp, color = Color.LightGray)
+                CustomDivider()
             }
 
             item {
                 Row(
-                    modifier = Modifier.padding(4.dp),
+                    modifier = Modifier.padding(Dimensions.componentPadding),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     CustomButton(
                         textButton = true,
                         onClick = {},
-                        containerColor = Color.White,
-                        elevation = ButtonDefaults.buttonElevation(2.dp),
                         buttonText = "Cancel",
-                        buttonDescription = "Cancel button",
-                        shape = RoundedCornerShape(4.dp),
-                        contentColor = Color.Black
-                    )
+                        buttonDescription = "Cancel button",                    )
                     CustomButton(
                         textButton = true,
                         onClick = {},
-                        containerColor = Color.White,
-                        elevation = ButtonDefaults.buttonElevation(2.dp),
-                        buttonText = "Apply Filter",
                         buttonDescription = "Apply Filter button",
-                        shape = RoundedCornerShape(4.dp),
-                        contentColor = Color.Black
                     )
                 }
             }
@@ -105,13 +98,14 @@ fun FilterScreen(){
 fun CollapseSection(
     isCollapsed : Boolean,
     onToggleCollapse : () -> Unit,
+    padding : Dp = Dimensions.componentPadding,
     icon : ImageVector,
     collapseIcon : String,
 ){
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(12.dp)
+            .padding(padding)
             .clickable{
                 onToggleCollapse()
             }

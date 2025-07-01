@@ -9,16 +9,16 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.example.shopping.ui.theme.app_dBlack
-import com.example.shopping.ui.theme.app_white
+import com.example.shopping.ui.theme.Dimensions
+import com.example.shopping.ui.theme.app__dtext
 
 @Composable
 fun CustomIcon(
     painter : Painter,
     iconDescription : String = "Dunelle Icon",
-    iconPadding : Dp = 1.dp,
-    iconSize : Dp = 20.dp,
-    iconColor : Color = app_dBlack
+    iconPadding : Dp = Dimensions.iconPadding,
+    iconSize : Dp = Dimensions.iconSize,
+    iconColor : Color = app__dtext
 
 ){
     Icon(

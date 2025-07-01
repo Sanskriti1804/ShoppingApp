@@ -2,13 +2,9 @@ package com.example.shopping.cart.screen
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
@@ -28,11 +24,14 @@ import com.airbnb.lottie.compose.LottieConstants
 import com.airbnb.lottie.compose.animateLottieCompositionAsState
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.example.shopping.R
+import com.example.shopping.components.CustomBody
 import com.example.shopping.components.CustomButton
+import com.example.shopping.components.CustomLabel
 import com.example.shopping.components.CustomTitle
 import com.example.shopping.components.CustomTopBar
-import com.example.shopping.ui.theme.app_dBlack
-import com.example.shopping.ui.theme.app_lGray
+import com.example.shopping.ui.theme.app__dtext
+import com.example.shopping.ui.theme.app_lComponent
+import java.util.Date
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -50,14 +49,8 @@ fun ConfirmationScreen(){
     Scaffold(
         topBar = {
             CustomTopBar(
-                title = "Shoppie",
-                fontWeight = FontWeight.ExtraBold,
                 titleOverflow = TextOverflow.Ellipsis,
-                navigationIconColor = Color.Black,
                 onNavigationClick = {},
-                containerColor = app_dBlack, // Assuming this color is defined elsewhere
-                titleColor = Color.Black,
-                actionIconColor = Color.Black,
                 scrollBehavior = scrollBehavior
             )
         }
@@ -67,10 +60,7 @@ fun ConfirmationScreen(){
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             CustomTitle(
-                header = "THANKYOU FOR YOUR ORDER",
-                headerColor = app_lGray,
-                fontWeight = FontWeight.ExtraBold,
-                fontSize = 32.sp
+                header = "THANKYOU FOR YOUR ORDER"
             )
 
             composition?.let {
@@ -80,38 +70,23 @@ fun ConfirmationScreen(){
                 )
             }
 
-            CustomTitle(
-                header = "Estimated Delivery",
-                headerColor = app_dBlack,
-                fontWeight = FontWeight.SemiBold,
-                fontSize = 22.sp
+            CustomBody(
+                header = "Estimated Delivery"
+            )
+            CustomLabel(
+                header = Date().toString()
+            )
+            CustomLabel(
+                header = "We've emailed a confirmation and we'll notify you when your order has been shipped"
             )
 
-            CustomTitle(
-                header = "July 7, 2004",
-                headerColor = app_dBlack,
-                fontWeight = FontWeight.Normal,
-                fontSize = 18.sp
-            )
-
-            CustomTitle(
-                header = "We've emailed a confirmation and we'll notify you when your order has been shipped",
-                headerColor = Color.Black,
-                fontWeight = FontWeight.Light,
-                fontSize = 32.sp
-            )
             CustomButton(
                 textButton = true,
                 onClick = {},
-                containerColor = app_dBlack,
-                contentColor = app_dBlack,
-                elevation = ButtonDefaults.buttonElevation(4.dp),
                 buttonText = "VIEW PLACED ORDER",
                 buttonDescription = "order desc"
             )
-
         }
-
     }
 }
 

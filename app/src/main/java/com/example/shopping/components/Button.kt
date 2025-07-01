@@ -12,14 +12,11 @@ import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ButtonElevation
-import androidx.compose.material3.CardElevation
-import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -31,22 +28,24 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.example.shopping.R
-import com.example.shopping.ui.theme.app_lBlack
-import com.example.shopping.ui.theme.app_white
+import com.example.shopping.ui.theme.Dimensions
+import com.example.shopping.ui.theme.Shapes
+import com.example.shopping.ui.theme.app_ltext
+import com.example.shopping.ui.theme.app_llComponent
 
 
 @Composable
 fun CustomButton(
     textButton : Boolean,
     onClick : () -> Unit,
-    shape : Shape = RoundedCornerShape(4.dp),
-    containerColor: Color = app_lBlack,
-    contentColor : Color = app_white,
-    elevation: ButtonElevation = ButtonDefaults.buttonElevation(2.dp),
+    shape : Shape = Shapes.ButtonShape,
+    containerColor: Color = app_ltext,
+    contentColor : Color = app_llComponent,
+    elevation: ButtonElevation = ButtonDefaults.buttonElevation(Dimensions.buttonElevation),
     buttonText: String? = null,
     buttonIcon : ImageVector? = null,
     buttonDescription: String,
-    modifier: Modifier = Modifier.padding(2.dp).fillMaxWidth()
+    modifier: Modifier = Modifier.padding(Dimensions.buttonPadding) .fillMaxWidth()
 ){
     Button(
         onClick = onClick,
@@ -72,21 +71,22 @@ fun CustomButton(
 @Composable
 fun QuantityButton(
     onClick: () -> Unit,
-    shape: Shape = RoundedCornerShape(2.dp),
-    elevation: ButtonElevation = ButtonDefaults.buttonElevation(2.dp),
-    containerColor: Color = app_lBlack,
-    contentColor: Color = app_white,
-    borderColor : Color = app_white,
-    borderThickness : Dp = 1.dp,
+    shape: Shape = Shapes.ButtonShape,
+    elevation: ButtonElevation = ButtonDefaults.buttonElevation(Dimensions.buttonElevation),
+    containerColor: Color = app_ltext,
+    contentColor: Color = app_llComponent,
+    borderColor : Color = app_llComponent,
+    borderThickness : Dp = Dimensions.buttonBorder,
     upIcon : Painter = painterResource(R.drawable.ic_remove),
     downIcon : ImageVector = Icons.Default.Add,
-    contentDesciption : String = "Quantity icon",
-    quantity : String
-
+    quantity : String,
+    padding : Dp = Dimensions.buttonPadding
     ){
     Button(
         onClick = onClick,
-        modifier = Modifier.padding(3.dp).border(width = borderThickness, color = borderColor),
+        modifier = Modifier
+            .padding(padding)
+            .border(width = borderThickness, color = borderColor),
         shape = shape,
         elevation = elevation,
         colors = ButtonDefaults.buttonColors(
@@ -99,15 +99,13 @@ fun QuantityButton(
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
             CustomIcon(
-                painter = painterResource(R.drawable.ic_app_arrow),
-                iconSize = 10.dp
+                painter = painterResource(R.drawable.ic_app_arrow)
             )
             Text(
                 text = quantity
             )
             CustomIcon(
                 painter = painterResource(R.drawable.ic_app_arrow),
-                iconSize = 10.dp
             )
         }
     }
@@ -116,21 +114,23 @@ fun QuantityButton(
 @Composable
 fun SizeButton(
     onClick: () -> Unit,
-    shape: Shape = RoundedCornerShape(2.dp),
-    elevation: ButtonElevation = ButtonDefaults.buttonElevation(2.dp),
+    shape: Shape = Shapes.ButtonShape,
+    elevation: ButtonElevation = ButtonDefaults.buttonElevation(Dimensions.buttonElevation),
     containerColor: Color = Color.White,
     contentColor: Color = Color.Black,
     borderColor : Color = Color.Black,
-    borderThickness : Dp = 1.dp,
+    borderThickness : Dp = Dimensions.buttonBorder,
     upIcon : ImageVector = Icons.Default.KeyboardArrowUp,
     downIcon : ImageVector = Icons.Default.KeyboardArrowDown,
-    contentDesciption : String = "Quantity icon",
-    quantity : String
+    quantity : String,
+    padding : Dp = Dimensions.buttonPadding
 
 ){
     Button(
         onClick = onClick,
-        modifier = Modifier.padding(3.dp).border(width = borderThickness, color = borderColor),
+        modifier = Modifier
+            .padding(padding)
+            .border(width = borderThickness, color = borderColor),
         shape = shape,
         elevation = elevation,
         colors = ButtonDefaults.buttonColors(
@@ -148,13 +148,11 @@ fun SizeButton(
 
             Row {
                 CustomIcon(
-                    painter = painterResource(R.drawable.ic_app_arrow),
-                    iconSize = 10.dp
+                    painter = painterResource(R.drawable.ic_app_arrow)
                 )
 
                 CustomIcon(
-                    painter = painterResource(R.drawable.ic_app_arrow),
-                    iconSize = 10.dp
+                    painter = painterResource(R.drawable.ic_app_arrow)
                 )
             }
         }

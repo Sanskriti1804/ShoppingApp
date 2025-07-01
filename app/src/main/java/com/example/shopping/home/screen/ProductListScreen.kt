@@ -1,31 +1,23 @@
 package com.example.shopping.home.screen
 
 import android.annotation.SuppressLint
-import android.util.Size
+import android.util.Log
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsDraggedAsState
 import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -42,12 +34,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import coil.compose.rememberAsyncImagePainter
+import coil.size.Dimension
 import com.example.shopping.R
+import com.example.shopping.components.CustomBody
+import com.example.shopping.components.CustomDiscountImage
 import com.example.shopping.components.CustomIcon
+import com.example.shopping.components.CustomLabel
 import com.example.shopping.components.CustomNavigationBar
-import com.example.shopping.components.CustomSearch
 import com.example.shopping.components.CustomTitle
 import com.example.shopping.components.CustomTopBar
 import com.example.shopping.home.data.CategoryData
@@ -56,11 +50,13 @@ import com.example.shopping.home.data.Product
 import com.example.shopping.home.viewmodel.ProductViewModel
 import com.example.shopping.navigation.Screen
 import com.example.shopping.product.ProductCarousel
-import com.example.shopping.ui.theme.app_dBlack
-import com.example.shopping.ui.theme.app_lBlack
-import com.example.shopping.ui.theme.app_lGray
-import com.example.shopping.ui.theme.app_white
-import com.example.shopping.ui.theme.app_white_bg
+import com.example.shopping.ui.theme.Dimensions
+import com.example.shopping.ui.theme.Shapes
+import com.example.shopping.ui.theme.app__dtext
+import com.example.shopping.ui.theme.app_ltext
+import com.example.shopping.ui.theme.app_lComponent
+import com.example.shopping.ui.theme.app_llComponent
+import com.example.shopping.ui.theme.app_background
 import com.google.accompanist.pager.rememberPagerState
 import kotlinx.coroutines.delay
 
@@ -79,7 +75,7 @@ fun ProductListScreen(navController : NavHostController) {
     val searchHistory = listOf("First Search", "Second Search", "Third Search")
 
     Scaffold(
-        containerColor = app_white_bg,
+        containerColor = app_background,
         topBar = {
             CustomTopBar(
                 titleOverflow = TextOverflow.Ellipsis,
@@ -95,13 +91,13 @@ fun ProductListScreen(navController : NavHostController) {
     ) { paddingValues ->
         LazyVerticalGrid(
             columns = GridCells.Fixed(2),
-            modifier = Modifier.fillMaxSize().padding(top = 95.dp, bottom = 18.dp, start = 18.dp, end = 18.dp)
-//            modifier = Modifier.fillMaxSize().padding(20.dp)
-
+            modifier = Modifier.fillMaxSize()
+                .padding(paddingValues)
+                .padding(Dimensions.appPadding)
         ) {
-//            item {
-//                featureRow()
-//            }
+            item {
+                featureRow()
+            }
             item(span = { GridItemSpan(2)}) {
                 val discountImage = listOf(
                     R.drawable.ic_discount1,
@@ -123,23 +119,17 @@ fun ProductListScreen(navController : NavHostController) {
                 val discountData = DiscountData(
                     title = "Flat 30% OFF",
                     desc = "on Summer Collection",
-                    textColor = Color.Black,
-                    descColor = app_dBlack,
+                    textColor = app__dtext,
+                    descColor = app__dtext,
                     image = discountImage,
                     ctaText = "SHOP NOW"
                 )
 
-                DiscountCard(
-                    shape = RoundedCornerShape(8.dp),
-                    containerColor = app_lGray, // Assuming this color is defined elsewhere
-                    elevation = CardDefaults.cardElevation(4.dp),
-                    data = discountData,
-                    titleSize = 40.sp,
-                    descSize = 20.sp,
-                    ctaSize = 20.sp
-                )
+//                DiscountCard(
+//                    data = discountData
+//                )
 
-                Spacer(modifier = Modifier.height(12.dp))
+                Spacer(modifier = Modifier.height(Dimensions.medSpacer))
             }
 
             item (
@@ -178,83 +168,53 @@ fun ProductListScreen(navController : NavHostController) {
             item(span = { GridItemSpan(2)}) {
                 val categoryList = listOf(
                     CategoryData(
-                        icon = painterResource(id = R.drawable.ic_cat_dress),
-                        label = "null",
-                        bgColor = app_lBlack
+                        icon = painterResource(id = R.drawable.ic_cat_dress)
                     ),
                     CategoryData(
-                        icon = painterResource(id = R.drawable.ic_cat_hat),
-                        label = "null",
-                        bgColor = app_lBlack
+                        icon = painterResource(id = R.drawable.ic_cat_hat)
                     ),
                     CategoryData(
-                        icon = painterResource(id = R.drawable.ic_cat_bow_tie),
-                        label = "null",
-                        bgColor = app_lBlack
+                        icon = painterResource(id = R.drawable.ic_cat_bow_tie)
                     ),
                     CategoryData(
-                        icon = painterResource(id = R.drawable.ic_cat_camera),
-                        label = "null",
-                        bgColor = app_lBlack
+                        icon = painterResource(id = R.drawable.ic_cat_camera)
                     ),
                     CategoryData(
-                        icon = painterResource(id = R.drawable.ic_cat_tie),
-                        label = "null",
-                        bgColor = app_lBlack
+                        icon = painterResource(id = R.drawable.ic_cat_tie)
                     ),
                     CategoryData(
-                        icon = painterResource(id = R.drawable.ic_cat_dryer),
-                        label = "null",
-                        bgColor = app_lBlack
+                        icon = painterResource(id = R.drawable.ic_cat_dryer)
                     ),
                     CategoryData(
-                        icon = painterResource(id = R.drawable.ic_cat_belt),
-                        label = "null",
-                        bgColor = app_lBlack
+                        icon = painterResource(id = R.drawable.ic_cat_belt)
                     ),
                     CategoryData(
-                        icon = painterResource(id = R.drawable.ic_cat_earrings),
-                        label = "null",
-                        bgColor = app_lBlack
+                        icon = painterResource(id = R.drawable.ic_cat_earrings)
                     ),
                     CategoryData(
-                        icon = painterResource(id = R.drawable.ic_cat_glasses),
-                        label = "null",
-                        bgColor = app_lBlack
+                        icon = painterResource(id = R.drawable.ic_cat_glasses)
                     ),
                     CategoryData(
-                        icon = painterResource(id = R.drawable.ic_cat_hand_bag),
-                        label = "null",
-                        bgColor = app_lBlack
+                        icon = painterResource(id = R.drawable.ic_cat_hand_bag)
                     ),
                     CategoryData(
-                        icon = painterResource(id = R.drawable.ic_cat_jeans),
-                        label = "null",
-                        bgColor = app_lBlack
+                        icon = painterResource(id = R.drawable.ic_cat_jeans)
                     ),
                     CategoryData(
-                        icon = painterResource(id = R.drawable.ic_cat_lipstick),
-                        label = "null",
-                        bgColor = app_lBlack
+                        icon = painterResource(id = R.drawable.ic_cat_lipstick)
                     ),
                     CategoryData(
-                        icon = painterResource(id = R.drawable.ic_cat_shorts),
-                        label = "null",
-                        bgColor = app_lBlack
+                        icon = painterResource(id = R.drawable.ic_cat_shorts)
                     ),
                     CategoryData(
-                        icon = painterResource(id = R.drawable.ic_cat_tshirt),
-                        label = "null",
-                        bgColor = app_lBlack
+                        icon = painterResource(id = R.drawable.ic_cat_tshirt)
                     ),
                     CategoryData(
-                        icon = painterResource(id = R.drawable.ic_cat_wristwatch),
-                        label = "null",
-                        bgColor = app_lBlack
+                        icon = painterResource(id = R.drawable.ic_cat_wristwatch)
                     )
                 )
 
-                Box(modifier = Modifier.padding(8.dp)) {
+                Box(modifier = Modifier.padding(Dimensions.componentPadding)) {
                     CategoryCardRow(
                         categoryList = categoryList,
                         onClick = {}
@@ -266,33 +226,29 @@ fun ProductListScreen(navController : NavHostController) {
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(12.dp),
+                        .padding(Dimensions.componentPadding),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
-                    CustomTitle(
-                        header = "Featured",
-                        fontSize = 16.sp
+                    CustomBody(
+                        header = "Featured"
                     )
                     Row {
-                        CustomTitle(
-                            header = "See all",
-                            fontSize = 14.sp,
-                            fontWeight = FontWeight.Thin
+                        CustomLabel(
+                            header = " See all"
                         )
                         CustomIcon(
-                            painter = painterResource(R.drawable.ic_app_arrow),
-                            iconColor = app_dBlack
+                            painter = painterResource(R.drawable.ic_app_arrow)
                         )
                     }
                 }
             }
 
-
             if (products.isEmpty()) {
                 item(span = { GridItemSpan(2) }) {
-                    Text("No products found", modifier = Modifier.fillMaxWidth().padding(16.dp))
+                    Text("No products found", modifier = Modifier.fillMaxWidth().padding(Dimensions.componentPadding))
                 }
             } else {
+
                 items(items = products, key = { product -> product.id }) { product ->
                     ProductCard(
                         product = product,
@@ -307,96 +263,34 @@ fun ProductListScreen(navController : NavHostController) {
 }
 
 @Composable
-fun featureRow(
-    padding : Dp = 4.dp
-){
-    Row(
-        modifier = Modifier
-            .padding(padding)
-            .fillMaxWidth()
-    ) {
-        Row {
-            CustomIcon(
-                painter = painterResource(R.drawable.ic_order_return),
-                iconSize = 15.dp
-            )
-            Column {
-                CustomTitle(
-                    header = "Easy Return",
-                    fontSize = 8.sp
-                )
-                CustomTitle(
-                    header = "Free pick up",
-                    fontSize = 8.sp,
-                    fontWeight = FontWeight.Thin
-                )
-            }
-        }
-
-        Row {
-            CustomIcon(
-                painter = painterResource(R.drawable.ic_app_star),
-                iconSize = 15.dp
-            )
-            Column {
-                CustomTitle(
-                    header = "Fast Delivery",
-                    fontSize = 8.sp
-                )
-                CustomTitle(
-                    header = "100+ Styles",
-                    fontSize = 8.sp,
-                    fontWeight = FontWeight.Thin
-                )
-            }
-        }
-
-        Row {
-            CustomIcon(
-                painter = painterResource(R.drawable.ic_app_processing),
-                iconSize = 15.dp
-            )
-            Column {
-                CustomTitle(
-                    header = "Free Shipping",
-                    fontSize = 8.sp
-                )
-                CustomTitle(
-                    header = "For orders 50+",
-                    fontSize = 8.sp,
-                    fontWeight = FontWeight.Thin
-                )
-            }
-        }
-
-    }
-}
-
-@Composable
 fun ProductCard(
     product : Product,
-    containerColor : Color = app_white,
-    outerPadding : Dp = 8.dp,
-    shape: Shape = RoundedCornerShape(4.dp),
-    elevation: CardElevation = CardDefaults.cardElevation(4.dp),
-    innerPadding: Dp = 16.dp,
+    containerColor : Color = app_llComponent,
+//    outerPadding : Dp = Dimensions.productCardSize,
+    outerPadding : Dp = 1.dp,
+//    shape: Shape = Shapes.CardShape,
+    shape: Shape = RoundedCornerShape(2.dp),
+//    elevation: CardElevation = CardDefaults.cardElevation(Dimensions.cardElevation),
+    elevation: CardElevation = CardDefaults.cardElevation(2.dp),
+//    innerPadding: Dp = Dimensions.componentPadding,
+    innerPadding: Dp = 2.dp,
+//    imageSize : Dp = Dimensions.ProductSize,
     imageSize : Dp = 100.dp,
     contentScale: ContentScale = ContentScale.Crop,
-    spacerHeight : Dp = 4.dp,
     onClick: () -> Unit
 ){
     Card(
         modifier = Modifier
-            .padding(outerPadding)
-            .heightIn(min = 220.dp, max = 260.dp)
-        ,
+            .padding(outerPadding),
+//            .heightIn(min = 220.dp, max = 260.dp)
+//        ,
         shape = shape,
         colors = CardDefaults.cardColors(
             containerColor = containerColor
         ),
         elevation = elevation,
         onClick = onClick,
-        ) {
+    ) {
         Column(modifier = Modifier.padding(innerPadding)) {
             Image(
                 painter = rememberAsyncImagePainter(product.thumbnail),
@@ -405,15 +299,73 @@ fun ProductCard(
                 modifier = Modifier.size(imageSize),
                 contentScale = contentScale
             )
-            Spacer(modifier = Modifier.height(spacerHeight))
+            Spacer(modifier = Modifier.height(Dimensions.smallSpacer))
             Column {
-                CustomTitle(
-                    header = product.title,
-                    fontSize = 16.sp
+                Column {
+                    CustomTitle(
+                        header = product.title
+                    )
+                    CustomLabel(
+                        header = "$${product.price}"
+                    )
+                }
+            }
+        }
+    }
+}
+
+
+@Composable
+fun featureRow(
+    padding : Dp = Dimensions.componentPadding
+){
+    Row(
+        modifier = Modifier
+            .padding(padding)
+            .fillMaxWidth()
+    ) {
+        Row {
+            CustomIcon(
+                painter = painterResource(R.drawable.ic_order_return)
+            )
+            Column {
+                CustomLabel(
+                    header = "Easy Return",
+                    fontWeight = FontWeight.Bold
                 )
-                CustomTitle(
-                    header = "$${product.price}",
-                    fontSize = 12.sp,
+                CustomLabel(
+                    header = "Free Pick Up",
+                    fontWeight = FontWeight.Thin
+                )
+            }
+        }
+        Row {
+            CustomIcon(
+                painter = painterResource(R.drawable.ic_app_star)
+            )
+            Column {
+                CustomLabel(
+                    header = "Fast Delivery",
+                    fontWeight = FontWeight.Bold
+                )
+                CustomLabel(
+                    header = "100+ Styles",
+                    fontWeight = FontWeight.Thin
+                )
+            }
+        }
+
+        Row {
+            CustomIcon(
+                painter = painterResource(R.drawable.ic_app_processing)
+            )
+            Column {
+                CustomLabel(
+                    header = "Free Shipping",
+                    fontWeight = FontWeight.Bold
+                )
+                CustomLabel(
+                    header = "For Orders 50+",
                     fontWeight = FontWeight.Thin
                 )
             }
@@ -421,20 +373,21 @@ fun ProductCard(
     }
 }
 
+
 @Composable
 fun DiscountCard(
-    modifier : Modifier = Modifier.padding(2.dp).heightIn(max = 180.dp),
-    shape: Shape,
-    containerColor: Color,
-    elevation: CardElevation,
+    padding: Dp = Dimensions.componentPadding,
+    height : Dp = Dimensions.productCardSize,
+    shape: Shape = Shapes.CardShape,
+    containerColor: Color = app_llComponent,
+    elevation: CardElevation= CardDefaults.cardElevation(Dimensions.cardElevation),
     data: DiscountData,
-    titleSize: TextUnit,
-    descSize: TextUnit,
-    ctaSize: TextUnit
 ){
     val selectedImage  = remember { data.image.random() }
     Card(
-        modifier = modifier,
+        modifier = Modifier
+            .padding(padding)
+            .heightIn(height),
         shape = shape,
         colors = CardDefaults.cardColors(
             containerColor = containerColor
@@ -442,7 +395,7 @@ fun DiscountCard(
         elevation = elevation
     ){
         Row (modifier = Modifier
-            .padding(20.dp)
+            .padding(Dimensions.componentPadding)
             .wrapContentHeight()
             .fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween
@@ -454,18 +407,19 @@ fun DiscountCard(
                 CustomTitle(
                     header = data.title,
                     modifier = Modifier.weight(3f),
-                    fontWeight = FontWeight.Bold,
                     maxLine = 1
                 )
-                Spacer(modifier = Modifier.height(3.dp))
+                Spacer(modifier = Modifier.height(Dimensions.smallSpacer))
 
                 CustomTitle(
                     header =   data.desc,
                     maxLine = 1,
                     modifier = Modifier.weight(0.8f)
                 )
-                Spacer(modifier = Modifier.height(2.dp))
-                CustomTitle(
+
+                Spacer(modifier = Modifier.height(Dimensions.smallSpacer))
+
+                CustomBody(
                     header = data.ctaText,
                     modifier = Modifier.weight(0.8f),
                     maxLine = 1
@@ -476,14 +430,8 @@ fun DiscountCard(
                     .weight(1.5f)
                     .fillMaxHeight()
             ){
-                Image(
-                    painter = painterResource(selectedImage),
-                    contentDescription = "Discount Image",
-                    contentScale = ContentScale.Fit,
-                    modifier = Modifier
-                        .fillMaxSize()
-//                    .size()
-//                    .aspectRatio(1f)
+                CustomDiscountImage(
+                    painter = painterResource(selectedImage)
                 )
             }
         }
@@ -493,59 +441,58 @@ fun DiscountCard(
 @Composable
 fun CategoryCardRow(
     categoryList : List<CategoryData>,
-    size : Dp = 45.dp,
+    size : Dp = Dimensions.CategoryCardSize,
     onClick : () -> Unit,
-    CardColor : Color = app_white_bg,
-    borderStroke : Dp = 1.dp,
-    borderColor: Color = app_lGray,
-    innerPadding : Dp = 7.dp
+    CardColor : Color = app_background,
+    elevation: CardElevation = CardDefaults.cardElevation(Dimensions.cardElevation),
+    borderStroke : Dp = Dimensions.cardBorder,
+    borderColor: Color = app_lComponent,
+    innerPadding : Dp = Dimensions.componentPadding
 ){
     LazyRow(
-        horizontalArrangement = Arrangement.spacedBy(3.dp)
+        horizontalArrangement = Arrangement.spacedBy(Dimensions.medSpacer)
     ) {
         items(categoryList){item ->
             Card(
                 modifier = Modifier
                     .size(size)
                     .clickable{onClick()},
-                elevation = CardDefaults.cardElevation(4.dp),
+                elevation = elevation,
                 colors = CardDefaults.cardColors(
                     containerColor = CardColor
                 ),
                 border = BorderStroke(borderStroke, borderColor)
             ) {
-                Icon(
+                CustomIcon(
                     painter = item.icon,
-                    tint = item.bgColor,
-                    contentDescription = item.label,
-                    modifier = Modifier.padding(innerPadding)
+                    iconColor = item.bgColor,
+                    iconDescription = item.label
                 )
             }
-            Spacer(modifier = Modifier.width(10.dp))
         }
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun PreviewDiscountCard(){
-    val sampleData = DiscountData(
-        title = "50% OFF",
-        desc = "On all skincare products",
-        ctaText = "Shop Now",
-        textColor = Color.Black,
-        descColor = Color.DarkGray,
-        image = listOf(R.drawable.ic_discount13)
-    )
-
-    DiscountCard(
-        shape = RoundedCornerShape(12.dp),
-        containerColor = Color(0xFFFFF3E0),
-        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
-        data = sampleData,
-        titleSize = 18.sp,
-        descSize = 14.sp,
-        ctaSize = 16.sp
-    )
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun PreviewDiscountCard(){
+//    val sampleData = DiscountData(
+//        title = "50% OFF",
+//        desc = "On all skincare products",
+//        ctaText = "Shop Now",
+//        textColor = Color.Black,
+//        descColor = Color.DarkGray,
+//        image = listOf(R.drawable.ic_discount13)
+//    )
+//
+//    DiscountCard(
+//        shape = RoundedCornerShape(12.dp),
+//        containerColor = Color(0xFFFFF3E0),
+//        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
+//        data = sampleData,
+//        titleSize = 18.sp,
+//        descSize = 14.sp,
+//        ctaSize = 16.sp
+//    )
+//}
 

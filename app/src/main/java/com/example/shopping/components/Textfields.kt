@@ -8,26 +8,26 @@ import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.text.Placeholder
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.example.shopping.ui.theme.app_lBlack
-import com.example.shopping.ui.theme.app_white
+import com.example.shopping.ui.theme.Dimensions
+import com.example.shopping.ui.theme.Shapes
+import com.example.shopping.ui.theme.app_ltext
+import com.example.shopping.ui.theme.app_llComponent
 
 
 @Composable
 fun CustomTextField(
     value : String,
-    padding : Dp = 2.dp,
+    padding : Dp = Dimensions.componentPadding,
     onValueChange : (String) -> Unit,
-    shape: Shape = RoundedCornerShape(6.dp),
+    shape: Shape = Shapes.TextFieldShape,
     placeholder: String,
-    textColor : Color = app_lBlack,
-    containercolor : Color = app_white,
+    textColor : Color = app_ltext,
+    containercolor : Color = app_llComponent,
     visualTransformation : VisualTransformation = VisualTransformation.None
 ){
     OutlinedTextField(

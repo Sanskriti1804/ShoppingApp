@@ -1,7 +1,5 @@
 package com.example.shopping.components
 
-import android.R
-import android.util.Size
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
@@ -9,27 +7,23 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.AlignmentLine
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.shopping.ui.theme.Typography
-import com.example.shopping.ui.theme.app_dBlack
+import com.example.shopping.ui.theme.app__dtext
 
 @Composable
 fun CustomTitle(
     header : String,
-    headerColor : Color = app_dBlack,
-    fontWeight: FontWeight = FontWeight.SemiBold,
-    fontSize : TextUnit = 22.sp,
-    style: TextStyle = MaterialTheme.typography.titleLarge,
+    headerColor : Color = app__dtext,
+    fontWeight: FontWeight = FontWeight.Bold,
+    fontSize : TextUnit = 24.sp,
+    style: TextStyle = MaterialTheme.typography.bodyLarge,
     modifier: Modifier = Modifier.padding(1.dp),
-    maxLine: Int = 5
+    maxLine: Int = 1
 ){
     Text(
         text = header,
@@ -44,14 +38,14 @@ fun CustomTitle(
 }
 
 @Composable
-fun CustomHeader(
+fun CustomBody(
     header : String,
-    headerColor : Color = app_dBlack,
+    headerColor : Color = app__dtext,
     fontWeight: FontWeight = FontWeight.SemiBold,
     fontSize : TextUnit = 22.sp,
-    style: TextStyle = MaterialTheme.typography.titleLarge,
+    style: TextStyle = MaterialTheme.typography.bodyLarge,
     modifier: Modifier = Modifier.padding(1.dp),
-    maxLine: Int = 5
+    maxLine: Int = 1
 ){
     Text(
         text = header,
@@ -68,12 +62,12 @@ fun CustomHeader(
 @Composable
 fun CustomLabel(
     header : String,
-    headerColor : Color = app_dBlack,
-    fontWeight: FontWeight = FontWeight.SemiBold,
-    fontSize : TextUnit = 22.sp,
-    style: TextStyle = MaterialTheme.typography.titleLarge,
+    headerColor : Color = app__dtext,
+    fontWeight: FontWeight = FontWeight.Normal,
+    fontSize : TextUnit = 18.sp,
+    style: TextStyle = MaterialTheme.typography.labelSmall,
     modifier: Modifier = Modifier.padding(1.dp),
-    maxLine: Int = 5
+    maxLine: Int = 1
 ){
     Text(
         text = header,
@@ -86,27 +80,7 @@ fun CustomLabel(
         maxLines = maxLine
     )
 }
-@Composable
-fun CustomBody(
-    header : String,
-    headerColor : Color = app_dBlack,
-    fontWeight: FontWeight = FontWeight.SemiBold,
-    fontSize : TextUnit = 22.sp,
-    style: TextStyle = MaterialTheme.typography.titleLarge,
-    modifier: Modifier = Modifier.padding(1.dp),
-    maxLine: Int = 5
-){
-    Text(
-        text = header,
-        modifier = modifier,
-        color = headerColor,
-        style = style.copy(
-            fontWeight = fontWeight,
-            fontSize = fontSize
-        ),
-        maxLines = maxLine
-    )
-}
+
 @Composable
 fun CustomDivider(
     modifier: Modifier = Modifier.padding(12.dp),

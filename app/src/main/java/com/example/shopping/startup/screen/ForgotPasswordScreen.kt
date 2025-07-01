@@ -6,9 +6,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
@@ -18,7 +15,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -32,15 +28,14 @@ import com.airbnb.lottie.compose.LottieConstants
 import com.airbnb.lottie.compose.animateLottieCompositionAsState
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.example.shopping.R
+import com.example.shopping.components.CustomBody
 import com.example.shopping.components.CustomButton
-import com.example.shopping.components.CustomField
 import com.example.shopping.components.CustomTextField
-import com.example.shopping.components.CustomTitle
 import com.example.shopping.components.CustomTopBar
 import com.example.shopping.components.EmptyState
 import com.example.shopping.navigation.Screen
-import com.example.shopping.ui.theme.app_lGray
-import com.example.shopping.ui.theme.app_white_bg
+import com.example.shopping.ui.theme.Dimensions
+import com.example.shopping.ui.theme.app_background
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -59,7 +54,7 @@ fun ForgotPasswordScreen(navController: NavHostController){
     )
 
     Scaffold (
-        containerColor = app_white_bg,
+        containerColor = app_background,
         topBar = {
             CustomTopBar(
             title = "Forgot Password",
@@ -74,7 +69,7 @@ fun ForgotPasswordScreen(navController: NavHostController){
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ){
-            Spacer(modifier = Modifier.height(50.dp))
+            Spacer(modifier = Modifier.height(Dimensions.medSpacer))
 
             composition?.let {
                 EmptyState(
@@ -83,35 +78,27 @@ fun ForgotPasswordScreen(navController: NavHostController){
                 )
             }
 
-            Spacer(modifier = Modifier.height(15.dp))
-            CustomTitle(
-                header = "Please Enter your Email Address to recieve a Verification Code",
-                fontWeight = FontWeight.Normal,
-                fontSize = 22.sp
+            Spacer(modifier = Modifier.height(Dimensions.medSpacer))
+            CustomBody(
+                header = "Please Enter your Email Address to recieve a Verification Code"
             )
-            Spacer(modifier = Modifier.height(10.dp))
+            Spacer(modifier = Modifier.height(Dimensions.medSpacer))
 
             CustomTextField(
                 value = "Email Address",
                 onValueChange = {},
-
                 placeholder = "Enter your email address"
             )
 
 
-            Spacer(modifier = Modifier.height(10.dp))
+            Spacer(modifier = Modifier.height(Dimensions.medSpacer))
 
             CustomButton(
                 textButton = true,
-                modifier = Modifier
-                    .fillMaxWidth(),
                 onClick = {navController.navigate(Screen.EmailVerificationScreen.route)},
                 buttonText = "Send",
-                elevation = ButtonDefaults.buttonElevation(4.dp),
                 buttonDescription = "send  verification code button"
             )
-
-
         }
     }
 }

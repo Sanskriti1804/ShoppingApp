@@ -11,18 +11,20 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.example.shopping.ui.theme.app_dBlack
-import com.example.shopping.ui.theme.app_lGray
+import com.example.shopping.ui.theme.Dimensions
+import com.example.shopping.ui.theme.Shapes
+import com.example.shopping.ui.theme.app__dtext
+import com.example.shopping.ui.theme.app_lComponent
 
 
 @Composable
 fun CustomCard(
     onClick: () -> Unit,
-    padding : Dp = 8.dp,
-    shape: Shape = RoundedCornerShape(6.dp),
-    elevation: CardElevation = CardDefaults.cardElevation(4.dp),
-    containerColor: Color = app_lGray,
-    contentColor: Color = app_dBlack,
+    padding : Dp = Dimensions.cardElementsPadding,
+    shape: Shape = Shapes.CardShape,
+    elevation: CardElevation = CardDefaults.cardElevation(Dimensions.cardElevation),
+    containerColor: Color = app_lComponent,
+    contentColor: Color = app__dtext,
     content : @Composable () -> Unit
 ){
     Card (

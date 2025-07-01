@@ -2,9 +2,6 @@ package com.example.shopping.cart.screen
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
@@ -27,11 +24,13 @@ import com.airbnb.lottie.compose.LottieConstants
 import com.airbnb.lottie.compose.animateLottieCompositionAsState
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.example.shopping.R
+import com.example.shopping.components.CustomBody
 import com.example.shopping.components.CustomButton
 import com.example.shopping.components.CustomTitle
 import com.example.shopping.components.CustomTopBar
-import com.example.shopping.ui.theme.app_dBlack
-import com.example.shopping.ui.theme.app_lGray
+import com.example.shopping.ui.theme.Strings
+import com.example.shopping.ui.theme.app__dtext
+import com.example.shopping.ui.theme.app_lComponent
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -49,14 +48,9 @@ fun CancellationScreen(){
     Scaffold(
         topBar = {
             CustomTopBar(
-                title = "Shoppie",
-                fontWeight = FontWeight.ExtraBold,
+                title = Strings.appName.toString(),
                 titleOverflow = TextOverflow.Ellipsis,
-                navigationIconColor = Color.Black,
                 onNavigationClick = {},
-                containerColor = app_dBlack, // Assuming this color is defined elsewhere
-                titleColor = Color.Black,
-                actionIconColor = Color.Black,
                 scrollBehavior = scrollBehavior
             )
         }
@@ -66,10 +60,7 @@ fun CancellationScreen(){
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             CustomTitle(
-                header = "ORDER FAILED",
-                headerColor = app_lGray,
-                fontWeight = FontWeight.ExtraBold,
-                fontSize = 32.sp
+                header = "ORDER FAILED"
             )
 
             composition?.let {
@@ -79,26 +70,16 @@ fun CancellationScreen(){
                 )
             }
 
-            CustomTitle(
+            CustomBody(
                 header = "Couldn't place your order",
-                headerColor = app_dBlack,
-                fontWeight = FontWeight.SemiBold,
-                fontSize = 22.sp
             )
-
-            CustomTitle(
-                header = "Please try again!!",
-                headerColor = app_dBlack,
-                fontWeight = FontWeight.Normal,
-                fontSize = 18.sp
+            CustomBody(
+                header = "Please try again!!"
             )
 
             CustomButton(
                 textButton = true,
                 onClick = {},
-                containerColor = app_dBlack,
-                contentColor = app_lGray,
-                elevation = ButtonDefaults.buttonElevation(4.dp),
                 buttonText = "BACK TO ORDER",
                 buttonDescription = "order desc"
             )

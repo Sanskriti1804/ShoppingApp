@@ -26,7 +26,9 @@ import com.example.shopping.R
 import com.example.shopping.components.AppLogo
 import com.example.shopping.components.CustomTitle
 import com.example.shopping.navigation.Screen
+import com.example.shopping.ui.theme.Dimensions
 import com.example.shopping.ui.theme.Strings
+import com.example.shopping.ui.theme.app_background
 import kotlinx.coroutines.delay
 
 @SuppressLint("SuspiciousIndentation")
@@ -43,7 +45,7 @@ fun SplashScreen(navController: NavHostController)
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .background(Color.White),
+                .background(app_background),
             contentAlignment = Alignment.Center
         ) {
             Column(
@@ -54,15 +56,12 @@ fun SplashScreen(navController: NavHostController)
                     logoImage = appLogo
                 )
 
-                Spacer(modifier = Modifier.height(15.dp))
+                Spacer(modifier = Modifier.height(Dimensions.medSpacer))
 
                 CustomTitle(
-                    header = stringResource(Strings.appName),
-                    fontSize = 56.sp,
-                    fontWeight = FontWeight.ExtraBold,
-                    style = MaterialTheme.typography.bodyLarge
+                    header = stringResource(Strings.appName)
                 )
-                Spacer(modifier = Modifier.height(24.dp))
+                Spacer(modifier = Modifier.height(Dimensions.medSpacer))
             }
         }
 }

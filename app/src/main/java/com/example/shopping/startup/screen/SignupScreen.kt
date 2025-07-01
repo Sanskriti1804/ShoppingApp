@@ -1,5 +1,10 @@
 package com.example.shopping.startup.screen
 
+
+import com.example.shopping.components.CustomBody
+import com.example.shopping.components.CustomLabel
+import com.example.shopping.components.CustomTitle
+import com.example.shopping.ui.theme.Dimensions
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -19,17 +24,14 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import com.example.shopping.R
 import com.example.shopping.components.AppLogo
 import com.example.shopping.components.CustomButton
 import com.example.shopping.components.CustomCard
 import com.example.shopping.components.CustomTextField
-import com.example.shopping.components.CustomTitle
 import com.example.shopping.navigation.Screen
 import com.example.shopping.startup.viewmodel.AuthViewModel
 import com.example.shopping.ui.theme.Strings
@@ -47,7 +49,7 @@ fun SignupScreen(
     val isLoading by remember { mutableStateOf(false)}
 
     Column (
-        modifier = Modifier.padding(top = 100.dp, start = 30.dp, end = 30.dp, bottom = 30.dp),
+        modifier = Modifier.padding(Dimensions.appPadding),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ){
@@ -56,25 +58,23 @@ fun SignupScreen(
             logoImage = appLogo
         )
 
-        Spacer(modifier = Modifier.height(36.dp))
+        Spacer(modifier = Modifier.height(Dimensions.medSpacer))
 
         CustomTitle(
             header = stringResource(Strings.signup),
-            fontWeight = FontWeight.ExtraBold,
-            fontSize = 40.sp
         )
 
-        Spacer(modifier = Modifier.height(12.dp))
+        Spacer(modifier = Modifier.height(Dimensions.medSpacer))
 
         CustomCard(
             onClick = {}
         ) {
             Column(
-                modifier = Modifier.padding(28.dp),
+                modifier = Modifier.padding(Dimensions.componentPadding),
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                CustomTitle(
+                CustomBody(
                     header = "Email"
                 )
                 CustomTextField(
@@ -82,7 +82,7 @@ fun SignupScreen(
                     onValueChange = {email = it},
                     placeholder = "Enter your Email"
                 )
-                CustomTitle(
+                CustomBody(
                     header = "Name"
                 )
                 CustomTextField(
@@ -90,7 +90,7 @@ fun SignupScreen(
                     onValueChange = {name = it},
                     placeholder = "Enter your name",
                 )
-                CustomTitle(
+                CustomBody(
                     header = "Password"
                 )
                 CustomTextField(
@@ -100,7 +100,7 @@ fun SignupScreen(
                     visualTransformation = PasswordVisualTransformation()
                 )
 
-                Spacer(modifier = Modifier.height(12.dp))
+                Spacer(modifier = Modifier.height(Dimensions.medSpacer))
 
                 CustomButton(
                     textButton = true,
@@ -109,14 +109,11 @@ fun SignupScreen(
                         navController.navigate(Screen.HomeScreen.route)
                         },
                     buttonText = stringResource(Strings.signup),
-                    elevation = ButtonDefaults.buttonElevation(4.dp),
-                    buttonDescription = "signup",
-                    modifier = Modifier.fillMaxWidth()
+                    buttonDescription = "signup"
                 )
 
-                CustomTitle(
+                CustomLabel(
                     header = "Already have an Account? Login",
-                    fontSize = 10.sp,
                     modifier = Modifier
                         .clickable(
                             onClick = {navController.navigate(Screen.LoginScreen.route)}

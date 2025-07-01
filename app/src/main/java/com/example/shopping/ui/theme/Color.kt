@@ -12,15 +12,12 @@ val Pink40 = Color(0xFF7D5260)
 
 
 // temp color
-val app_dBlack = Color(0xFF121212)
-val app_lBlack = Color(0xFF2c2c2c)
-val app_llComponent = Color(0xFF2c2c2c)
-val app_dGray = Color(0xFF75706f)
-val app_lGray = Color(0xFFd4d3d2)
-val app_white = Color(0xFFeaeaea)
+val app__dtext = Color(0xFF121212)
+val app_ltext = Color(0xFF2c2c2c)
+val app_dComponent = Color(0xFF75706f)
+val app_lComponent = Color(0xFFd4d3d2)
+val app_llComponent = Color(0xFFeaeaea)
 val app_highlight = Color(0xFFf08b64)
-val app_orange = Color(0xFFf08b64)
-val app_white_bg = Color.White
 val app_background = Color.White
 
 

@@ -1,4 +1,4 @@
-package com.example.shopping.product
+ package com.example.shopping.product
 
 import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.clickable
@@ -18,6 +18,8 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import com.example.shopping.ui.theme.Dimensions
+import com.example.shopping.ui.theme.Shapes
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.HorizontalPagerIndicator
 import com.google.accompanist.pager.PagerState
@@ -28,21 +30,21 @@ fun ProductCarousel(
     state : PagerState,
     images : List<Int>,
     imageDescription : String = "product image",
-    padding : Dp = 2.dp,
-    shape : Shape = RoundedCornerShape(3.dp),
+    padding : Dp = Dimensions.componentPadding,
+    shape : Shape = Shapes.CardShape,
     pageInteractionSource : MutableInteractionSource = remember { MutableInteractionSource() },
-    imageSize : Dp = 250.dp,
+    imageSize : Dp = Dimensions.productDescSize,
     contentScale : ContentScale = ContentScale.Crop,
     inActiveColor : Color = Color.DarkGray,
     activeColor : Color = Color.White,
     indicatorShape : Shape = CircleShape,
     indicatorAlignment : Alignment = Alignment.Center,
-    indicatorPadding : Dp = 4.dp
+    indicatorPadding : Dp = Dimensions.componentPadding
 ){
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(4.dp)
+            .padding(Dimensions.componentPadding)
     ){
         HorizontalPager(
             state = state,

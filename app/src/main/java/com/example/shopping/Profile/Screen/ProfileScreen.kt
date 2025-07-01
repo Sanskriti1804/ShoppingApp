@@ -10,13 +10,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.Divider
-import androidx.compose.material3.DividerDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
-import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -26,21 +22,22 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.example.shopping.R
+import com.example.shopping.components.CustomBody
 import com.example.shopping.components.CustomCard
+import com.example.shopping.components.CustomIcon
+import com.example.shopping.components.CustomLabel
 import com.example.shopping.components.CustomNavigationBar
 import com.example.shopping.components.CustomProfilePic
 import com.example.shopping.components.CustomTitle
 import com.example.shopping.components.CustomTopBar
-import com.example.shopping.components.ProfileSection
-import com.example.shopping.ui.theme.app_white_bg
+import com.example.shopping.ui.theme.Dimensions
+import com.example.shopping.ui.theme.app_background
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -52,7 +49,7 @@ fun ProfileScreen(
     val profileImage = painterResource(id = R.drawable.profile)
 
     Scaffold(
-        containerColor = app_white_bg,
+        containerColor = app_background,
         topBar = {
             CustomTopBar(
                 titleOverflow = TextOverflow.Ellipsis,
@@ -90,15 +87,11 @@ fun ProfileScreen(
                             .padding(10.dp),
                         horizontalAlignment = Alignment.Start
                     ) {
-                        CustomTitle(
-                            header = "My Profile",
-                            fontSize = 18.sp,
-                            fontWeight = FontWeight.Thin
+                        CustomBody(
+                            header = "My Profile"
                         )
-                        CustomTitle(
-                            header = "Refer and Earn",
-                            fontSize = 18.sp,
-                            fontWeight = FontWeight.Thin
+                        CustomBody(
+                            header = " Refer and Earn"
                         )
                     }
                 }
@@ -114,25 +107,17 @@ fun ProfileScreen(
                             .padding(10.dp),
                         horizontalAlignment = Alignment.Start
                     ) {
-                        CustomTitle(
-                            header = "Help Center",
-                            fontSize = 18.sp,
-                            fontWeight = FontWeight.Thin
+                        CustomLabel(
+                            header = "Help Center"
                         )
-                        CustomTitle(
-                            header = "Customer Service",
-                            fontSize = 18.sp,
-                            fontWeight = FontWeight.Thin
+                        CustomLabel(
+                            header = "Customer Service"
                         )
-                        CustomTitle(
-                            header = "Return Policy",
-                            fontSize = 18.sp,
-                            fontWeight = FontWeight.Thin
+                        CustomLabel(
+                            header = "Return Policy"
                         )
-                        CustomTitle(
-                            header = "Shipping Delivery",
-                            fontSize = 18.sp,
-                            fontWeight = FontWeight.Thin
+                        CustomLabel(
+                            header = "Shipping Delivery"
                         )
                     }
                 }
@@ -145,18 +130,14 @@ fun ProfileScreen(
                     Column(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(10.dp),
+                            .padding(Dimensions.componentPadding),
                         horizontalAlignment = Alignment.Start
                     ) {
-                        CustomTitle(
-                            header = "About Service",
-                            fontSize = 18.sp,
-                            fontWeight = FontWeight.Thin
+                        CustomLabel(
+                            header = "About Service"
                         )
-                        CustomTitle(
-                            header = "About Us",
-                            fontSize = 18.sp,
-                            fontWeight = FontWeight.Thin
+                        CustomLabel(
+                            header = "About Us"
                         )
                     }
                 }
@@ -174,22 +155,19 @@ fun ProfileSection(
     name : String
 ){
     Row(
-        modifier = Modifier.padding(12.dp),
+        modifier = Modifier.padding(Dimensions.componentPadding),
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
 //        CustomProfilePic()
         Column (
-            modifier = Modifier.padding(15.dp)
+            modifier = Modifier.padding(Dimensions.componentPadding)
         ){
             CustomTitle(
-                header = username,
-                fontWeight = FontWeight.Bold
+                header = username
             )
 
-            CustomTitle(
-                header = name,
-                fontSize = 20.sp,
-                fontWeight = FontWeight.Thin
+            CustomLabel(
+                header = name
             )
         }
     }
@@ -198,12 +176,10 @@ fun ProfileSection(
 @Composable
 fun OrderCard(
     onClick : () -> Unit,
-    innerPadding : Dp = 8.dp,
+    innerPadding : Dp = Dimensions.cardElementsPadding,
     cardTitle : String = "My Orders",
-    orderFont : TextUnit = 16.sp,
-    viewmoreFont : TextUnit = 14.sp,
     viewmore : String = "View More",
-    unpaid : Painter = painterResource(R.drawable.ic_order_unpaid) ,
+    unpaid : Painter = painterResource(R.drawable.ic_order_unpaid),
     tracking : Painter = painterResource(R.drawable.ic_app_processing),
     delivered: Painter = painterResource(R.drawable.ic_order_delivered),
     returns : Painter = painterResource(R.drawable.ic_order_return),
@@ -211,8 +187,6 @@ fun OrderCard(
     trackingLabel : String = "Processing",
     deliveredLabel: String = "Delivered",
     returnsLabel : String = "Returns",
-    labelWeight : FontWeight = FontWeight.Thin,
-    labelSize : TextUnit = 12.sp
 ){
     CustomCard(
         onClick = onClick,
@@ -226,57 +200,47 @@ fun OrderCard(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween
             ){
-                CustomTitle(
-                    header = cardTitle,
-                    fontSize = orderFont
+                CustomBody(
+                    header = cardTitle
                 )
 
-                CustomTitle(
-                    header =  viewmore,
-                    fontWeight = FontWeight.Thin,
-                    fontSize = viewmoreFont
+                CustomLabel(
+                    header =  viewmore
                 )
             }
-            Spacer(modifier = Modifier.height(2.dp))
+            Spacer(modifier = Modifier.height(Dimensions.smallSpacer))
+
             Row(
                 modifier = Modifier
-                    .padding(12.dp),
+                    .padding(Dimensions.componentPadding),
                 horizontalArrangement = Arrangement.Absolute.SpaceAround
             )
             {
                 Column {
-                    orderIcon(order = unpaid)
-                    CustomTitle(
-                        header = unpaidLabel,
-                        fontWeight = labelWeight,
-                        fontSize = labelSize
+                    CustomIcon(painter = unpaid)
+                    CustomLabel(
+                        header = unpaidLabel
                     )
                 }
 
                 Column {
-                    orderIcon(order = tracking)
-                    CustomTitle(
-                        header = trackingLabel,
-                        fontWeight = labelWeight,
-                        fontSize = labelSize
+                    CustomIcon(painter = tracking)
+                    CustomLabel(
+                        header = trackingLabel
                     )
                 }
 
                 Column {
-                    orderIcon(order = delivered)
-                    CustomTitle(
-                        header = deliveredLabel,
-                        fontWeight = labelWeight,
-                        fontSize = labelSize
+                    CustomIcon(painter = delivered)
+                    CustomLabel(
+                        header = deliveredLabel
                     )
                 }
 
                 Column {
-                    orderIcon(order = returns)
-                    CustomTitle(
-                        header = returnsLabel,
-                        fontWeight = labelWeight,
-                        fontSize = labelSize
+                    CustomIcon(painter = returns)
+                    CustomLabel(
+                        header = returnsLabel
                     )
                 }
 
@@ -286,21 +250,6 @@ fun OrderCard(
     }
 }
 
-@Composable
-fun orderIcon(
-    order : Painter,
-    orderDesc : String = "order description",
-    contentScale: ContentScale = ContentScale.Crop,
-    size : Dp = 25.dp
-
-){
-    Image(
-        painter = order,
-        contentDescription = orderDesc,
-        contentScale = contentScale,
-        modifier = Modifier.size(size)
-    )
-}
 
 //@Preview(showBackground = true)
 //@Composable
