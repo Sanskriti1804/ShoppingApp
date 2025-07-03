@@ -13,20 +13,20 @@ import androidx.compose.ui.unit.dp
 import coil.size.Size
 import com.example.shopping.R
 
-@Composable
-fun CustomReviewImage(
-    painter : Painter = painterResource(R.drawable.profile),
-    reviewDesc : String = "Review Image Description",
-    contentScale: ContentScale = ContentScale.Crop,
-    size: Dp = 150.dp,
-    reviewPadding : Dp = 4.dp
-){
-    Image(
-        painter = painter,
-        contentDescription = reviewDesc,
-        modifier = Modifier
-            .padding(reviewPadding)
-            .size(size),
-        contentScale = contentScale
-    )
-}
+//@Composable
+//fun CustomReviewImage(
+//    painter : Painter = painterResource(R.drawable.profile),
+//    reviewDesc : String = "Review Image Description",
+//    contentScale: ContentScale = ContentScale.Crop,
+//    size: Dp = 150.dp,
+//    reviewPadding : Dp = 4.dp
+//){
+//    Image(
+//        painter = painter,
+//        contentDescription = reviewDesc,
+//        modifier = Modifier
+//            .padding(reviewPadding)
+//            .size(size),
+//        contentScale = contentScale
+//    )
+//}

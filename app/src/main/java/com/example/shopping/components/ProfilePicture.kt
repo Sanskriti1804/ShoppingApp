@@ -15,23 +15,23 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.example.shopping.R
 
-@Composable
-fun CustomProfilePic(
-    profile : Painter = painterResource(R.drawable.profile),
-    userProfileDesc : String = "User Profile Photo",
-    profilePadding : Dp = 12.dp,
-    profileShape : Shape = CircleShape,
-    profileSize : Dp = 120.dp,
-    contentScale : ContentScale = ContentScale.Crop
-){
-    Image(
-        painter = profile,
-        contentDescription = userProfileDesc,
-        modifier = Modifier
-            .padding(profilePadding)
-            .clip(profileShape)
-            .size(profileSize),
-        contentScale = contentScale,
-
-    )
-}
+//@Composable
+//fun CustomProfilePic(
+//    profile : Painter = painterResource(R.drawable.profile),
+//    userProfileDesc : String = "User Profile Photo",
+//    profilePadding : Dp = 12.dp,
+//    profileShape : Shape = CircleShape,
+//    profileSize : Dp = 120.dp,
+//    contentScale : ContentScale = ContentScale.Crop
+//){
+//    Image(
+//        painter = profile,
+//        contentDescription = userProfileDesc,
+//        modifier = Modifier
+//            .padding(profilePadding)
+//            .clip(profileShape)
+//            .size(profileSize),
+//        contentScale = contentScale,
+//
+//    )
+//}

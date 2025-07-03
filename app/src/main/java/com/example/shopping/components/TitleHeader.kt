@@ -44,6 +44,70 @@ fun CustomTitle(
 }
 
 @Composable
+fun CustomHeader(
+    header : String,
+    headerColor : Color = app_dBlack,
+    fontWeight: FontWeight = FontWeight.SemiBold,
+    fontSize : TextUnit = 22.sp,
+    style: TextStyle = MaterialTheme.typography.titleLarge,
+    modifier: Modifier = Modifier.padding(1.dp),
+    maxLine: Int = 5
+){
+    Text(
+        text = header,
+        modifier = modifier,
+        color = headerColor,
+        style = style.copy(
+            fontWeight = fontWeight,
+            fontSize = fontSize
+        ),
+        maxLines = maxLine
+    )
+}
+
+@Composable
+fun CustomLabel(
+    header : String,
+    headerColor : Color = app_dBlack,
+    fontWeight: FontWeight = FontWeight.SemiBold,
+    fontSize : TextUnit = 22.sp,
+    style: TextStyle = MaterialTheme.typography.titleLarge,
+    modifier: Modifier = Modifier.padding(1.dp),
+    maxLine: Int = 5
+){
+    Text(
+        text = header,
+        modifier = modifier,
+        color = headerColor,
+        style = style.copy(
+            fontWeight = fontWeight,
+            fontSize = fontSize
+        ),
+        maxLines = maxLine
+    )
+}
+@Composable
+fun CustomBody(
+    header : String,
+    headerColor : Color = app_dBlack,
+    fontWeight: FontWeight = FontWeight.SemiBold,
+    fontSize : TextUnit = 22.sp,
+    style: TextStyle = MaterialTheme.typography.titleLarge,
+    modifier: Modifier = Modifier.padding(1.dp),
+    maxLine: Int = 5
+){
+    Text(
+        text = header,
+        modifier = modifier,
+        color = headerColor,
+        style = style.copy(
+            fontWeight = fontWeight,
+            fontSize = fontSize
+        ),
+        maxLines = maxLine
+    )
+}
+@Composable
 fun CustomDivider(
     modifier: Modifier = Modifier.padding(12.dp),
     thickness : Dp = 2.dp,

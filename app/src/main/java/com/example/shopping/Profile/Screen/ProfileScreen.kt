@@ -177,7 +177,7 @@ fun ProfileSection(
         modifier = Modifier.padding(12.dp),
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        CustomProfilePic()
+//        CustomProfilePic()
         Column (
             modifier = Modifier.padding(15.dp)
         ){
