@@ -7,10 +7,12 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.shopping.cart.data.CartProduct
-import com.example.shopping.home.model.RetrofitInstance
+import com.example.shopping.cart.model.CartApi
 import kotlinx.coroutines.launch
 
-class CartViewModel : ViewModel() {
+class CartViewModel(
+    private val cartApi: CartApi
+) : ViewModel() {
     var cartList by mutableStateOf<List<CartProduct>>(emptyList())
 
     init {
@@ -20,7 +22,7 @@ class CartViewModel : ViewModel() {
     private fun fetchCartProd( ){
         viewModelScope.launch {
             try {
-                val response = RetrofitInstance.cartApi.getCartProducts(limit = 4, skip = 0)
+                val response = cartApi.getCartProducts(limit = 4, skip = 0)
                 val allProducts = response.carts.firstOrNull()?.products ?: emptyList()
                 cartList = allProducts
             }

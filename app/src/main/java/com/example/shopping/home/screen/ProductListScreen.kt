@@ -32,7 +32,6 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import coil.compose.rememberAsyncImagePainter
 import coil.size.Dimension
@@ -59,13 +58,15 @@ import com.example.shopping.ui.theme.app_llComponent
 import com.example.shopping.ui.theme.app_background
 import com.google.accompanist.pager.rememberPagerState
 import kotlinx.coroutines.delay
+import org.koin.androidx.compose.koinViewModel
+import org.koin.androidx.compose.viewModel
 
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter", "SuspiciousIndentation")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ProductListScreen(navController : NavHostController) {
-    val viewModel: ProductViewModel = viewModel()
+    val viewModel: ProductViewModel = koinViewModel()
     val products = viewModel.productList
 
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())

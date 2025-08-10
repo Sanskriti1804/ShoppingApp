@@ -1,0 +1,13 @@
+package com.example.shopping.di
+
+
+import com.example.shopping.home.viewmodel.ProductViewModel
+import com.example.shopping.startup.viewmodel.AuthViewModel
+import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.dsl.module
+
+val viewModelModule = module {
+    viewModel { AuthViewModel(get()) }
+
+    viewModel { ProductViewModel(get()) }  // get() fetches ProductApi
+}

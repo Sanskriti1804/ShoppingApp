@@ -23,6 +23,5 @@ val authModule = module {
         )      //get() - injects the instance we defined above
     }
 
-    viewModel { AuthViewModel(get()) }
 
 }

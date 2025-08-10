@@ -6,10 +6,12 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.shopping.home.data.Product
-import com.example.shopping.home.model.RetrofitInstance
+import com.example.shopping.home.model.ProductApi
 import kotlinx.coroutines.launch
 
-class ProductViewModel : ViewModel(){
+class ProductViewModel(
+    private val productApi : ProductApi
+) : ViewModel(){
 
     var product by mutableStateOf<Product?>(null)
     //prodList - observable property that will hold a list of products fetched from the api
@@ -26,7 +28,7 @@ class ProductViewModel : ViewModel(){
         //nw calls are asynch  - if vm destroyed prop destroyed - no memory leaks
         viewModelScope.launch {
             try {
-                val response = RetrofitInstance.api.getProducts(limit = 100, skip = 0)
+                val response = productApi.getProducts(limit = 100, skip = 0)
                 productList = response.products
             }
             catch (e : Exception){
@@ -38,7 +40,7 @@ class ProductViewModel : ViewModel(){
     private fun fetchProductById(){
         viewModelScope.launch {
             try {
-                val response = RetrofitInstance.api.getProducts(limit = 100, skip = 0)
+                val response = productApi.getProducts(limit = 100, skip = 0)
                 println(" \uD83D\uDFE2 Response received: ${response.products.size} products")
                 product = response.products.firstOrNull()
             }
