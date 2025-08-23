@@ -5,22 +5,21 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class EmailRequest(
     val personalizations: List<Personalization>,
-    val content: List<Content>,
-    val from: EmailInfo,
-    val reply_to: EmailInfo? = null
+    val from: SendGridEmail,
+    val subject: String,
+    val content: List<SendGridContent>
 )
 
-data class Personalization(
-    val to: List<EmailInfo>,
-    val subject: String
+data class SendGridEmail(
+    val email: String,
+    val name: String? = null
 )
 
-data class Content(
-    val type: String,
+data class SendGridContent(
+    val type: String = "text/plain",
     val value: String
 )
 
-data class EmailInfo(
-    val email: String,
-    val name: String? = null
+data class Personalization(
+    val to: List<SendGridEmail>
 )
