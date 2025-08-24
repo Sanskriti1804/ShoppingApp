@@ -16,6 +16,11 @@ android {
         versionCode = 1
         versionName = "1.0"
 
+//        val stripePublishableKey = project.properties["STRIPE_PUBLISHABLE_KEY"] ?: "\"\""
+//        val stripeSecretKey = project.properties["STRIPE_SECRET_KEY"] ?: "\"\""
+//
+//        buildConfigField("String", "STRIPE_PUBLISHABLE_KEY", stripePublishableKey.toString())
+//        buildConfigField("String", "STRIPE_SECRET_KEY", stripeSecretKey.toString())
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -37,7 +42,11 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
+}
+fun getProperty(propertyName: String, defaultValue: String): String {
+    return project.properties[propertyName] as? String ?: defaultValue
 }
 
 dependencies {
@@ -72,6 +81,7 @@ dependencies {
     implementation("io.insert-koin:koin-android:3.5.3")
     implementation("io.insert-koin:koin-androidx-compose:3.5.0")// or latest
 
+    implementation("com.stripe:stripe-android:21.23.1") 
 
     implementation("com.airbnb.android:lottie-compose:6.1.0")
 

@@ -8,7 +8,7 @@ import retrofit2.http.POST
 
 interface EmailAPI {
     @Headers("Content-type: application/json")
-    @POST("v3/mail/send ")
+    @POST("v3/mail/send")
     suspend fun postEmail(
         @Body emailRequest: EmailRequest
     ) : Response<Unit>
