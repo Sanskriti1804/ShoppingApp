@@ -1,26 +1,23 @@
-//package com.example.shopping.order.screens
-//
-//import androidx.compose.material.Button
-//import androidx.compose.material.Text
-//import androidx.compose.runtime.Composable
-//import androidx.compose.runtime.LaunchedEffect
-//import androidx.compose.runtime.getValue
-//import androidx.compose.runtime.mutableStateOf
-//import androidx.compose.runtime.remember
-//import androidx.compose.runtime.setValue
-//import androidx.compose.ui.platform.LocalContext
-//import com.stripe.android.PaymentConfiguration
-//import com.stripe.android.paymentsheet.PaymentSheet
-//import com.stripe.android.paymentsheet.PaymentSheetResult
-//
-//
-//@Composable
-//fun App() {
+import com.stripe.android.paymentsheet.PaymentSheet
+
+import androidx.compose.material.Button
+import androidx.compose.material.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.platform.LocalContext
+import com.stripe.android.PaymentConfiguration
+import com.stripe.android.paymentsheet.PaymentSheetResult
+
+
+@Composable
+fun App() {
 //    val paymentSheet = remember { PaymentSheet.Builder(::onPaymentSheetResult) }.build()
-//    val context = LocalContext.current
-//    var customerConfig by remember { mutableStateOf<PaymentSheet.CustomerConfiguration?>(null) }
-//    var paymentIntentClientSecret by remember { mutableStateOf<String?>(null) }
-//
+
+
 //    LaunchedEffect(context) {
 //        // Make a request to your own server and retrieve payment configurations
 //        val networkResult = ...
@@ -34,35 +31,36 @@
 //        }
 //    }
 //
-//    Button(
-//        onClick = {
+    Button(
+        onClick = {
 //            val currentConfig = customerConfig
 //            val currentClientSecret = paymentIntentClientSecret
 //
 //            if (currentConfig != null && currentClientSecret != null) {
 //                presentPaymentSheet(paymentSheet, currentConfig, currentClientSecret)
 //            }
-//        }
-//    ) {
-//        Text("Checkout")
-//    }
-//}
-//
-//private fun presentPaymentSheet(
-//    paymentSheet: PaymentSheet,
-//    customerConfig: PaymentSheet.CustomerConfiguration,
-//    paymentIntentClientSecret: String
-//) {
-//    paymentSheet.presentWithPaymentIntent(
-//        paymentIntentClientSecret,
-//        PaymentSheet.Configuration.Builder(merchantDisplayName = "My merchant name")
-//            .customer(customerConfig)
-//            // Set `allowsDelayedPaymentMethods` to true if your business handles
-//            // delayed notification payment methods like US bank accounts.
-//            .allowsDelayedPaymentMethods(true)
-//            .build()
-//    )
-//}
+//            presentPaymentSheet(paymentSheet, customerConfig, paymentIntentClientSecret)
+        }
+    ) {
+        Text("Checkout")
+    }
+}
+
+private fun presentPaymentSheet(
+    paymentSheet: PaymentSheet,
+    customerConfig: PaymentSheet.CustomerConfiguration,
+    paymentIntentClientSecret: String
+) {
+    paymentSheet.presentWithPaymentIntent(
+        paymentIntentClientSecret,
+        PaymentSheet.Configuration.Builder(merchantDisplayName = "My merchant name")
+            .customer(customerConfig)
+            // Set `allowsDelayedPaymentMethods` to true if your business handles
+            // delayed notification payment methods like US bank accounts.
+            .allowsDelayedPaymentMethods(true)
+            .build()
+    )
+}
 //
 //private
 //}

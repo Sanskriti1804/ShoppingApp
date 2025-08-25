@@ -1,41 +1,26 @@
 package com.example.shopping.order.repository
 
-import com.stripe.android.paymentsheet.PaymentSheet
-import com.stripe.android.paymentsheet.PaymentSheetResult
+import com.example.shopping.order.data.PaymentConfigResponse
+import com.example.shopping.order.remote.PaymentApiService
+import com.example.shopping.util.UiState
 
 class PaymentRepository (
-
+    private val paymentApi: PaymentApiService
 ){
-    fun presentPaymentSheet(
-        paymentSheet: PaymentSheet,
-        customerConfig: PaymentSheet.CustomerConfiguration,
-        paymentIntentClientSecret: String
-    ) {
-        paymentSheet.presentWithPaymentIntent(
-            paymentIntentClientSecret,
-            PaymentSheet.Configuration.Builder(merchantDisplayName = "My merchant name")
-                .customer(customerConfig)
-                // Set `allowsDelayedPaymentMethods` to true if your business handles
-                // delayed notification payment methods like US bank accounts.
-                .allowsDelayedPaymentMethods(true)
-                .build()
-        )
-    }
-
-    fun onPaymentSheetResult(paymentSheetResult: PaymentSheetResult) {
-        when (paymentSheetResult) {
-            is PaymentSheetResult.Canceled -> {
-                print("Canceled")
+    suspend fun getPaymentConfig() : UiState<PaymentConfigResponse>{
+        return try {
+//        Make a request to your own server and retrieve payment configurations
+            val response = paymentApi.getPaymentIntent()
+            if (response.isSuccessful){
+                //Direct mapping (response.body()!!) → fast, simple, API perfectly matches model
+                UiState.Success(response.body()!!)      //!! - asserting it is not null
+            }
+            else{
+                UiState.Error(Exception("Network request failed"))
             }
 
-            is PaymentSheetResult.Failed -> {
-                print("Error: ${paymentSheetResult.error}")
-            }
-
-            is PaymentSheetResult.Completed -> {
-                // Display for example, an order confirmation screen
-                print("Completed")
-            }
+        }catch (e : Exception){
+            UiState.Error(e)
         }
     }
 }

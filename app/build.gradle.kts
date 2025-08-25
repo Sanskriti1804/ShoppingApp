@@ -81,7 +81,7 @@ dependencies {
     implementation("io.insert-koin:koin-android:3.5.3")
     implementation("io.insert-koin:koin-androidx-compose:3.5.0")// or latest
 
-    implementation("com.stripe:stripe-android:21.23.1") 
+    implementation("com.stripe:stripe-android:21.23.1")
 
     implementation("com.airbnb.android:lottie-compose:6.1.0")
 
