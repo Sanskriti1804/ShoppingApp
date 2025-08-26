@@ -7,17 +7,13 @@ import android.content.Context
 import java.io.File
 import java.util.Properties
 
+
 object LocalProps {
     fun load(context: Context): Properties {
-        val props = Properties() //empty Properties object to hold the loaded values.
+        val props = Properties()
         try {
-            // Go 2 levels up from /data/data/... to find project root
-            val file = File(context.applicationInfo.dataDir)
-                .parentFile?.parentFile
-                ?.resolve("local.properties")
-
-            if (file != null && file.exists()) {
-                props.load(file.inputStream())
+            context.assets.open("stripe.properties").use { inputStream ->
+                props.load(inputStream)
             }
         } catch (e: Exception) {
             e.printStackTrace()
@@ -26,6 +22,26 @@ object LocalProps {
     }
 }
 
+
+//object LocalProps {
+//    fun load(context: Context): Properties {
+//        val props = Properties() //empty Properties object to hold the loaded values.
+//        try {
+//            // Go 2 levels up from /data/data/... to find project root
+//            val file = File(context.applicationInfo.dataDir)
+//                .parentFile?.parentFile
+//                ?.resolve("local.properties")
+//
+//            if (file != null && file.exists()) {
+//                props.load(file.inputStream())
+//            }
+//        } catch (e: Exception) {
+//            e.printStackTrace()
+//        }
+//        return props
+//    }
+//}
+//
 
 
 

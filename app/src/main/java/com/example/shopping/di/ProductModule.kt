@@ -17,6 +17,5 @@ val productModule = module {
         }.create(ProductApi::class.java)
     }
 
-    single<ProductApi> { get<Retrofit>().create(ProductApi::class.java) } //creates productapi interface from retrofit instance
     single<CartApi> { get<Retrofit>().create(CartApi::class.java)}
 }

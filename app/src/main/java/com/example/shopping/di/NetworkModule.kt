@@ -32,7 +32,5 @@ val networkModule = module {
             .addConverterFactory(GsonConverterFactory.create())
             .client(get())
             .build()
-
-
     }
 }
