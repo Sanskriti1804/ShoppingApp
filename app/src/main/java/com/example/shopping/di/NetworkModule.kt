@@ -3,6 +3,7 @@ package com.example.shopping.di
 import com.google.firebase.BuildConfig
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -33,7 +34,7 @@ val networkModule = module {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
-    single("emailRetrofit") {
+    single(named("emailRetrofit")) {
         Retrofit.Builder()
             .baseUrl("https://api.sendgrid.com")
             .client(get())
@@ -41,4 +42,3 @@ val networkModule = module {
             .build()
     }
 }
-hello
