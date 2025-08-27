@@ -1,6 +1,7 @@
 package com.example.shopping.di
 
 
+import com.example.shopping.cart.viewmodel.CartViewModel
 import com.example.shopping.email.viewmodel.EmailViewModel
 import com.example.shopping.home.viewmodel.ProductViewModel
 import com.example.shopping.order.viewmodel.PaymentViewModel
@@ -15,5 +16,6 @@ val viewModelModule = module {
 
     viewModel { EmailViewModel(get()) }
     viewModel { PaymentViewModel(get()) }
+    viewModel { CartViewModel(get()) }
 
 }

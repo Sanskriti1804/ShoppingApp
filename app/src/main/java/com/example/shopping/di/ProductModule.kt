@@ -12,10 +12,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 val productModule = module {
 
     single<ProductApi> {
-        get<Retrofit>{
-            parametersOf("https://dummyjson.com")
-        }.create(ProductApi::class.java)
+        get<Retrofit>("productRetrofit").create(ProductApi::class.java)
     }
 
-    single<CartApi> { get<Retrofit>().create(CartApi::class.java)}
+    single<CartApi> { get<Retrofit>("productRetrofit").create(CartApi::class.java)}
 }

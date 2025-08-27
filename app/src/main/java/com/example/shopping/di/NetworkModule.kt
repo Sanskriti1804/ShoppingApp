@@ -26,11 +26,19 @@ val networkModule = module {
             .build()
     }
 
-    factory { (baseUrl : String) ->
+    single(named("productRetrofit")) {
         Retrofit.Builder()
-            .baseUrl(baseUrl)
-            .addConverterFactory(GsonConverterFactory.create())
+            .baseUrl("https://dummyjson.com/")
             .client(get())
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+    }
+    single("emailRetrofit") {
+        Retrofit.Builder()
+            .baseUrl("https://api.sendgrid.com")
+            .client(get())
+            .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
 }
+hello

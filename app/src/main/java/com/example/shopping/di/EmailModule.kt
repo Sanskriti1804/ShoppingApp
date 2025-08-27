@@ -11,9 +11,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 val EmailModule = module{
     single<EmailAPI> {
-        get<Retrofit> {
-            parametersOf("https://api.sendgrid.com")
-        }.create(EmailAPI::class.java)
+        get<Retrofit>("emailRetrofit").create(EmailAPI::class.java)
     }
     single { EmailRepository(get()) }
 }
