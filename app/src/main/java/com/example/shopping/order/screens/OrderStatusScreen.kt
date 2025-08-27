@@ -14,7 +14,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.LottieConstants
 import com.airbnb.lottie.compose.animateLottieCompositionAsState
@@ -32,13 +31,14 @@ import com.example.shopping.components.CustomTitle
 import com.example.shopping.components.EmptyState
 import com.example.shopping.ui.theme.Dimensions
 import com.example.shopping.ui.theme.app_highlight
+import org.koin.androidx.compose.koinViewModel
 import java.util.Date
 import java.util.TimeZone
 
 @Composable
 fun OrderStatusScreen(){
 
-    val viewModel : CartViewModel = viewModel()
+    val viewModel : CartViewModel = koinViewModel()
     val order = viewModel.cartList
 
     Column(

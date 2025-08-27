@@ -27,7 +27,6 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.example.shopping.R
 import com.example.shopping.components.CustomBody
@@ -45,12 +44,13 @@ import com.example.shopping.ui.theme.Dimensions
 import com.example.shopping.ui.theme.app_ltext
 import com.example.shopping.ui.theme.app_lComponent
 import com.example.shopping.ui.theme.app_background
+import org.koin.androidx.compose.koinViewModel
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MenuScreen(navController: NavHostController) {
-    val viewModel : ProductViewModel = viewModel()
+    val viewModel : ProductViewModel = koinViewModel()
     val product = viewModel.productList
 
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
