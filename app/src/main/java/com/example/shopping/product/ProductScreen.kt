@@ -49,11 +49,12 @@ import com.example.shopping.ui.theme.Shapes
 import com.example.shopping.ui.theme.app_ltext
 import com.example.shopping.ui.theme.app_lComponent
 import com.google.accompanist.pager.rememberPagerState
+import org.koin.androidx.compose.koinViewModel
 import java.util.Date
 
 @Composable
 fun ProductDescriptionScreen(){
-    val viewModel : ProductViewModel = viewModel()
+    val viewModel : ProductViewModel = koinViewModel()
     val product  = viewModel.product
     LazyColumn (
         modifier = Modifier

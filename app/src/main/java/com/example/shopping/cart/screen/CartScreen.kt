@@ -45,6 +45,7 @@ import com.example.shopping.ui.theme.Dimensions
 import com.example.shopping.ui.theme.Shapes
 import com.example.shopping.ui.theme.app_lComponent
 import com.example.shopping.ui.theme.app_background
+import org.koin.androidx.compose.koinViewModel
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -52,7 +53,7 @@ import com.example.shopping.ui.theme.app_background
 fun CartScreen(navController: NavHostController) {
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
 
-    val viewModel : CartViewModel = viewModel()
+    val viewModel : CartViewModel = koinViewModel()
     val cartProduct = viewModel.cartList
 
     Scaffold(
