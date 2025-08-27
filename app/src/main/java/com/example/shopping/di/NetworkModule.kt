@@ -1,6 +1,7 @@
 package com.example.shopping.di
 
-import com.google.firebase.BuildConfig
+
+import com.example.shopping.BuildConfig
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.core.qualifier.named

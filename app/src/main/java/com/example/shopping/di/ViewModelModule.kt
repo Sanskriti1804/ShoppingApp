@@ -12,7 +12,7 @@ import org.koin.dsl.module
 val viewModelModule = module {
     viewModel { AuthViewModel(get()) }
 
-    viewModel { ProductViewModel(get()) }  // get() fetches ProductApi
+    viewModel { ProductViewModel(get()) }
 
     viewModel { EmailViewModel(get()) }
     viewModel { PaymentViewModel(get()) }

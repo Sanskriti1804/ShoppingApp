@@ -4,7 +4,9 @@ import android.app.Application
 import android.util.Log
 import androidx.compose.runtime.remember
 import com.example.shopping.di.authModule
+import com.example.shopping.di.emailModule
 import com.example.shopping.di.networkModule
+import com.example.shopping.di.paymentModule
 import com.example.shopping.di.productModule
 import com.example.shopping.di.viewModelModule
 import com.example.shopping.util.LocalProps
@@ -55,6 +57,8 @@ class ShoppingApp : Application(){
                 authModule,
                 productModule,
                 viewModelModule,
+                emailModule,
+                paymentModule
 
             )
         }
