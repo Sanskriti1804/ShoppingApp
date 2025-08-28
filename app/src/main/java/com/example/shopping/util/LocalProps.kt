@@ -9,7 +9,7 @@ import java.util.Properties
 
 
 object LocalProps {
-    fun load(context: Context): Properties {
+    fun loadFromAssets(context: Context): Properties {
         val props = Properties()
         try {
             context.assets.open("stripe.properties").use { inputStream ->
@@ -20,8 +20,23 @@ object LocalProps {
         }
         return props
     }
-}
 
+    fun loadFromLocalProperties(rootDir : File, fileName : String = "local.properties") : Properties {
+        val props = Properties()
+        try {
+            val file = File(rootDir, fileName)
+            if (file.exists()) {
+                file.inputStream().use { stream ->
+                    props.load(stream)
+                }
+            }
+        }
+        catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return props
+    }
+}
 
 //object LocalProps {
 //    fun load(context: Context): Properties {

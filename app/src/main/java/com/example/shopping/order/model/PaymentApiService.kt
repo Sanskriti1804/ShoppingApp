@@ -1,4 +1,4 @@
-package com.example.shopping.order.remote
+package com.example.shopping.order.model
 
 import com.example.shopping.order.data.PaymentConfigResponse
 import retrofit2.Response

@@ -5,6 +5,7 @@ plugins {
     id("com.google.gms.google-services")
 }
 
+
 android {
     namespace = "com.example.shopping"
     compileSdk = 35
@@ -21,6 +22,7 @@ android {
 //
 //        buildConfigField("String", "STRIPE_PUBLISHABLE_KEY", stripePublishableKey.toString())
 //        buildConfigField("String", "STRIPE_SECRET_KEY", stripeSecretKey.toString())
+
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -80,6 +82,9 @@ dependencies {
 
     implementation("io.insert-koin:koin-android:3.5.3")
     implementation("io.insert-koin:koin-androidx-compose:3.5.0")// or latest
+
+    //for token caching
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
 
     implementation("com.stripe:stripe-android:21.23.1")
 

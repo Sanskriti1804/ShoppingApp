@@ -1,7 +1,7 @@
 package com.example.shopping.di
 
-import com.example.shopping.order.remote.PaymentApiService
-import com.example.shopping.order.repository.PaymentRepository
+import com.example.shopping.order.model.PaymentApiService
+import com.example.shopping.order.model.PaymentRepository
 import org.koin.dsl.module
 import retrofit2.Retrofit
 

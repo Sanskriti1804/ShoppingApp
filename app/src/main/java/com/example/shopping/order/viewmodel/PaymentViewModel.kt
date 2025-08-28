@@ -3,7 +3,7 @@ package com.example.shopping.order.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.shopping.order.data.PaymentConfigResponse
-import com.example.shopping.order.repository.PaymentRepository
+import com.example.shopping.order.model.PaymentRepository
 import com.example.shopping.util.UiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

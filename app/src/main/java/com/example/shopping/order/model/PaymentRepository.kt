@@ -1,13 +1,12 @@
-package com.example.shopping.order.repository
+package com.example.shopping.order.model
 
 import com.example.shopping.order.data.PaymentConfigResponse
-import com.example.shopping.order.remote.PaymentApiService
 import com.example.shopping.util.UiState
 
 class PaymentRepository (
     private val paymentApi: PaymentApiService
 ){
-    suspend fun getPaymentConfig() : UiState<PaymentConfigResponse>{
+    suspend fun getPaymentConfig() : UiState<PaymentConfigResponse> {
         return try {
 //        Make a request to your own server and retrieve payment configurations
             val response = paymentApi.getPaymentIntent()
