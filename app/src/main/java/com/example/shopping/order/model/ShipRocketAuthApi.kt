@@ -10,5 +10,4 @@ interface ShipRocketAuthApi{
 
     @POST("v1/external/auth/login")
     suspend fun login(@Body request : ShipRocketAuthRequest) : Response<ShipRocketAuthResponse>
-
 }
