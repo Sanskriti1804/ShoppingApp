@@ -1,5 +1,6 @@
 package com.example.shopping.email.domain
 
+import com.example.shopping.BuildConfig
 import com.example.shopping.email.data.EmailRequest
 import com.example.shopping.email.data.Personalization
 import com.example.shopping.email.data.SendGridContent
@@ -27,7 +28,8 @@ class EmailRepository(
                 subject = subject
             )
 
-            val response: Response<Unit> = api.postEmail(request)
+            val apiKey = BuildConfig.DEBUG
+            val response: Response<Unit> = api.postEmail("Bearer $apiKey",request)
 
             if (response.isSuccessful) {
                 Result.success(Unit)
