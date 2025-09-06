@@ -38,7 +38,7 @@ val networkModule = module {
 
     single(named("backendRetrofit")){
         Retrofit.Builder()
-            .baseUrl("https://fakestoreapi.com/")
+            .baseUrl("http://10.0.2.2:8080/")
             .client(get())
             .addConverterFactory(GsonConverterFactory.create())
             .build()

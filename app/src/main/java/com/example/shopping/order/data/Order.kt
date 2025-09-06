@@ -1,4 +1,4 @@
-package com.example.shopping.backend.data
+package com.example.shopping.order.data
 
 data class OrderResponse(
     val data: OrderData

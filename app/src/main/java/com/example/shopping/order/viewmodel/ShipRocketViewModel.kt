@@ -2,7 +2,6 @@ package com.example.shopping.order.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.shopping.order.model.ShipRocketRepository
 import com.example.shopping.util.UiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
