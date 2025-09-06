@@ -8,6 +8,10 @@ import androidx.navigation.compose.rememberNavController
 import com.example.shopping.Profile.Screen.ProfileScreen
 import com.example.shopping.home.screen.ProductListScreen
 import com.example.shopping.navigation.Screen
+import com.example.shopping.order.screens.OrderScreen
+import com.example.shopping.order.viewmodel.ShipRocketViewModel
+import com.example.shopping.startup.viewmodel.AuthViewModel
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun MainApp(){
@@ -19,7 +23,7 @@ fun MainApp(){
 fun AppNavGraph(navController: NavHostController){
     NavHost(
         navController = navController,
-        startDestination = Screen.HomeScreen.route
+        startDestination = Screen.OrderScreen.route
     ) {
         StartupNavGraph(navController)
         CartNavGraph(navController)
@@ -29,6 +33,5 @@ fun AppNavGraph(navController: NavHostController){
                 navController = navController
             )
         }
-
     }
 }

@@ -7,6 +7,7 @@ import com.example.shopping.di.emailModule
 import com.example.shopping.di.networkModule
 import com.example.shopping.di.paymentModule
 import com.example.shopping.di.productModule
+import com.example.shopping.di.shiprocketModule
 import com.example.shopping.di.viewModelModule
 import com.example.shopping.util.LocalProps
 import com.stripe.android.PaymentConfiguration
@@ -62,6 +63,7 @@ class ShoppingApp : Application(){
             modules(
                 networkModule,
                 authModule,
+                shiprocketModule,
                 productModule,
                 viewModelModule,
                 emailModule,

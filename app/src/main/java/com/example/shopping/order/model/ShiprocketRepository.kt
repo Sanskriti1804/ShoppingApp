@@ -5,7 +5,7 @@ import com.example.shopping.order.data.ShiprocketLoginResponse
 import com.example.shopping.order.data.OrderResponse
 import javax.inject.Inject
 
-class ShiprocketRepository @Inject constructor(
+class ShiprocketRepository(
     private val shiprocketApi: ShiprocketApi,
     private val shiprocketTokenManager: ShiprocketTokenManager
 ){

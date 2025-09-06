@@ -44,6 +44,14 @@ val networkModule = module {
             .build()
     }
 
+    single(named("externalApiRetrofit")) {
+        Retrofit.Builder()
+            .baseUrl("https://apiv2.shiprocket.in/") // Actual Shiprocket API
+            .client(get())
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+    }
+
     single(named("productRetrofit")) {
         Retrofit.Builder()
             .baseUrl("https://dummyjson.com/")
