@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <network-security-config>
-    <domain-config cleartextTrafficPermitted="true">
+    <base-config cleartextTrafficPermitted="true" />
+    <!-- Emulator hosts -->
+    <domain-config cleartextTrafficPermitted="true" includeSubdomains="false">
+        <domain includeSubdomains="false">10.0.2.2</domain>
+    </domain-config>
+    <domain-config cleartextTrafficPermitted="true" includeSubdomains="false">
+        <domain includeSubdomains="false">10.0.3.2</domain>
+    </domain-config>
+    <domain-config cleartextTrafficPermitted="true" includeSubdomains="true">
         <domain includeSubdomains="true">192.168.1.6</domain>
     </domain-config>
+    <!-- Optional: allow a specific LAN hostname or IP for physical devices; duplicate with includeSubdomains as applicable -->
+    <!-- Example for a static LAN IP: replace 192.168.1.50 with your backend host IP/FQDN -->
+    <!--
+    <domain-config cleartextTrafficPermitted="true" includeSubdomains="true">
+        <domain includeSubdomains="true">192.168.1.50</domain>
+    </domain-config>
+    -->
 </network-security-config>

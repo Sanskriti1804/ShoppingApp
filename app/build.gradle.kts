@@ -17,11 +17,7 @@ android {
         versionCode = 1
         versionName = "1.0"
 
-//        val stripePublishableKey = project.properties["STRIPE_PUBLISHABLE_KEY"] ?: "\"\""
-//        val stripeSecretKey = project.properties["STRIPE_SECRET_KEY"] ?: "\"\""
-//
-//        buildConfigField("String", "STRIPE_PUBLISHABLE_KEY", stripePublishableKey.toString())
-//        buildConfigField("String", "STRIPE_SECRET_KEY", stripeSecretKey.toString())
+//        buildConfigField("String", "BACKEND_BASE_URL", "\"http://10.0.2.2:8080/\"")
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -33,6 +29,12 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+
+//            buildConfigField("String", "BACKEND_BASE_URL", "\"https://your.backend.domain/\"")
+        }
+        debug {
+            // Override with debug URL
+//            buildConfigField("String", "BACKEND_BASE_URL", "\"http://10.0.2.2:8080/\"")
         }
     }
     compileOptions {

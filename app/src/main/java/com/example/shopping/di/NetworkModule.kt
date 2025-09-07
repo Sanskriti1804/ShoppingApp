@@ -1,11 +1,13 @@
 package com.example.shopping.di
 
 
+import android.content.Context
 import com.example.shopping.BuildConfig
 import com.example.shopping.order.model.AuthInterceptor
 import com.example.shopping.order.model.ShiprocketTokenManager
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.android.ext.koin.androidContext
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -37,8 +39,10 @@ val networkModule = module {
     }
 
     single(named("backendRetrofit")){
+        val context: Context = androidContext()
+        val baseUrl = context.getString(com.example.shopping.R.string.backend_base_url)
         Retrofit.Builder()
-            .baseUrl("http://192.168.1.6:8080/")
+            .baseUrl(baseUrl)
             .client(get())
             .addConverterFactory(GsonConverterFactory.create())
             .build()
