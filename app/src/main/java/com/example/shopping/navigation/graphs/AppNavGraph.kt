@@ -28,6 +28,10 @@ fun AppNavGraph(navController: NavHostController){
         StartupNavGraph(navController)
         CartNavGraph(navController)
         ProductNavGraph(navController)
+        composable(Screen.OrderScreen.route) {
+//        val shipRocketViewModel : ShipRocketViewModel = koinViewModel()
+            OrderScreen()
+        }
         composable(Screen.ProfileScreen.route) {
             ProfileScreen(
                 navController = navController

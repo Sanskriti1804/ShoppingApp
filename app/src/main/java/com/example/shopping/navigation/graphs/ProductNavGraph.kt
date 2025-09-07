@@ -30,10 +30,4 @@ fun NavGraphBuilder.ProductNavGraph(navController: NavHostController){
     composable(Screen.ProductDescriptionScreen.route) {
         ProductDescriptionScreen()
     }
-    composable(Screen.OrderScreen.route) {
-        val shipRocketViewModel : ShipRocketViewModel = koinViewModel()
-        OrderScreen(
-            viewModel = shipRocketViewModel
-        )
-    }
 }

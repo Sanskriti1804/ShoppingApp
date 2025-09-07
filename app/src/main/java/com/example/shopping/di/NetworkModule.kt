@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit
 
 val networkModule = module {
 
-    single { ShiprocketTokenManager(get()) }
+//    single { ShiprocketTokenManager(get()) }
 
     single {
         val logging = HttpLoggingInterceptor().apply {
@@ -38,19 +38,19 @@ val networkModule = module {
 
     single(named("backendRetrofit")){
         Retrofit.Builder()
-            .baseUrl("http://10.0.2.2:8080/")
+            .baseUrl("http://192.168.1.6:8080/")
             .client(get())
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
 
-    single(named("externalApiRetrofit")) {
-        Retrofit.Builder()
-            .baseUrl("https://apiv2.shiprocket.in/") // Actual Shiprocket API
-            .client(get())
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-    }
+//    single(named("externalApiRetrofit")) {
+//        Retrofit.Builder()
+//            .baseUrl("https://apiv2.shiprocket.in/") // Actual Shiprocket API
+//            .client(get())
+//            .addConverterFactory(GsonConverterFactory.create())
+//            .build()
+//    }
 
     single(named("productRetrofit")) {
         Retrofit.Builder()
