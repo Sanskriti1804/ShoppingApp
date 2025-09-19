@@ -1,5 +1,6 @@
 package com.example.shopping.order.screens
 
+import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
 import androidx.compose.foundation.layout.Column
@@ -13,6 +14,7 @@ import com.example.shopping.order.viewmodel.ShipRocketViewModel
 import com.example.shopping.util.UiState
 import org.koin.androidx.compose.koinViewModel
 
+private const val TAG = "OrderScreen"
 
 @Composable
 fun OrderScreen(
@@ -23,27 +25,49 @@ fun OrderScreen(
 
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         Button(onClick = {
+            Log.d(TAG, "Login button clicked")
             viewModel.login("your-email@example.com", "your-password")
         }) {
             Text("Login to Shiprocket")
         }
 
         Button(onClick = {
+            Log.d(TAG, "Fetch order button clicked")
             viewModel.getOrderById(12345L)
         }) {
             Text("Fetch Order")
         }
 
         when (val state = loginState) {
-            is UiState.Loading -> Text("Logging in...")
-            is UiState.Success -> Text("Login successful! Token: ${state.data.token}")
-            is UiState.Error -> Text("Login failed: ${state.exception.message}")
+            is UiState.Loading -> {
+                Log.d(TAG, "Login state: Loading")
+                Text("Logging in...")
+            }
+            is UiState.Success -> {
+                Log.d(TAG, "Login state: Success. Token=${state.data.token}")
+                Text("Login successful! Token: ${state.data.token}")
+            }
+            is UiState.Error -> {
+                Log.e(TAG, "Login state: Error", state.exception)
+                Text("Login failed: ${state.exception.message}")
+            }
         }
 
         when (val state = orderState) {
-            is UiState.Loading -> Text("Loading order...")
-            is UiState.Success -> Text("Order total: $${state.data.data.total}")
-            is UiState.Error -> Text("Order fetch failed: ${state.exception.message}")
+            is UiState.Loading -> {
+                Log.d(TAG, "Order state: Loading")
+                Text("Loading order...")
+            }
+
+            is UiState.Success -> {
+                Log.d(TAG, "Order state: Success. Order=${state.data}")
+                Text("Order total: $${state.data.data.total}")
+            }
+
+            is UiState.Error -> {
+                Log.e(TAG, "Order state: Error", state.exception)
+                Text("Order fetch failed: ${state.exception.message}")
+            }
         }
     }
 }
